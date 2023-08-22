@@ -1,0 +1,14 @@
+*.jar
+*.pdf
+*.docx
+**/migrations
+*.pyc
+*.zip
+*.xml
+*.png
+*.rar
+venv/
+env/
+geckodriver.log
+db.sqlite3
+test.json

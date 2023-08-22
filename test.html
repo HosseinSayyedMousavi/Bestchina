@@ -1,0 +1,73 @@
+<div  class="desitems mt-[20px]">
+    <div  class="text-[22px] leading-[30px]">Compatible with:</div>
+    <div  class="pl-[15px]">
+        <ul  style="list-style: disc;">
+
+            {% for compatible in Details["Detail"]["CompatibleList"] %}
+                <li  class="text-[18px] leading-[30px]">{{ compatible["DisplayName"] }} </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+</div>
+
+
+<div  class="desitems">
+    <div  class="text-[22px] pt-[12px] leading-[30px]">Package included:</div>
+    <div  class="pl-[15px]">
+        <ul  style="list-style: disc;">
+
+            {% for package in Details["Detail"]["PackageList"] %}
+                <li  class="text-[18px] leading-[20px]">{{ package }}</li>
+            {% endfor %}
+
+        </ul>
+    </div>
+</div>
+
+
+<div 
+    class="n-data-table __data-table-11a5fl2-m n-data-table--bottom-bordered n-data-table--single-line mt-[30px]">
+    <div class="n-data-table-wrapper">
+        <div class="n-data-table-base-table">
+            <table class="n-data-table-table" style="table-layout: fixed;">
+                <colgroup>
+                    <col>
+                    <col>
+                </colgroup>
+                <thead class="n-data-table-thead" data-n-id="d77a7923">
+                    <tr class="n-data-table-tr">
+                        <th colspan="1" rowspan="1" data-col-key="key" class="n-data-table-th">
+                            <div class="n-data-table-th__title-wrapper">
+                                <div class="n-data-table-th__title">
+                                    <div class="n-data-table-th__ellipsis">
+                                        <div style="font-size: 22px; font-weight: bold;">Specifications</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                        <th colspan="1" rowspan="1" data-col-key="title" class="n-data-table-th n-data-table-th--last">
+                            <div class="n-data-table-th__title-wrapper">
+                                <div class="n-data-table-th__title">
+                                    <div default="()=>&quot;&quot;"></div>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-n-id="d77a7923" class="n-data-table-tbody">
+
+                    {% for specific in Details["Detail"]["SpecificationList"] %}
+                        <tr class="n-data-table-tr td">
+                            <td colspan="1" rowspan="1" data-col-key="key" class="n-data-table-td"><span
+                                    class="n-ellipsis" style="text-overflow: ellipsis;"><span>{{ specific["Name"] }}</span></span></td>
+                            <td colspan="1" rowspan="1" data-col-key="title"
+                                class="n-data-table-td n-data-table-td--last-col">{{ specific["Value"] }}</td>
+                        </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

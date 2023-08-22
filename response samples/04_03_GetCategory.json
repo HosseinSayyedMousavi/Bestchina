@@ -1,0 +1,902 @@
+[
+  {
+    "ProductId": 2578778,
+    "ItemNo": "660154835A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:20Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T04:42:24Z"
+  },
+  {
+    "ProductId": 2578775,
+    "ItemNo": "660154832A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:20Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T04:42:25Z"
+  },
+  {
+    "ProductId": 2578746,
+    "ItemNo": "660154823B",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:22Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:41Z"
+  },
+  {
+    "ProductId": 2578745,
+    "ItemNo": "660154823A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:22Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:41Z"
+  },
+  {
+    "ProductId": 2578743,
+    "ItemNo": "660154821A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:23Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T04:43:08Z"
+  },
+  {
+    "ProductId": 2578722,
+    "ItemNo": "660154816E",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:23Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:42Z"
+  },
+  {
+    "ProductId": 2578721,
+    "ItemNo": "660154816D",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:23Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:41Z"
+  },
+  {
+    "ProductId": 2578720,
+    "ItemNo": "660154816C",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:23Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:41Z"
+  },
+  {
+    "ProductId": 2578719,
+    "ItemNo": "660154816B",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:24Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:41Z"
+  },
+  {
+    "ProductId": 2578718,
+    "ItemNo": "660154816A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:24Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:41Z"
+  },
+  {
+    "ProductId": 2578499,
+    "ItemNo": "660154800E",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T18:55:38Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T11:51:03Z"
+  },
+  {
+    "ProductId": 2578498,
+    "ItemNo": "660154800D",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T18:55:39Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T11:51:03Z"
+  },
+  {
+    "ProductId": 2578497,
+    "ItemNo": "660154800C",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T18:55:39Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T11:51:03Z"
+  },
+  {
+    "ProductId": 2578496,
+    "ItemNo": "660154800B",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T18:55:39Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T11:51:03Z"
+  },
+  {
+    "ProductId": 2578495,
+    "ItemNo": "660154800A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T18:55:39Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T11:51:03Z"
+  },
+  {
+    "ProductId": 2577629,
+    "ItemNo": "660154679P",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:33Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:41Z"
+  },
+  {
+    "ProductId": 2577628,
+    "ItemNo": "660154679O",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:33Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:41Z"
+  },
+  {
+    "ProductId": 2577627,
+    "ItemNo": "660154679N",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:34Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:41Z"
+  },
+  {
+    "ProductId": 2577626,
+    "ItemNo": "660154679M",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:34Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:41Z"
+  },
+  {
+    "ProductId": 2577625,
+    "ItemNo": "660154679L",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:34Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:41Z"
+  },
+  {
+    "ProductId": 2577624,
+    "ItemNo": "660154679K",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:35Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:41Z"
+  },
+  {
+    "ProductId": 2577623,
+    "ItemNo": "660154679J",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:35Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:41Z"
+  },
+  {
+    "ProductId": 2577622,
+    "ItemNo": "660154679I",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:35Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:41Z"
+  },
+  {
+    "ProductId": 2577621,
+    "ItemNo": "660154679H",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:36Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:40Z"
+  },
+  {
+    "ProductId": 2577620,
+    "ItemNo": "660154679G",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:36Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:40Z"
+  },
+  {
+    "ProductId": 2577619,
+    "ItemNo": "660154679F",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:36Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:40Z"
+  },
+  {
+    "ProductId": 2577618,
+    "ItemNo": "660154679E",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:37Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:40Z"
+  },
+  {
+    "ProductId": 2577617,
+    "ItemNo": "660154679D",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:37Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:40Z"
+  },
+  {
+    "ProductId": 2577616,
+    "ItemNo": "660154679C",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:37Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:40Z"
+  },
+  {
+    "ProductId": 2577615,
+    "ItemNo": "660154679B",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:38Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:40Z"
+  },
+  {
+    "ProductId": 2577614,
+    "ItemNo": "660154679A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T12:34:38Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T05:10:40Z"
+  },
+  {
+    "ProductId": 2577596,
+    "ItemNo": "660154676B",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T14:15:15Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T06:52:42Z"
+  },
+  {
+    "ProductId": 2577595,
+    "ItemNo": "660154676A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-21T14:15:16Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-21T06:52:42Z"
+  },
+  {
+    "ProductId": 2576794,
+    "ItemNo": "660154619Z",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:45Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576793,
+    "ItemNo": "660154619Y",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:46Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576792,
+    "ItemNo": "660154619X",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:46Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576791,
+    "ItemNo": "660154619W",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:47Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576790,
+    "ItemNo": "660154619V",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:47Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576789,
+    "ItemNo": "660154619U",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:48Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576788,
+    "ItemNo": "660154619T",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:48Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576787,
+    "ItemNo": "660154619S",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:49Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576786,
+    "ItemNo": "660154619R",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:49Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576785,
+    "ItemNo": "660154619Q",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:50Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576784,
+    "ItemNo": "660154619P",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:52Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576783,
+    "ItemNo": "660154619O",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:54Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576782,
+    "ItemNo": "660154619N",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:57Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576781,
+    "ItemNo": "660154619M",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:57Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576780,
+    "ItemNo": "660154619L",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:57Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576779,
+    "ItemNo": "660154619K",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:58Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576778,
+    "ItemNo": "660154619J",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:58Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576777,
+    "ItemNo": "660154619I",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:59Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:25Z"
+  },
+  {
+    "ProductId": 2576776,
+    "ItemNo": "660154619H",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:59Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:24Z"
+  },
+  {
+    "ProductId": 2576775,
+    "ItemNo": "660154619G",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:22:00Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:24Z"
+  },
+  {
+    "ProductId": 2576774,
+    "ItemNo": "660154619F",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:22:00Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:24Z"
+  },
+  {
+    "ProductId": 2576773,
+    "ItemNo": "660154619E",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:22:00Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:24Z"
+  },
+  {
+    "ProductId": 2576772,
+    "ItemNo": "660154619D",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:22:01Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:24Z"
+  },
+  {
+    "ProductId": 2576771,
+    "ItemNo": "660154619C",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:22:01Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:24Z"
+  },
+  {
+    "ProductId": 2576770,
+    "ItemNo": "660154619B",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:22:02Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:24Z"
+  },
+  {
+    "ProductId": 2576769,
+    "ItemNo": "660154619A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:22:03Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:31:24Z"
+  },
+  {
+    "ProductId": 2576538,
+    "ItemNo": "660154583F",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:07Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:28:08Z"
+  },
+  {
+    "ProductId": 2576537,
+    "ItemNo": "660154583E",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:07Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:28:08Z"
+  },
+  {
+    "ProductId": 2576536,
+    "ItemNo": "660154583D",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:07Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:28:08Z"
+  },
+  {
+    "ProductId": 2576535,
+    "ItemNo": "660154583C",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:07Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:28:08Z"
+  },
+  {
+    "ProductId": 2576534,
+    "ItemNo": "660154583B",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:08Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:28:08Z"
+  },
+  {
+    "ProductId": 2576533,
+    "ItemNo": "660154583A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:08Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:28:08Z"
+  },
+  {
+    "ProductId": 2576454,
+    "ItemNo": "660154567B",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-18T17:14:28Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-18T10:00:52Z"
+  },
+  {
+    "ProductId": 2576453,
+    "ItemNo": "660154567A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-18T17:13:35Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-18T10:00:52Z"
+  },
+  {
+    "ProductId": 2576362,
+    "ItemNo": "660154554D",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:23Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:27:53Z"
+  },
+  {
+    "ProductId": 2576361,
+    "ItemNo": "660154554C",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:24Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:27:53Z"
+  },
+  {
+    "ProductId": 2576360,
+    "ItemNo": "660154554B",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:24Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:27:53Z"
+  },
+  {
+    "ProductId": 2576359,
+    "ItemNo": "660154554A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-19T17:21:24Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-19T10:27:53Z"
+  },
+  {
+    "ProductId": 2574923,
+    "ItemNo": "660154329A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-17T23:54:22Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-17T16:02:14Z"
+  },
+  {
+    "ProductId": 2574856,
+    "ItemNo": "660154312G",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-18T17:14:14Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-18T10:00:45Z"
+  },
+  {
+    "ProductId": 2574855,
+    "ItemNo": "660154312F",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-18T17:14:15Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-18T10:00:45Z"
+  },
+  {
+    "ProductId": 2574854,
+    "ItemNo": "660154312E",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-18T17:14:15Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-18T10:00:45Z"
+  },
+  {
+    "ProductId": 2574853,
+    "ItemNo": "660154312D",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-18T17:14:15Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-18T10:00:45Z"
+  },
+  {
+    "ProductId": 2574852,
+    "ItemNo": "660154312C",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-18T17:14:16Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-18T10:00:45Z"
+  },
+  {
+    "ProductId": 2574851,
+    "ItemNo": "660154312B",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-18T17:14:16Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-18T10:00:45Z"
+  },
+  {
+    "ProductId": 2574850,
+    "ItemNo": "660154312A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-18T17:14:16Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-18T10:00:45Z"
+  },
+  {
+    "ProductId": 2574201,
+    "ItemNo": "660154267F",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-17T18:32:14Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-17T11:11:18Z"
+  },
+  {
+    "ProductId": 2574200,
+    "ItemNo": "660154267E",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-17T18:32:14Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-17T11:11:18Z"
+  },
+  {
+    "ProductId": 2574199,
+    "ItemNo": "660154267D",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-17T18:32:14Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-17T11:11:18Z"
+  },
+  {
+    "ProductId": 2574198,
+    "ItemNo": "660154267C",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-17T18:32:15Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-17T11:11:18Z"
+  },
+  {
+    "ProductId": 2574197,
+    "ItemNo": "660154267B",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-17T18:32:08Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-17T11:11:18Z"
+  },
+  {
+    "ProductId": 2574196,
+    "ItemNo": "660154267A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-17T18:32:08Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-17T11:11:18Z"
+  },
+  {
+    "ProductId": 2572916,
+    "ItemNo": "660154077G",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-16T14:28:29Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-16T07:00:53Z"
+  },
+  {
+    "ProductId": 2572915,
+    "ItemNo": "660154077F",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-16T14:28:30Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-16T07:00:53Z"
+  },
+  {
+    "ProductId": 2572914,
+    "ItemNo": "660154077E",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-16T14:28:30Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-16T07:00:53Z"
+  },
+  {
+    "ProductId": 2572913,
+    "ItemNo": "660154077D",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-16T14:28:30Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-16T07:00:53Z"
+  },
+  {
+    "ProductId": 2572912,
+    "ItemNo": "660154077C",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-16T14:28:30Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-16T07:00:53Z"
+  },
+  {
+    "ProductId": 2572911,
+    "ItemNo": "660154077B",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-16T14:28:31Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-16T07:00:53Z"
+  },
+  {
+    "ProductId": 2572910,
+    "ItemNo": "660154077A",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-16T14:28:31Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-16T07:00:53Z"
+  },
+  {
+    "ProductId": 2572250,
+    "ItemNo": "660154009I",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-16T20:17:17Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-16T13:00:52Z"
+  },
+  {
+    "ProductId": 2572249,
+    "ItemNo": "660154009H",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-16T20:17:17Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-16T13:00:52Z"
+  },
+  {
+    "ProductId": 2572248,
+    "ItemNo": "660154009G",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-16T20:17:18Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-16T13:00:52Z"
+  },
+  {
+    "ProductId": 2572247,
+    "ItemNo": "660154009F",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-16T20:17:18Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-16T13:00:52Z"
+  },
+  {
+    "ProductId": 2572246,
+    "ItemNo": "660154009E",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-16T20:17:18Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-16T13:00:52Z"
+  },
+  {
+    "ProductId": 2572245,
+    "ItemNo": "660154009D",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-16T20:17:18Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-16T13:00:52Z"
+  },
+  {
+    "ProductId": 2572244,
+    "ItemNo": "660154009C",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-16T20:17:19Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-16T13:00:52Z"
+  },
+  {
+    "ProductId": 2572243,
+    "ItemNo": "660154009B",
+    "CatalogCode": "C003700020099",
+    "ProductStatus": 1,
+    "PublishDate": "2023-08-16T20:17:19Z",
+    "StockStatus": 2,
+    "Modified": "2023-08-16T13:00:52Z"
+  }
+]

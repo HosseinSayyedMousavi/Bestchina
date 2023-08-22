@@ -1,0 +1,766 @@
+{
+    "Detail": {
+        "ItemNo": "101227415A",
+        "EanCode": "",
+        "CategoryCode": "C003700130330",
+        "Name": "Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - Black",
+        "Summary": "Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - Black",
+        "Description": "<h5 class='system-title'>Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - Black</h5>\n<div class='system-intro'></div>\n<div class='system-description'><ul class=\" list-paddingleft-2\" style=\"list-style-type: disc;\"><li><p>Classic litchi texture, comfortable to touch</p></li><li><p>360-degree rotation allows for landscape and portrait view</p></li><li><p>Completely protect the tablet from daily damages</p></li><li><p>Elastic band for secure closure</p></li><li><p>Quick and easy installation</p></li></ul></div>\n",
+        "ProductStatus": 1,
+        "WithPackage": 0,
+        "Reminder": null,
+        "MOQ": 1,
+        "IsSpecialOffer": false,
+        "Price": 1.97,
+        "OriginalPrice": 1.97,
+        "PromotionPrice": 1.97,
+        "PromotionPeriod": "",
+        "PriceList": [
+            {
+                "MinimumQuantity": 1,
+                "UnitPrice": 1.97,
+                "Invalid": false,
+                "CurrentInterval": true
+            },
+            {
+                "MinimumQuantity": 4,
+                "UnitPrice": 1.93,
+                "Invalid": false,
+                "CurrentInterval": false
+            },
+            {
+                "MinimumQuantity": 15,
+                "UnitPrice": 1.84,
+                "Invalid": false,
+                "CurrentInterval": false
+            },
+            {
+                "MinimumQuantity": 50,
+                "UnitPrice": 1.77,
+                "Invalid": false,
+                "CurrentInterval": false
+            },
+            {
+                "MinimumQuantity": 100,
+                "UnitPrice": 1.69,
+                "Invalid": false,
+                "CurrentInterval": false
+            }
+        ],
+        "SpecificationList": [
+            {
+                "Name": "Case Feature",
+                "Value": "With Stand"
+            },
+            {
+                "Name": "Color",
+                "Value": "Black"
+            },
+            {
+                "Name": "Material",
+                "Value": "Plastic, PU Leather"
+            },
+            {
+                "Name": "Retail Packaging",
+                "Value": "Simple PP Bag"
+            },
+            {
+                "Name": "Texture",
+                "Value": "Litchi"
+            },
+            {
+                "Name": "Gross Weight",
+                "Value": "0.155kg"
+            },
+            {
+                "Name": "Volume Weight",
+                "Value": "0.128kg"
+            },
+            {
+                "Name": "Length",
+                "Value": "21.200cm"
+            },
+            {
+                "Name": "Width",
+                "Value": "13.500cm"
+            },
+            {
+                "Name": "Height",
+                "Value": "2.000cm"
+            },
+            {
+                "Name": "Weight",
+                "Value": "0.138kg"
+            },
+            {
+                "Name": "EAN",
+                "Value": ""
+            },
+            {
+                "Name": "With Retail Packaging",
+                "Value": "No"
+            }
+        ],
+        "LeadTime": "1 - 3 days",
+        "GrossWeight": 0.155,
+        "VolumeWeight": 0.128,
+        "Length": 21.200,
+        "Width": 13.500,
+        "Height": 2.000,
+        "CompatibleList": [
+            {
+                "Brand": "Samsung",
+                "Model": "Samsung Galaxy Tab A 8.4 (2020)",
+                "Versions": [],
+                "DisplayName": "Samsung Galaxy Tab A 8.4 (2020)"
+            }
+        ],
+        "Modified": "2020-05-15T15:41:54",
+        "Added": "2020-05-15T15:42:09",
+        "StockStatus": 2,
+        "PackageList": [
+            "1 x Litchi Texture 360 Degree Rotary Stand Leather Case"
+        ],
+        "CacheTime": "2023-07-25T09:11:27",
+        "Attributes": {
+            "Color": "Black"
+        }
+    },
+    "ModelList": [
+        {
+            "ItemNo": "101227415A",
+            "EanCode": "",
+            "CategoryCode": "C003700130330",
+            "Name": "Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - Black",
+            "Summary": "Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - Black",
+            "Description": "<h5 class='system-title'>Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - Black</h5>\n<div class='system-intro'></div>\n<div class='system-description'><ul class=\" list-paddingleft-2\" style=\"list-style-type: disc;\"><li><p>Classic litchi texture, comfortable to touch</p></li><li><p>360-degree rotation allows for landscape and portrait view</p></li><li><p>Completely protect the tablet from daily damages</p></li><li><p>Elastic band for secure closure</p></li><li><p>Quick and easy installation</p></li></ul></div>\n",
+            "ProductStatus": 1,
+            "WithPackage": 0,
+            "Reminder": null,
+            "MOQ": 1,
+            "IsSpecialOffer": false,
+            "Price": 1.97,
+            "OriginalPrice": 1.97,
+            "PromotionPrice": 1.97,
+            "PromotionPeriod": "",
+            "PriceList": [
+                {
+                    "MinimumQuantity": 1,
+                    "UnitPrice": 1.97,
+                    "Invalid": false,
+                    "CurrentInterval": true
+                },
+                {
+                    "MinimumQuantity": 4,
+                    "UnitPrice": 1.93,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                },
+                {
+                    "MinimumQuantity": 15,
+                    "UnitPrice": 1.84,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                },
+                {
+                    "MinimumQuantity": 50,
+                    "UnitPrice": 1.77,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                },
+                {
+                    "MinimumQuantity": 100,
+                    "UnitPrice": 1.69,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                }
+            ],
+            "SpecificationList": [
+                {
+                    "Name": "Case Feature",
+                    "Value": "With Stand"
+                },
+                {
+                    "Name": "Color",
+                    "Value": "Black"
+                },
+                {
+                    "Name": "Material",
+                    "Value": "Plastic, PU Leather"
+                },
+                {
+                    "Name": "Retail Packaging",
+                    "Value": "Simple PP Bag"
+                },
+                {
+                    "Name": "Texture",
+                    "Value": "Litchi"
+                },
+                {
+                    "Name": "Gross Weight",
+                    "Value": "0.155kg"
+                },
+                {
+                    "Name": "Volume Weight",
+                    "Value": "0.128kg"
+                },
+                {
+                    "Name": "Length",
+                    "Value": "21.200cm"
+                },
+                {
+                    "Name": "Width",
+                    "Value": "13.500cm"
+                },
+                {
+                    "Name": "Height",
+                    "Value": "2.000cm"
+                },
+                {
+                    "Name": "Weight",
+                    "Value": "0.138kg"
+                },
+                {
+                    "Name": "EAN",
+                    "Value": ""
+                },
+                {
+                    "Name": "With Retail Packaging",
+                    "Value": "No"
+                }
+            ],
+            "LeadTime": "1 - 3 days",
+            "GrossWeight": 0.155,
+            "VolumeWeight": 0.128,
+            "Length": 21.200,
+            "Width": 13.500,
+            "Height": 2.000,
+            "CompatibleList": [
+                {
+                    "Brand": "Samsung",
+                    "Model": "Samsung Galaxy Tab A 8.4 (2020)",
+                    "Versions": [],
+                    "DisplayName": "Samsung Galaxy Tab A 8.4 (2020)"
+                }
+            ],
+            "Modified": "2020-05-15T15:41:54",
+            "Added": "2020-05-15T15:42:09",
+            "StockStatus": 2,
+            "PackageList": [
+                "1 x Litchi Texture 360 Degree Rotary Stand Leather Case"
+            ],
+            "CacheTime": "2023-07-25T09:11:27",
+            "Attributes": {
+                "Color": "Black"
+            }
+        },
+        {
+            "ItemNo": "101227415B",
+            "EanCode": "",
+            "CategoryCode": "C003700130330",
+            "Name": "Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - White",
+            "Summary": "Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - White",
+            "Description": "<h5 class='system-title'>Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - White</h5>\n<div class='system-intro'></div>\n<div class='system-description'><ul class=\" list-paddingleft-2\" style=\"list-style-type: disc;\"><li><p>Classic litchi texture, comfortable to touch</p></li><li><p>360-degree rotation allows for landscape and portrait view</p></li><li><p>Completely protect the tablet from daily damages</p></li><li><p>Elastic band for secure closure</p></li><li><p>Quick and easy installation</p></li></ul></div>\n",
+            "ProductStatus": 1,
+            "WithPackage": 0,
+            "Reminder": null,
+            "MOQ": 1,
+            "IsSpecialOffer": false,
+            "Price": 1.97,
+            "OriginalPrice": 1.97,
+            "PromotionPrice": 1.97,
+            "PromotionPeriod": "",
+            "PriceList": [
+                {
+                    "MinimumQuantity": 1,
+                    "UnitPrice": 1.97,
+                    "Invalid": false,
+                    "CurrentInterval": true
+                },
+                {
+                    "MinimumQuantity": 4,
+                    "UnitPrice": 1.93,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                },
+                {
+                    "MinimumQuantity": 15,
+                    "UnitPrice": 1.84,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                },
+                {
+                    "MinimumQuantity": 50,
+                    "UnitPrice": 1.77,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                },
+                {
+                    "MinimumQuantity": 100,
+                    "UnitPrice": 1.69,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                }
+            ],
+            "SpecificationList": [
+                {
+                    "Name": "Case Feature",
+                    "Value": "With Stand"
+                },
+                {
+                    "Name": "Color",
+                    "Value": "White"
+                },
+                {
+                    "Name": "Material",
+                    "Value": "Plastic, PU Leather"
+                },
+                {
+                    "Name": "Retail Packaging",
+                    "Value": "Simple PP Bag"
+                },
+                {
+                    "Name": "Texture",
+                    "Value": "Litchi"
+                },
+                {
+                    "Name": "Gross Weight",
+                    "Value": "0.155kg"
+                },
+                {
+                    "Name": "Volume Weight",
+                    "Value": "0.128kg"
+                },
+                {
+                    "Name": "Length",
+                    "Value": "21.200cm"
+                },
+                {
+                    "Name": "Width",
+                    "Value": "13.500cm"
+                },
+                {
+                    "Name": "Height",
+                    "Value": "2.000cm"
+                },
+                {
+                    "Name": "Weight",
+                    "Value": "0.138kg"
+                },
+                {
+                    "Name": "EAN",
+                    "Value": ""
+                },
+                {
+                    "Name": "With Retail Packaging",
+                    "Value": "No"
+                }
+            ],
+            "LeadTime": "1 - 3 days",
+            "GrossWeight": 0.155,
+            "VolumeWeight": 0.128,
+            "Length": 21.200,
+            "Width": 13.500,
+            "Height": 2.000,
+            "CompatibleList": [
+                {
+                    "Brand": "Samsung",
+                    "Model": "Samsung Galaxy Tab A 8.4 (2020)",
+                    "Versions": [],
+                    "DisplayName": "Samsung Galaxy Tab A 8.4 (2020)"
+                }
+            ],
+            "Modified": "2020-05-15T15:41:55",
+            "Added": "2020-05-15T15:42:10",
+            "StockStatus": 2,
+            "PackageList": [
+                "1 x Litchi Texture 360 Degree Rotary Stand Leather Case"
+            ],
+            "CacheTime": "2023-07-25T09:11:27",
+            "Attributes": {
+                "Color": "White"
+            }
+        },
+        {
+            "ItemNo": "101227415C",
+            "EanCode": "",
+            "CategoryCode": "C003700130330",
+            "Name": "Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - Red",
+            "Summary": "Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - Red",
+            "Description": "<h5 class='system-title'>Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - Red</h5>\n<div class='system-intro'></div>\n<div class='system-description'><ul class=\" list-paddingleft-2\" style=\"list-style-type: disc;\"><li><p>Classic litchi texture, comfortable to touch</p></li><li><p>360-degree rotation allows for landscape and portrait view</p></li><li><p>Completely protect the tablet from daily damages</p></li><li><p>Elastic band for secure closure</p></li><li><p>Quick and easy installation</p></li></ul></div>\n",
+            "ProductStatus": 1,
+            "WithPackage": 0,
+            "Reminder": null,
+            "MOQ": 1,
+            "IsSpecialOffer": false,
+            "Price": 1.97,
+            "OriginalPrice": 1.97,
+            "PromotionPrice": 1.97,
+            "PromotionPeriod": "",
+            "PriceList": [
+                {
+                    "MinimumQuantity": 1,
+                    "UnitPrice": 1.97,
+                    "Invalid": false,
+                    "CurrentInterval": true
+                },
+                {
+                    "MinimumQuantity": 4,
+                    "UnitPrice": 1.93,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                },
+                {
+                    "MinimumQuantity": 15,
+                    "UnitPrice": 1.84,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                },
+                {
+                    "MinimumQuantity": 50,
+                    "UnitPrice": 1.77,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                },
+                {
+                    "MinimumQuantity": 100,
+                    "UnitPrice": 1.69,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                }
+            ],
+            "SpecificationList": [
+                {
+                    "Name": "Case Feature",
+                    "Value": "With Stand"
+                },
+                {
+                    "Name": "Color",
+                    "Value": "Red"
+                },
+                {
+                    "Name": "Material",
+                    "Value": "Plastic, PU Leather"
+                },
+                {
+                    "Name": "Retail Packaging",
+                    "Value": "Simple PP Bag"
+                },
+                {
+                    "Name": "Texture",
+                    "Value": "Litchi"
+                },
+                {
+                    "Name": "Gross Weight",
+                    "Value": "0.155kg"
+                },
+                {
+                    "Name": "Volume Weight",
+                    "Value": "0.128kg"
+                },
+                {
+                    "Name": "Length",
+                    "Value": "21.200cm"
+                },
+                {
+                    "Name": "Width",
+                    "Value": "13.500cm"
+                },
+                {
+                    "Name": "Height",
+                    "Value": "2.000cm"
+                },
+                {
+                    "Name": "Weight",
+                    "Value": "0.138kg"
+                },
+                {
+                    "Name": "EAN",
+                    "Value": ""
+                },
+                {
+                    "Name": "With Retail Packaging",
+                    "Value": "No"
+                }
+            ],
+            "LeadTime": "1 - 3 days",
+            "GrossWeight": 0.155,
+            "VolumeWeight": 0.128,
+            "Length": 21.200,
+            "Width": 13.500,
+            "Height": 2.000,
+            "CompatibleList": [
+                {
+                    "Brand": "Samsung",
+                    "Model": "Samsung Galaxy Tab A 8.4 (2020)",
+                    "Versions": [],
+                    "DisplayName": "Samsung Galaxy Tab A 8.4 (2020)"
+                }
+            ],
+            "Modified": "2020-05-15T15:41:56",
+            "Added": "2020-05-15T15:42:11",
+            "StockStatus": 2,
+            "PackageList": [
+                "1 x Litchi Texture 360 Degree Rotary Stand Leather Case"
+            ],
+            "CacheTime": "2023-07-25T09:11:27",
+            "Attributes": {
+                "Color": "Red"
+            }
+        },
+        {
+            "ItemNo": "101227415E",
+            "EanCode": "",
+            "CategoryCode": "C003700130330",
+            "Name": "Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - Pink",
+            "Summary": "Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - Pink",
+            "Description": "<h5 class='system-title'>Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - Pink</h5>\n<div class='system-intro'></div>\n<div class='system-description'><ul class=\" list-paddingleft-2\" style=\"list-style-type: disc;\"><li><p>Classic litchi texture, comfortable to touch</p></li><li><p>360-degree rotation allows for landscape and portrait view</p></li><li><p>Completely protect the tablet from daily damages</p></li><li><p>Elastic band for secure closure</p></li><li><p>Quick and easy installation</p></li></ul></div>\n",
+            "ProductStatus": 1,
+            "WithPackage": 0,
+            "Reminder": null,
+            "MOQ": 1,
+            "IsSpecialOffer": false,
+            "Price": 1.97,
+            "OriginalPrice": 1.97,
+            "PromotionPrice": 1.97,
+            "PromotionPeriod": "",
+            "PriceList": [
+                {
+                    "MinimumQuantity": 1,
+                    "UnitPrice": 1.97,
+                    "Invalid": false,
+                    "CurrentInterval": true
+                },
+                {
+                    "MinimumQuantity": 4,
+                    "UnitPrice": 1.93,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                },
+                {
+                    "MinimumQuantity": 15,
+                    "UnitPrice": 1.84,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                },
+                {
+                    "MinimumQuantity": 50,
+                    "UnitPrice": 1.77,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                },
+                {
+                    "MinimumQuantity": 100,
+                    "UnitPrice": 1.69,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                }
+            ],
+            "SpecificationList": [
+                {
+                    "Name": "Case Feature",
+                    "Value": "With Stand"
+                },
+                {
+                    "Name": "Color",
+                    "Value": "Pink"
+                },
+                {
+                    "Name": "Material",
+                    "Value": "Plastic, PU Leather"
+                },
+                {
+                    "Name": "Retail Packaging",
+                    "Value": "Simple PP Bag"
+                },
+                {
+                    "Name": "Texture",
+                    "Value": "Litchi"
+                },
+                {
+                    "Name": "Gross Weight",
+                    "Value": "0.155kg"
+                },
+                {
+                    "Name": "Volume Weight",
+                    "Value": "0.128kg"
+                },
+                {
+                    "Name": "Length",
+                    "Value": "21.200cm"
+                },
+                {
+                    "Name": "Width",
+                    "Value": "13.500cm"
+                },
+                {
+                    "Name": "Height",
+                    "Value": "2.000cm"
+                },
+                {
+                    "Name": "Weight",
+                    "Value": "0.138kg"
+                },
+                {
+                    "Name": "EAN",
+                    "Value": ""
+                },
+                {
+                    "Name": "With Retail Packaging",
+                    "Value": "No"
+                }
+            ],
+            "LeadTime": "1 - 3 days",
+            "GrossWeight": 0.155,
+            "VolumeWeight": 0.128,
+            "Length": 21.200,
+            "Width": 13.500,
+            "Height": 2.000,
+            "CompatibleList": [
+                {
+                    "Brand": "Samsung",
+                    "Model": "Samsung Galaxy Tab A 8.4 (2020)",
+                    "Versions": [],
+                    "DisplayName": "Samsung Galaxy Tab A 8.4 (2020)"
+                }
+            ],
+            "Modified": "2020-05-15T15:41:57",
+            "Added": "2020-05-15T15:42:12",
+            "StockStatus": 2,
+            "PackageList": [
+                "1 x Litchi Texture 360 Degree Rotary Stand Leather Case"
+            ],
+            "CacheTime": "2023-07-25T09:11:27",
+            "Attributes": {
+                "Color": "Pink"
+            }
+        },
+        {
+            "ItemNo": "101227415I",
+            "EanCode": "",
+            "CategoryCode": "C003700130330",
+            "Name": "Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - Dark Blue",
+            "Summary": "Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - Dark Blue",
+            "Description": "<h5 class='system-title'>Litchi Texture 360° Rotating Stand Leather Cover for Samsung Galaxy Tab A 8.4 T307 (2020) - Dark Blue</h5>\n<div class='system-intro'></div>\n<div class='system-description'><ul class=\" list-paddingleft-2\" style=\"list-style-type: disc;\"><li><p>Classic litchi texture, comfortable to touch</p></li><li><p>360-degree rotation allows for landscape and portrait view</p></li><li><p>Completely protect the tablet from daily damages</p></li><li><p>Elastic band for secure closure</p></li><li><p>Quick and easy installation</p></li></ul></div>\n",
+            "ProductStatus": 1,
+            "WithPackage": 0,
+            "Reminder": null,
+            "MOQ": 1,
+            "IsSpecialOffer": false,
+            "Price": 1.97,
+            "OriginalPrice": 1.97,
+            "PromotionPrice": 1.97,
+            "PromotionPeriod": "",
+            "PriceList": [
+                {
+                    "MinimumQuantity": 1,
+                    "UnitPrice": 1.97,
+                    "Invalid": false,
+                    "CurrentInterval": true
+                },
+                {
+                    "MinimumQuantity": 4,
+                    "UnitPrice": 1.93,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                },
+                {
+                    "MinimumQuantity": 15,
+                    "UnitPrice": 1.84,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                },
+                {
+                    "MinimumQuantity": 50,
+                    "UnitPrice": 1.77,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                },
+                {
+                    "MinimumQuantity": 100,
+                    "UnitPrice": 1.69,
+                    "Invalid": false,
+                    "CurrentInterval": false
+                }
+            ],
+            "SpecificationList": [
+                {
+                    "Name": "Case Feature",
+                    "Value": "With Stand"
+                },
+                {
+                    "Name": "Color",
+                    "Value": "Dark Blue"
+                },
+                {
+                    "Name": "Material",
+                    "Value": "Plastic, PU Leather"
+                },
+                {
+                    "Name": "Retail Packaging",
+                    "Value": "Simple PP Bag"
+                },
+                {
+                    "Name": "Texture",
+                    "Value": "Litchi"
+                },
+                {
+                    "Name": "Gross Weight",
+                    "Value": "0.155kg"
+                },
+                {
+                    "Name": "Volume Weight",
+                    "Value": "0.128kg"
+                },
+                {
+                    "Name": "Length",
+                    "Value": "21.200cm"
+                },
+                {
+                    "Name": "Width",
+                    "Value": "13.500cm"
+                },
+                {
+                    "Name": "Height",
+                    "Value": "2.000cm"
+                },
+                {
+                    "Name": "Weight",
+                    "Value": "0.138kg"
+                },
+                {
+                    "Name": "EAN",
+                    "Value": ""
+                },
+                {
+                    "Name": "With Retail Packaging",
+                    "Value": "No"
+                }
+            ],
+            "LeadTime": "1 - 3 days",
+            "GrossWeight": 0.155,
+            "VolumeWeight": 0.128,
+            "Length": 21.200,
+            "Width": 13.500,
+            "Height": 2.000,
+            "CompatibleList": [
+                {
+                    "Brand": "Samsung",
+                    "Model": "Samsung Galaxy Tab A 8.4 (2020)",
+                    "Versions": [],
+                    "DisplayName": "Samsung Galaxy Tab A 8.4 (2020)"
+                }
+            ],
+            "Modified": "2020-05-15T15:42:01",
+            "Added": "2020-05-15T15:42:16",
+            "StockStatus": 2,
+            "PackageList": [
+                "1 x Litchi Texture 360 Degree Rotary Stand Leather Case"
+            ],
+            "CacheTime": "2023-07-25T09:11:27",
+            "Attributes": {
+                "Color": "Dark Blue"
+            }
+        }
+    ]
+}
