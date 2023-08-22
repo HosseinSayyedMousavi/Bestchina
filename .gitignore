@@ -12,3 +12,5 @@ env/
 geckodriver.log
 db.sqlite3
 test.json
+*.pyc
+static/

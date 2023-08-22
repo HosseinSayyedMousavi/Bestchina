@@ -221,3 +221,12 @@ def get_All_Children(AuthorizationToken,ParentCode="",CatList=[]):
         CatList = get_All_Children(AuthorizationToken,child["Code"],CatList)
     return CatList
 
+from six import u
+def decode(encoded_text):
+    return u(encoded_text)
+
+def translate_children(children):
+    for child in children["CateoryList"]:
+        child["Name"]=google_translate(child["Name"])
+        translate_children(child)
+    return children
