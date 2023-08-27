@@ -119,7 +119,8 @@ def Import_Job(importer):
             ItemNo = category_item_list[importer.Number_of_checked_products]
             details = standardize_Details(get_Details(AuthorizationToken,ItemNo=ItemNo))
             for detail in details["ModelList"] :
-                Model_Black_List.objects.create(black_item_no=detail["ItemNo"].strip())
+                if detail["ItemNo"] != ItemNo:
+                    Model_Black_List.objects.create(black_item_no=detail["ItemNo"].strip())
             if  not Model_Black_List.objects.filter(black_item_no=details["Details"]["ItemNo"].strip()):
                 response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'})
                 if response.json()["result"]:

@@ -7,7 +7,6 @@ import json
 translator = Translator()
 
 
-
 def get_AuthorizationToken(email="bestchina.ir@gmail.com", password="poonish27634"):
     reqUrl = f"http://openapi.tvc-mall.com/Authorization/GetAuthorization?email={email}&password={password}"
 
@@ -74,7 +73,7 @@ def delete_keyword(dictionary, keywords_to_remove):
 
 def delete_custom_keyword(Details, keywords_to_remove):
     Details["Detail"] = delete_keyword(Details["Detail"], keywords_to_remove)
-    Details["ModelList"] = [ model for model in Details["ModelList"] if model["ItemNo"]!=Details["Detail"]["ItemNo"]]
+    # Details["ModelList"] = [ model for model in Details["ModelList"] if model["ItemNo"]!=Details["Detail"]["ItemNo"]]
     for model in Details["ModelList"]:
         model = delete_keyword(model, keywords_to_remove)
         model = delete_keyword(model, ["Description","Summary","Name","CategoryCode"])
@@ -95,7 +94,7 @@ def get_Details(AuthorizationToken, ItemNo):
 def standardize_Details(Details):
     append_html='''
     <div>
-        <div class="titr">سازگار با:</div>
+        <h3 class="titr">سازگار با:</h3>
         <ul class="parag">
 
             {% if  "CompatibleList" in Details["Detail"].keys()%}
@@ -109,7 +108,7 @@ def standardize_Details(Details):
     </div>
 
     <div>
-        <div class="titr">بسته شامل:</div>
+        <h3 class="titr">بسته شامل:</h3>
         <ul class="parag">
 
             {% if  "PackageList" in Details["Detail"].keys()%}
@@ -126,7 +125,7 @@ def standardize_Details(Details):
     <table >
         <thead >
             <tr>
-                <th class="titr" >مشخصات فنی</th>
+                <h3 class="titr" >مشخصات فنی</h3>
                 <th></th>
             </tr>
         </thead>
@@ -158,61 +157,6 @@ def standardize_Details(Details):
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            .system-title {
-                text-align: right;
-                font-family: "Vazir";
-                direction: rtl;
-            }
-
-            .system-description {
-                text-align: right;
-                font-family: "Vazir";
-                direction: rtl;
-            }
-
-            .system-description ul {
-                position: relative;
-            }
-
-            @font-face {
-                font-family: 'Vazir';
-                src: url('https://raw.githubusercontent.com/rastikerdar/vazirmatn/master/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2'), url('https://raw.githubusercontent.com/rastikerdar/vazirmatn/master/fonts/webfonts/Vazirmatn-Regular.woff') format('woff');
-            }
-
-            .titr {
-                font-weight: bold;
-                font-size: 16px;
-                font-family: "Vazir";
-                text-align: right;
-                direction: rtl;
-            }
-
-            .titr tr td {
-                font-size: 12px;
-                font-family: "Vazir";
-                text-align: right;
-                direction: rtl;
-            }
-
-            .parag {
-                text-align: right;
-                font-family: "Vazir";
-                direction: rtl;
-            }
-
-            .clear {
-                clear: both;
-            }
-
-            .jay {
-                text-align: right !important;
-                direction: rtl !important;
-                display: block !important;
-                ;
-                position: relative;
-            }
-        </style>
     </head>
     <body>
 
@@ -221,6 +165,9 @@ def standardize_Details(Details):
 
     AuthorizationToken = get_AuthorizationToken()
     keywords_to_remove = ["EanCode", "Reminder", "IsSpecialOffer", "Price", "Modified","Added", "StockStatus", "CacheTime", "PriceList","PackageList", "CompatibleList", "SpecificationList","MOQ","LeadTime","PromotionPeriod","PromotionPrice","GrossWeight","VolumeWeight","WithPackage"]
+    if "-" in Details["Detail"]["Name"]:Details["Detail"]["Name"]=re.findall(r'(.*)-', Details["Detail"]["Name"])[0]
+    if "-" in Details["Detail"]["Summary"]:Details["Detail"]["Name"]=re.findall(r'(.*)-', Details["Detail"]["Summary"])[0]
+    Details["Detail"]["Description"]=Details["Detail"]["Description"].replace("-"+re.findall(r"-.*h5",Details["Detail"]["Description"])[0].split("-")[-1],"<\h5")
     Details["Detail"]["Image"] = get_Image(AuthorizationToken, Details["Detail"]["ItemNo"])
     Details["Detail"]["Name"] = google_translate(Details["Detail"]["Name"])
     Details["Detail"]["Summary"] = google_translate(Details["Detail"]["Summary"])
@@ -254,24 +201,29 @@ def standardize_Details(Details):
     except:pass
     Details["Detail"]["Description"]=re.sub(r"style.*?>",">",Details["Detail"]["Description"])
     Details["Detail"]["Description"] = google_translate(Details["Detail"]["Description"].replace("h5","h2").replace("system -title","system-title"))
-
+    
     template = Template(before_html + Details["Detail"]["Description"] + append_html)
     rendered_html = template.render(Details=Details)
     Details["Detail"]["Description"] = rendered_html
 
     Details = delete_custom_keyword(Details,keywords_to_remove)
     for model in Details["ModelList"]:
-        model["Image"] = get_Image(AuthorizationToken, model["ItemNo"])
-        try:
-            ModelKeys = list(model["Attributes"].keys())
-            for attr in ModelKeys:
-                try:model["Attributes"][google_translate(attr)] = google_translate(model["Attributes"].pop(attr))
-                except:
-                    try:model["Attributes"][attr] = google_translate(model["Attributes"].pop(attr))
+        if model["ItemNo"]!=Details["Detail"]["ItemNo"]:
+            model["Image"] = get_Image(AuthorizationToken, model["ItemNo"])
+            try:
+                ModelKeys = list(model["Attributes"].keys())
+                for attr in ModelKeys:
+                    try:model["Attributes"][google_translate(attr)] = google_translate(model["Attributes"].pop(attr))
                     except:
-                        try:model["Attributes"][google_translate(attr)] = model["Attributes"].pop(attr)
-                        except:pass
-        except:pass
+                        try:model["Attributes"][attr] = google_translate(model["Attributes"].pop(attr))
+                        except:
+                            try:model["Attributes"][google_translate(attr)] = model["Attributes"].pop(attr)
+                            except:pass
+            except:pass
+        else:
+            model["Image"]=Details["Detail"]["Image"]
+            try:model["Attributes"]=Details["Detail"]["Attributes"]
+            except:pass
     return Details
 
 
