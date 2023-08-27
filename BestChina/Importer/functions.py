@@ -54,7 +54,7 @@ def get_Image(AuthorizationToken, ItemNo, Size="700x700"):
     if response.json()["Message"]=="unauthorized":
         AuthorizationToken = get_AuthorizationToken()
         return get_Image(AuthorizationToken, ItemNo)
-    return response.json()
+    return response.json()["ImageUrl"]
 
 
 def google_translate(text, source_language="en", target_language="fa"):
