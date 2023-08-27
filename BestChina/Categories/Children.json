@@ -19,7 +19,7 @@
                             "Status": "Valid",
                             "CateoryList": []
                         },
-                        {
+                        { 
                             "Code": "C006700140001",
                             "Name": "Charger Cases",
                             "ParentCode": "C00670014",

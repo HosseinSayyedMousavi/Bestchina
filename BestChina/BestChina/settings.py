@@ -128,3 +128,4 @@ STATIC_ROOT = BASE_DIR / 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+IMPORT_ENDPOINT = "https://bestchina.ir/acc/wp-json/wpapi/v1/create-update-product"

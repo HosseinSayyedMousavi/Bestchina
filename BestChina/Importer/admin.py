@@ -11,7 +11,6 @@ class CategoryResource(ModelResource):
         exclude = ('id',)
         fields = "__all__"
 
-
     def get_or_init_instance(self, instance_loader, row):
         unique_field = self._meta.model._meta.get_field('Code')
         unique_value = row.get('Code')  
@@ -24,14 +23,18 @@ class CategoryResource(ModelResource):
 
 class CategoryAdmin(ImportExportModelAdmin):
     list_display = ("Code","Name","FarsiName","ParentCode","Status")
-    readonly_fields= ("Code","Name","FarsiName","ParentCode","Status")
+    readonly_fields= ("Code","Name","FarsiName","ParentCode","Status","errors","Total","ItemList","category_prepared_percent")
+    search_fields = ("Name","Code")
 admin.site.register(Category,CategoryAdmin)
 
 class ImporterAdmin(admin.ModelAdmin):
-    list_display = ("category","status","is_periodic")
+    list_display = ("category","status","is_periodic","Progress_percentage")
     list_display_links = list_display
-    readonly_fields = ("category","is_periodic","Progress_percentage","created_at","updated_at")
+    readonly_fields = ("category","Progress_percentage","created_at","updated_at","category_prepared_percent","period_number")
+    search_fields = ("category.Name","category.Code")
 admin.site.register(Importer,ImporterAdmin)
 
-admin.site.register(CreateImporter,SingletonModelAdmin)
+class CreateImporterAdmin(SingletonModelAdmin):
+    readonly_fields = ("errors","updated_at","created_at")
+admin.site.register(CreateImporter,CreateImporterAdmin)
 

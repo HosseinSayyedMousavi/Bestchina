@@ -5,87 +5,118 @@ import openai
 from googletrans import Translator
 from jinja2 import Template
 import time
+import re
 translator = Translator()
 openai.api_key = "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"
 
-
 append_html='''
-<div  class="desitems mt-[20px]">
-    <div  class="text-[22px] leading-[30px]">Compatible with:</div>
-    <div  class="pl-[15px]">
-        <ul  style="list-style: disc;">
-
-            {% for compatible in Details["Detail"]["CompatibleList"] %}
-                <li  class="text-[18px] leading-[30px]">{{ compatible["DisplayName"] }} </li>
-            {% endfor %}
-
-        </ul>
-    </div>
+<div>
+    <div class="titr">سازگار با:</div>
+    <ul class="parag">
+        {% for compatible in Details["Detail"]["CompatibleList"] %}
+            <li class="parag">{{ compatible["DisplayName"] }}</li>
+        {% endfor %}
+    </ul>
 </div>
 
-
-<div  class="desitems">
-    <div  class="text-[22px] pt-[12px] leading-[30px]">Package included:</div>
-    <div  class="pl-[15px]">
-        <ul  style="list-style: disc;">
-
-            {% for package in Details["Detail"]["PackageList"] %}
-                <li  class="text-[18px] leading-[20px]">{{ package }}</li>
-            {% endfor %}
-
-        </ul>
-    </div>
+<div>
+    <div class="titr">بسته شامل:</div>
+    <ul class="parag">
+        {% for package in Details["Detail"]["PackageList"] %}
+            <li class="parag" >{{ package }}</li>
+        {% endfor %}
+    </ul>
 </div>
-
-
-<div 
-    class="n-data-table __data-table-11a5fl2-m n-data-table--bottom-bordered n-data-table--single-line mt-[30px]">
-    <div class="n-data-table-wrapper">
-        <div class="n-data-table-base-table">
-            <table class="n-data-table-table" style="table-layout: fixed;">
-                <colgroup>
-                    <col>
-                    <col>
-                </colgroup>
-                <thead class="n-data-table-thead" data-n-id="d77a7923">
-                    <tr class="n-data-table-tr">
-                        <th colspan="1" rowspan="1" data-col-key="key" class="n-data-table-th">
-                            <div class="n-data-table-th__title-wrapper">
-                                <div class="n-data-table-th__title">
-                                    <div class="n-data-table-th__ellipsis">
-                                        <div style="font-size: 22px; font-weight: bold;">Specifications</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </th>
-                        <th colspan="1" rowspan="1" data-col-key="title" class="n-data-table-th n-data-table-th--last">
-                            <div class="n-data-table-th__title-wrapper">
-                                <div class="n-data-table-th__title">
-                                    <div default="()=>&quot;&quot;"></div>
-                                </div>
-                            </div>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody data-n-id="d77a7923" class="n-data-table-tbody">
-
-                    {% for specific in Details["Detail"]["SpecificationList"] %}
-                        <tr class="n-data-table-tr td">
-                            <td colspan="1" rowspan="1" data-col-key="key" class="n-data-table-td"><span
-                                    class="n-ellipsis" style="text-overflow: ellipsis;"><span>{{ specific["Name"] }}</span></span></td>
-                            <td colspan="1" rowspan="1" data-col-key="title"
-                                class="n-data-table-td n-data-table-td--last-col">{{ specific["Value"] }}</td>
-                        </tr>
-                    {% endfor %}
-                    
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="jay" style="text-align:right !important;direction:rtl !important">
+<table >
+    <thead >
+        <tr>
+            <th class="titr" >مشخصات فنی</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody >
+        {% for specific in Details["Detail"]["SpecificationList"] %}
+            <tr>
+                <td class="parag">{{ specific["Name"] }}</td>
+                <td class="parag">{{ specific["Value"] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="clear"></div>
 </div>
+  
+</body>
+</html>
 
 '''
 
+before_html = '''
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .system-title {
+            text-align: right;
+            font-family: "Vazir";
+            direction: rtl;
+        }
+
+        .system-description {
+            text-align: right;
+            font-family: "Vazir";
+            direction: rtl;
+        }
+
+        .system-description ul {
+            position: relative;
+        }
+
+        @font-face {
+            font-family: 'Vazir';
+            src: url('https://raw.githubusercontent.com/rastikerdar/vazirmatn/master/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2'), url('https://raw.githubusercontent.com/rastikerdar/vazirmatn/master/fonts/webfonts/Vazirmatn-Regular.woff') format('woff');
+        }
+
+        .titr {
+            font-weight: bold;
+            font-size: 16px;
+            font-family: "Vazir";
+            text-align: right;
+            direction: rtl;
+        }
+
+        .titr tr td {
+            font-size: 12px;
+            font-family: "Vazir";
+            text-align: right;
+            direction: rtl;
+        }
+
+        .parag {
+            text-align: right;
+            font-family: "Vazir";
+            direction: rtl;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .jay {
+            text-align: right !important;
+            direction: rtl !important;
+            display: block !important;
+            ;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+'''
 
 def get_AuthorizationToken(email="bestchina.ir@gmail.com", password="poonish27634"):
     reqUrl = f"http://openapi.tvc-mall.com/Authorization/GetAuthorization?email={email}&password={password}"
@@ -115,10 +146,10 @@ def get_Children(AuthorizationToken,ParentCode=""):
     return Children
 
 
-def get_Category(AuthorizationToken, PageSize, CategoryCode, PageIndex):
+def get_Category(AuthorizationToken, PageSize, CategoryCode, lastProductId=""):
     import requests
 
-    reqUrl = f"http://openapi.tvc-mall.com/OpenApi/Product/Search?PageSize={PageSize}&CategoryCode={CategoryCode}&PageIndex={PageIndex}"
+    reqUrl = f"http://openapi.tvc-mall.com/OpenApi/Product/Search?PageSize={PageSize}&CategoryCode={CategoryCode}&lastProductId={lastProductId}"
 
     headersList = {
         "Accept": "*/*",
@@ -128,10 +159,10 @@ def get_Category(AuthorizationToken, PageSize, CategoryCode, PageIndex):
 
     response = requests.request("GET", reqUrl, data="",  headers=headersList)
     
-    return response.json()["ProductItemNoList"]
+    return response.json()
 
 
-def get_Image(AuthorizationToken, ItemNo, Size="1000x1000"):
+def get_Image(AuthorizationToken, ItemNo, Size="700x700"):
     reqUrl = f"http://openapi.tvc-mall.com//OpenApi/Product/Image?ItemNo={ItemNo}&Size={Size}"
 
     headersList = {
@@ -184,30 +215,71 @@ def delete_keyword(dictionary, keywords_to_remove):
 
 def delete_custom_keyword(Details, keywords_to_remove):
     Details["Detail"] = delete_keyword(Details["Detail"], keywords_to_remove)
+    Details["ModelList"] = [ model for model in Details["ModelList"] if model["ItemNo"]!=Details["Detail"]["ItemNo"]]
     for model in Details["ModelList"]:
         model = delete_keyword(model, keywords_to_remove)
+        model = delete_keyword(model, ["Description","Summary","Name","CategoryCode"])
     return Details
 
 
 def get_Details(AuthorizationToken, ItemNo):
-    keywords_to_remove = ["EanCode", "Reminder", "IsSpecialOffer", "Price", "Modified","Added", "StockStatus", "CacheTime", "PriceList","PackageList", "CompatibleList", "SpecificationList"]
+    keywords_to_remove = ["EanCode", "Reminder", "IsSpecialOffer", "Price", "Modified","Added", "StockStatus", "CacheTime", "PriceList","PackageList", "CompatibleList", "SpecificationList","MOQ","LeadTime","PromotionPeriod","PromotionPrice","GrossWeight","VolumeWeight","WithPackage"]
     reqUrl = f"http://openapi.tvc-mall.com/OpenApi/Product/Detail?ItemNo={ItemNo}"
     headersList = {"Authorization": "TVC "+AuthorizationToken}
     response = requests.request("GET", reqUrl, data="",  headers=headersList)
     Details = response.json()
-    print(Details)
-    template = Template(append_html)
+    
     Details["Detail"]["Image"] = get_Image(AuthorizationToken, Details["Detail"]["ItemNo"])
     Details["Detail"]["Name"] = google_translate(Details["Detail"]["Name"])
     Details["Detail"]["Summary"] = google_translate(Details["Detail"]["Summary"])
+
+    try:
+        AttributeKeys = list(Details["Detail"]["Attributes"].keys())
+        for attr in AttributeKeys:
+            try:Details["Detail"]["Attributes"][google_translate(attr)] = google_translate(Details["Detail"]["Attributes"].pop(attr))
+            except:
+                try:Details["Detail"]["Attributes"][attr] = google_translate(Details["Detail"]["Attributes"].pop(attr))
+                except:
+                    try:Details["Detail"]["Attributes"][google_translate(attr)] = Details["Detail"]["Attributes"].pop(attr)
+                    except:pass
+    except:pass
+    
+
+    for specific in Details["Detail"]["SpecificationList"]:
+        try:specific["Name"] = google_translate(specific["Name"])
+        except:pass
+        try:specific["Value"] = google_translate(specific["Value"])
+        except:pass
+
+    for package in Details["Detail"]["PackageList"]:
+            try:package = google_translate(package)
+            except:pass
+
+    for compatible in Details["Detail"]["CompatibleList"]:
+         try:compatible["DisplayName"] = google_translate(compatible["DisplayName"])
+         except:pass
+    
+    Details["Detail"]["Description"]=re.sub(r"style.*?>",">",Details["Detail"]["Description"])
+    Details["Detail"]["Description"] = google_translate(Details["Detail"]["Description"].replace("h5","h2"))
+
+    template = Template(before_html + Details["Detail"]["Description"] + append_html)
     rendered_html = template.render(Details=Details)
-    Details["Detail"]["Description"] = Details["Detail"]["Description"]+rendered_html
-    Details["Detail"]["Description"] = google_translate(Details["Detail"]["Description"])
+    Details["Detail"]["Description"] = rendered_html
+
     Details = delete_custom_keyword(Details,keywords_to_remove)
     for model in Details["ModelList"]:
         model["Image"] = get_Image(AuthorizationToken, model["ItemNo"])
-        model["Name"] = google_translate(model["Name"])
-        model["Summary"] = google_translate(model["Summary"])
+        try:
+            ModelKeys = list(model["Attributes"].keys())
+            for attr in ModelKeys:
+                try:model["Attributes"][google_translate(attr)] = google_translate(model["Attributes"].pop(attr))
+                except:
+                    try:model["Attributes"][attr] = google_translate(model["Attributes"].pop(attr))
+                    except:
+                        try:model["Attributes"][google_translate(attr)] = model["Attributes"].pop(attr)
+                        except:pass
+        except:pass
+    print(Details["Detail"]["Description"].replace("\n","").replace("\\",""))
     return Details
 
 
@@ -224,6 +296,7 @@ def get_All_Children(AuthorizationToken,ParentCode="",CatList=[]):
 from six import u
 def decode(encoded_text):
     return u(encoded_text)
+
 
 def translate_children(children):
     for child in children["CateoryList"]:
