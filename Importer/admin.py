@@ -37,5 +37,6 @@ admin.site.register(Importer,ImporterAdmin)
 
 class CreateImporterAdmin(SingletonModelAdmin):
     readonly_fields = ("errors","updated_at","created_at")
+    exclude = ["status"]
 admin.site.register(CreateImporter,CreateImporterAdmin)
 

@@ -61,7 +61,7 @@ class Importer(models.Model):
 
     @property
     def category_prepared_Items(self):
-        return str(len(self.category.get_ItemList()))
+        return len(self.category.get_ItemList())
 
     def save(self, *args,**kwargs):
         if not self.pk and self.start_job==True:
