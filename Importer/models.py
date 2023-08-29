@@ -113,7 +113,7 @@ class Model_Black_List(models.Model):
 
 
 def Import_Job(importer):
-    # try:
+    try:
         AuthorizationToken = get_AuthorizationToken()
         if importer.category_prepared_Items == 0:
             set_all_item_list(AuthorizationToken,importer.category)
@@ -150,9 +150,9 @@ def Import_Job(importer):
             else:
                 importer.status="Finished"
                 importer.save()
-    # except Exception as e:
-    #     importer.status = "stopped"
-    #     importer.errors = json.dumps(e.args)
-    #     importer.start_job=False
-    #     importer.save()
+    except Exception as e:
+        importer.status = "stopped"
+        importer.errors = json.dumps(e.args)
+        importer.start_job=False
+        importer.save()
 
