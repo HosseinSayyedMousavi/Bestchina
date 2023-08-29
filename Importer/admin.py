@@ -23,7 +23,7 @@ class CategoryResource(ModelResource):
 
 class CategoryAdmin(ImportExportModelAdmin):
     list_display = ("Code","Name","FarsiName","ParentCode","Status")
-    readonly_fields= ("Code","Name","FarsiName","ParentCode","Status","errors","Total","ItemList","category_prepared_percent")
+    readonly_fields= ("Code","Name","FarsiName","ParentCode","Status","errors","Total","ItemList")
     search_fields = ("Name","Code","FarsiName")
 admin.site.register(Category,CategoryAdmin)
 
@@ -31,7 +31,7 @@ class ImporterAdmin(admin.ModelAdmin):
     list_display = ("category","status","is_periodic","Progress_percentage")
     list_display_links = list_display
     exclude = ["start_job"]
-    readonly_fields = ("category","category_prepared_percent","category_prepared_Items","Progress_percentage","created_at","updated_at","period_number","Number_of_products","Number_of_checked_products","errors")
+    readonly_fields = ("category","category_prepared_Items","Progress_percentage","created_at","updated_at","period_number","Number_of_products","Number_of_checked_products","errors")
     search_fields = ("category.Name","category.Code")
 admin.site.register(Importer,ImporterAdmin)
 

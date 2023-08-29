@@ -13,9 +13,8 @@ class CreateImporter(SingletonModel):
     category = models.OneToOneField("Category",max_length=255,unique=True,null=True,on_delete=models.SET_NULL)
     updated_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now=True)
-    status = models.CharField(choices=STATUS_CHOICES,max_length=255,default='Running')
     is_periodic = models.BooleanField(default=False)
-    period_length = models.PositiveIntegerField(default = 10)
+    period_length = models.IntegerField(default = 10)
     errors = models.TextField(default="Everything is Ok!",null=True)
 
     def save(self, *args,**kwargs):
@@ -29,7 +28,7 @@ class CreateImporter(SingletonModel):
             if self.pk:
                 Importer.objects.create(
                 category=self.category,
-                status=self.status,
+                status="Running",
                 is_periodic=self.is_periodic,
                 period_length=self.period_length,
                 start_job=True)
@@ -48,16 +47,16 @@ class Importer(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     status = models.CharField(choices=STATUS_CHOICES,max_length=255,default='Running')
     is_periodic = models.BooleanField(default=False)
-    period_length = models.PositiveIntegerField(default = 10)
-    period_number = models.PositiveIntegerField(default = 1)
+    period_length = models.IntegerField(default = 10)
+    period_number = models.IntegerField(default = 1)
     Progress_percentage = models.FloatField(default = 0)
-    Number_of_products = models.PositiveIntegerField(default=0) 
-    Number_of_checked_products = models.PositiveIntegerField(default=0) 
+    Number_of_products = models.IntegerField(default=0) 
+    Number_of_checked_products = models.IntegerField(default=0) 
     start_job = models.BooleanField(default=False)
     errors = models.TextField(default = "Everything is Ok!")
-    @property
-    def category_prepared_percent(self):
-        return str(len(self.category.get_ItemList())/self.category.Total * 100)
+    # @property
+    # def category_prepared_percent(self):
+    #     return str(len(self.category.get_ItemList())/self.category.Total * 100)
 
     @property
     def category_prepared_Items(self):
@@ -88,11 +87,11 @@ class Category(models.Model):
     ParentCode = models.CharField(max_length=255,null=False)
     Status = models.CharField(max_length=255,null=False)
     ItemList = models.TextField(default="[]")
-    Total = models.PositiveBigIntegerField(default=1, blank=True)
+    # Total = models.IntegerField(default=1, blank=True)
     errors = models.TextField(default="Everything is Ok!")
-    @property
-    def category_prepared_percent(self):
-        return len(self.get_ItemList())/self.Total * 100
+    # @property
+    # def category_prepared_percent(self):
+    #     return len(self.get_ItemList())/self.Total * 100
     
     def __str__(self):
         return self.Name 
@@ -114,7 +113,7 @@ class Model_Black_List(models.Model):
 
 
 def Import_Job(importer):
-    try:
+    # try:
         AuthorizationToken = get_AuthorizationToken()
         if importer.category_prepared_Items == 0:
             set_all_item_list(AuthorizationToken,importer.category)
@@ -151,9 +150,9 @@ def Import_Job(importer):
             else:
                 importer.status="Finished"
                 importer.save()
-    except Exception as e:
-        importer.status = "stopped"
-        importer.errors = json.dumps(e.args)
-        importer.start_job=False
-        importer.save()
+    # except Exception as e:
+    #     importer.status = "stopped"
+    #     importer.errors = json.dumps(e.args)
+    #     importer.start_job=False
+    #     importer.save()
 

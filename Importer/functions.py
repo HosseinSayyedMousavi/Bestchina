@@ -233,16 +233,14 @@ def set_all_item_list(AuthorizationToken,category):
         ItemList=[]
         lastProductId = ""
         i=0
-        print(category)
         while ProductItemNoList:
             NoList = get_item_list(AuthorizationToken=AuthorizationToken,CategoryCode=category.Code,lastProductId=lastProductId)
             ProductItemNoList = NoList["ProductItemNoList"]
             lastProductId = NoList["lastProductId"]
-            category.Total = NoList["Total"]-2
+            # category.Total = NoList["Total"]-2
             category.save()
             for item in ProductItemNoList:
                 i+=1
-                print(i)
                 ItemList.append(item["ItemNo"])
                 category.set_ItemList(ItemList)
     except Exception as e:
