@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3b26xmc$+w@91r$8h4j4v&d5y0z#a4r+i*jg09f)-*5+qwk(--
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["tvc-import.bestchina.ir"]
+ALLOWED_HOSTS = ["tvc-import.bestchina.ir","*"]
 
 
 # Application definition
