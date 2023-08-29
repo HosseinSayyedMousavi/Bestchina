@@ -67,6 +67,7 @@ class Importer(models.Model):
             super(Importer, self).save(*args,**kwargs)
             threading.Thread(target=Import_Job,args=(self,)).start()
         elif self.pk and self.status =="Running" and self.status_changed():
+            self.errors = "Everything is Ok!"
             super(Importer, self).save(*args,**kwargs)
             threading.Thread(target=Import_Job,args=(self,)).start()
         else:
@@ -125,7 +126,7 @@ def Import_Job(importer):
                 if detail["ItemNo"] != ItemNo:
                     try:Model_Black_List.objects.create(black_item_no=detail["ItemNo"].strip())
                     except:pass
-            if  not Model_Black_List.objects.filter(black_item_no=details["Details"]["ItemNo"].strip()):
+            if  not Model_Black_List.objects.filter(black_item_no=details["Detail"]["ItemNo"].strip()):
                 response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'})
                 if response.json()["result"]:
                     importer.Number_of_products = importer.Number_of_products + 1
