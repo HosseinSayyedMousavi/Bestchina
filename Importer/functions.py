@@ -238,7 +238,7 @@ def set_all_item_list(AuthorizationToken,category):
             NoList = get_item_list(AuthorizationToken=AuthorizationToken,CategoryCode=category.Code,lastProductId=lastProductId)
             ProductItemNoList = NoList["ProductItemNoList"]
             lastProductId = NoList["lastProductId"]
-            category.Total = NoList["Total"]
+            category.Total = NoList["Total"]-2
             category.save()
             for item in ProductItemNoList:
                 i+=1

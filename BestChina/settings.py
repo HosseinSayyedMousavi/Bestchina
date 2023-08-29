@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3b26xmc$+w@91r$8h4j4v&d5y0z#a4r+i*jg09f)-*5+qwk(--'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["tvc-import.bestchina.ir","localhost","*"]
+ALLOWED_HOSTS = ["tvc-import.bestchina.ir"]
 
 
 # Application definition
