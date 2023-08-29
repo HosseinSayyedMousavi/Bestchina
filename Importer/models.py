@@ -131,13 +131,15 @@ def Import_Job(importer):
                     importer.Number_of_products = importer.Number_of_products + 1
                     importer.Number_of_checked_products = importer.Number_of_checked_products + 1
                     importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
-                    importer.save(start_job=False)
+                    importer.start_job=False
+                    importer.save()
                 else:
                     raise Exception("Import Endpoint Has Error!")
             else:
                 importer.Number_of_checked_products = importer.Number_of_checked_products + 1
                 importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
-                importer.save(start_job=False)
+                importer.start_job=False
+                importer.save()
             try:importer = Importer.objects.get(id=importer.id)
             except:break
         else:
@@ -152,5 +154,6 @@ def Import_Job(importer):
     except Exception as e:
         importer.status = "stopped"
         importer.errors = json.dumps(e.args)
-        importer.save(start_job=False)
+        importer.start_job=False
+        importer.save()
 
