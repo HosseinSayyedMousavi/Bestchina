@@ -30,7 +30,7 @@ def get_item_list(AuthorizationToken,CategoryCode, lastProductId="", PageSize=10
         "User-Agent": "Thunder Client (https://www.thunderclient.com)",
         "Authorization": "TVC "+AuthorizationToken
     }
-    response = requests.request("GET", reqUrl, data="",  headers=headersList)
+    response = requests.request("GET", reqUrl, data="",  headers=headersList,timeout=20)
     if "Message" in response.json().keys():
         AuthorizationToken = get_AuthorizationToken()
         return get_item_list(AuthorizationToken,CategoryCode, lastProductId, PageSize)
@@ -49,7 +49,7 @@ def get_Image(AuthorizationToken, ItemNo, Size="700x700"):
 
     payload = ""
 
-    response = requests.request("GET", reqUrl, data=payload,  headers=headersList)
+    response = requests.request("GET", reqUrl, data=payload,  headers=headersList,timeout=20)
     if response.json()["Message"]=="unauthorized":
         AuthorizationToken = get_AuthorizationToken()
         return get_Image(AuthorizationToken, ItemNo)
@@ -83,7 +83,7 @@ def delete_custom_keyword(Details, keywords_to_remove):
 def get_Details(AuthorizationToken, ItemNo):
     reqUrl = f"http://openapi.tvc-mall.com/OpenApi/Product/Detail?ItemNo={ItemNo}"
     headersList = {"Authorization": "TVC "+AuthorizationToken}
-    response = requests.request("GET", reqUrl, data="",  headers=headersList)
+    response = requests.request("GET", reqUrl, data="",  headers=headersList,timeout=20)
     Details = response.json()
     if "Message" in response.json().keys():
         AuthorizationToken = get_AuthorizationToken()

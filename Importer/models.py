@@ -127,7 +127,7 @@ def Import_Job(importer):
                     if detail["ItemNo"] != ItemNo:
                         try:Model_Black_List.objects.create(black_item_no=detail["ItemNo"].strip())
                         except:pass
-                response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'})
+                response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
                 if response.json()["result"]:
                     importer.Number_of_products = importer.Number_of_products + 1
                     importer.Number_of_checked_products = importer.Number_of_checked_products + 1
