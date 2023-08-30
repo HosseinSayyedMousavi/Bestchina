@@ -121,13 +121,15 @@ def Import_Job(importer):
             set_all_item_list(AuthorizationToken,importer.category)
         category_item_list = importer.category.get_ItemList()
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
+            print(importer.Number_of_checked_products)
+
             ItemNo = category_item_list[importer.Number_of_checked_products]
             if  not Model_Black_List.objects.filter(black_item_no=ItemNo.strip()):
+                print(ItemNo)
                 details = standardize_Details(get_Details(AuthorizationToken,ItemNo=ItemNo))
                 for detail in details["ModelList"] :
-                    if detail["ItemNo"] != ItemNo:
-                        try:Model_Black_List.objects.create(black_item_no=detail["ItemNo"].strip())
-                        except:pass
+                    if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no=detail["ItemNo"].strip()):
+                        Model_Black_List.objects.create(black_item_no=detail["ItemNo"].strip())
                 response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
                 if response.json()["result"]:
                     importer.Number_of_products = importer.Number_of_products + 1
@@ -147,7 +149,7 @@ def Import_Job(importer):
         else:
             if importer.is_periodic :
                 time.sleep(importer.period_length*24*60*60)
-                importer.period_number = importer.period_number +1
+                importer.period_number = importer.period_number + 1
                 importer.start_job=True
                 importer.save()
             else:
