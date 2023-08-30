@@ -63,7 +63,8 @@ class Importer(models.Model):
         return len(self.category.get_ItemList())
 
     def save(self, *args,**kwargs):
-        if not self.pk and self.start_job==True:
+        if self.start_job==True:
+            self.errors = "Everything is Ok!"
             super(Importer, self).save(*args,**kwargs)
             threading.Thread(target=Import_Job,args=(self,)).start()
         elif self.pk and self.status =="Running" and self.status_changed():
@@ -147,10 +148,11 @@ def Import_Job(importer):
             if importer.is_periodic :
                 time.sleep(importer.period_length*24*60*60)
                 importer.period_number = importer.period_number +1
+                importer.start_job=True
                 importer.save()
-                Import_Job(importer)
             else:
                 importer.status="Finished"
+                importer.start_job=False
                 importer.save()
     except Exception as e:
         importer.status = "stopped"
