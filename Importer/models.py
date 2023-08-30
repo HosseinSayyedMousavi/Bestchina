@@ -121,11 +121,9 @@ def Import_Job(importer):
             set_all_item_list(AuthorizationToken,importer.category)
         category_item_list = importer.category.get_ItemList()
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
-            print(importer.Number_of_checked_products)
 
             ItemNo = category_item_list[importer.Number_of_checked_products]
             if  not Model_Black_List.objects.filter(black_item_no=ItemNo.strip()):
-                print(ItemNo)
                 details = standardize_Details(get_Details(AuthorizationToken,ItemNo=ItemNo))
                 for detail in details["ModelList"] :
                     if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no=detail["ItemNo"].strip()):
@@ -146,19 +144,21 @@ def Import_Job(importer):
                 importer.save()
             try:importer = Importer.objects.get(id=importer.id)
             except:break
+        if importer.is_periodic :
+            time.sleep(importer.period_length*24*60*60)
+            importer.period_number = importer.period_number + 1
+            importer.start_job=True
+            importer.save()
         else:
-            if importer.is_periodic :
-                time.sleep(importer.period_length*24*60*60)
-                importer.period_number = importer.period_number + 1
-                importer.start_job=True
-                importer.save()
-            else:
-                importer.status="Finished"
-                importer.start_job=False
-                importer.save()
+            importer.status="Finished"
+            importer.start_job=False
+            importer.save()
     except Exception as e:
-        importer.status = "stopped"
+        importer.status = "Stopped"
         importer.errors = json.dumps(e.args)
         importer.start_job=False
         importer.save()
-
+    importer.status = "Stopped"
+    importer.errors = "Job Stopped!"
+    importer.start_job=False
+    importer.save()
