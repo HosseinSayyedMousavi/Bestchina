@@ -123,7 +123,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/bestchin/public_html/static'
 STATICFIELS_DIRS = [
-BASE_DIR / 'statics',
+BASE_DIR / 'static',
 ]
 
 # Default primary key field type
