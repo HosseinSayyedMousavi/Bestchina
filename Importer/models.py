@@ -67,7 +67,7 @@ class Importer(models.Model):
             self.errors = "Everything is Ok!"
             super(Importer, self).save(*args,**kwargs)
             threading.Thread(target=Import_Job,args=(self,)).start()
-        elif self.pk and self.status =="Running" and self.status_changed():
+        elif self.status =="Running" and self.status_changed():
             self.errors = "Everything is Ok!"
             super(Importer, self).save(*args,**kwargs)
             threading.Thread(target=Import_Job,args=(self,)).start()
@@ -158,7 +158,4 @@ def Import_Job(importer):
         importer.errors = json.dumps(e.args)
         importer.start_job=False
         importer.save()
-    importer.status = "Stopped"
-    importer.errors = "Job Stopped!"
-    importer.start_job=False
-    importer.save()
+
