@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3b26xmc$+w@91r$8h4j4v&d5y0z#a4r+i*jg09f)-*5+qwk(--
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["tvc-import.bestchina.ir"]
+ALLOWED_HOSTS = ["acc.bestchina.ir"]
 
 
 # Application definition
@@ -121,10 +121,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/bestchin/public_html/static'
-STATICFIELS_DIRS = [
-BASE_DIR / 'static',
-]
+STATIC_ROOT = BASE_DIR / 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
