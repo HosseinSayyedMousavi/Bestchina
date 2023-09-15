@@ -92,7 +92,7 @@ def get_Details(AuthorizationToken, ItemNo):
 
 
 def standardize_Details(Details):
-    if int(Details["ProductStatus"])!=1:
+    if int(Details["Detail"]["ProductStatus"])!=1:
         return Details
 
     append_html='''
