@@ -92,6 +92,9 @@ def get_Details(AuthorizationToken, ItemNo):
 
 
 def standardize_Details(Details):
+    if int(Details["ProductStatus"])!=1:
+        return Details
+
     append_html='''
     <div>
         <h3 class="titr">سازگار با:</h3>
@@ -207,6 +210,7 @@ def standardize_Details(Details):
     Details["Detail"]["Description"] = rendered_html
 
     Details = delete_custom_keyword(Details,keywords_to_remove)
+    Details["ModelList"] = [model for model in Details["ModelList"] if model["ProductStatus"]==1]
     for model in Details["ModelList"]:
         if model["ItemNo"]!=Details["Detail"]["ItemNo"]:
             model["Image"] = get_Image(AuthorizationToken, model["ItemNo"])

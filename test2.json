@@ -1,0 +1,83 @@
+{
+  "Detail": {
+    "ItemNo": "652000001A",
+    "EanCode": "",
+    "CategoryCode": "C00690009",
+    "Name": "TS-FT0423 Wireless Electronic Thermo-hydrometer Multi-functional Indoor Outdooor Precise Thermometer",
+    "Summary": "TS-FT0423 Wireless Electronic Thermo-hydrometer Multi-functional Indoor Outdooor Precise Thermometer",
+    "Description": "<h5 class='system-title'>TS-FT0423 Wireless Electronic Thermo-hydrometer Multi-functional Indoor Outdooor Precise Thermometer</h5>\n<div class='system-intro'></div>\n<div class='system-description'><ul class=\" list-paddingleft-2\" style=\"list-style-type: disc;\"><li><p>Precisely monitor the environment&#39;s humidity and temperature</p></li><li><p>Allows changing temperature unit display between Celsius and Fahrenheit</p></li><li><p>High definition and large display screen makes digit reading easy and simple</p></li><li><p>Can be hanged on the wall or be placed on the table</p></li><li><p>Suitable for office, warehouse, greenhouse, baby room, kitchen, living room, etc.</p></li></ul><p><strong>Specification:</strong></p><ul class=\" list-paddingleft-2\" style=\"list-style-type: disc;\"><li><p>Temperature measurement range: 0-60 (\u2103)</p></li><li><p>Humidity measurement accuracy: 10-99 (RH)</p></li></ul></div>\n",
+    "ProductStatus": 2,
+    "WithPackage": 1,
+    "Reminder": null,
+    "MOQ": 1,
+    "IsSpecialOffer": false,
+    "Price": 9.93,
+    "OriginalPrice": 9.93,
+    "PromotionPrice": 9.93,
+    "PromotionPeriod": "",
+    "PriceList": [
+      {
+        "MinimumQuantity": 1,
+        "UnitPrice": 9.93,
+        "Invalid": false,
+        "CurrentInterval": true
+      },
+      {
+        "MinimumQuantity": 2,
+        "UnitPrice": 9.67,
+        "Invalid": false,
+        "CurrentInterval": false
+      },
+      {
+        "MinimumQuantity": 10,
+        "UnitPrice": 9.34,
+        "Invalid": false,
+        "CurrentInterval": false
+      },
+      {
+        "MinimumQuantity": 25,
+        "UnitPrice": 9.04,
+        "Invalid": false,
+        "CurrentInterval": false
+      },
+      {
+        "MinimumQuantity": 50,
+        "UnitPrice": 8.79,
+        "Invalid": false,
+        "CurrentInterval": false
+      }
+    ],
+    "SpecificationList": [
+      { "Name": "Brand", "Value": "N/A" },
+      { "Name": "Retail Packaging", "Value": "Paper Box" },
+      { "Name": "User Manual (Language)", "Value": "English and Chinese" },
+      { "Name": "Gross Weight", "Value": "0.110kg" },
+      { "Name": "Volume Weight", "Value": "0.084kg" },
+      { "Name": "Length", "Value": "15.000cm" },
+      { "Name": "Width", "Value": "8.000cm" },
+      { "Name": "Height", "Value": "3.500cm" },
+      { "Name": "Weight", "Value": "0.110kg" },
+      { "Name": "EAN", "Value": "" },
+      { "Name": "With Retail Packaging", "Value": "Yes" }
+    ],
+    "LeadTime": "1 - 3 days",
+    "GrossWeight": 0.11,
+    "VolumeWeight": 0.084,
+    "Length": 15.0,
+    "Width": 8.0,
+    "Height": 3.5,
+    "CompatibleList": null,
+    "Modified": "2023-03-15T06:31:38",
+    "Added": "2023-03-28T14:51:57",
+    "StockStatus": 2,
+    "PackageList": [
+      "1 x Precise Indoor Thermo-hygrometer",
+      "1 x Sensor",
+      "1 x English and Chinese User Manual",
+      "Other items not included"
+    ],
+    "CacheTime": "2023-09-15T11:18:26",
+    "Attributes": null
+  },
+  "ModelList": []
+}
