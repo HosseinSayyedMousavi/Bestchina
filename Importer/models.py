@@ -66,11 +66,15 @@ class Importer(models.Model):
         if self.start_job==True:
             self.errors = "Everything is Ok!"
             super(Importer, self).save(*args,**kwargs)
-            threading.Thread(target=Import_Job,args=(self,)).start()
+            Import_thread = threading.Thread(target=Import_Job,args=(self,))
+            Import_thread.daemon = True
+            Import_thread.start()
         elif self.status =="Running" and self.status_changed():
             self.errors = "Everything is Ok!"
             super(Importer, self).save(*args,**kwargs)
-            threading.Thread(target=Import_Job,args=(self,)).start()
+            Import_thread = threading.Thread(target=Import_Job,args=(self,))
+            Import_thread.daemon = True
+            Import_thread.start()
         else:
             super(Importer, self).save(*args,**kwargs)
 
