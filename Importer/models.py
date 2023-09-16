@@ -122,15 +122,12 @@ class Model_Black_List(models.Model):
 
 def Import_Job(importer):
     try:
-        importer.last_live = timezone.now()
-        importer.save()
         AuthorizationToken = get_AuthorizationToken()
         if importer.category_prepared_Items == 0:
             set_all_item_list(AuthorizationToken,importer.category)
         category_item_list = importer.category.get_ItemList()
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
-            importer.last_live = timezone.now()
-            importer.save()
+
             ItemNo = category_item_list[importer.Number_of_checked_products]
             if  not Model_Black_List.objects.filter(black_item_no=ItemNo.strip()):
                 details = standardize_Details(get_Details(AuthorizationToken,ItemNo=ItemNo))
@@ -174,4 +171,6 @@ def Import_Job(importer):
         importer.errors = json.dumps(e.args)
         importer.start_job=False
         importer.save()
+    importer.last_live = timezone.now()
+    importer.save()
 
