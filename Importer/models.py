@@ -44,8 +44,8 @@ class CreateImporter(SingletonModel):
 class Importer(models.Model):
 
     category = models.OneToOneField("Category",max_length=255,null=False,unique=True,on_delete=models.CASCADE)
-    updated_at = models.DateTimeField(auto_now_add=True)
-    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     last_live = models.DateTimeField(default=timezone.now)
     status = models.CharField(choices=STATUS_CHOICES,max_length=255,default='Running')
     is_periodic = models.BooleanField(default=False)
