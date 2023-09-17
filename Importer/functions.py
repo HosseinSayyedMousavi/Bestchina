@@ -96,8 +96,6 @@ def get_Details(AuthorizationToken, ItemNo):
 
 
 def standardize_Details(Details):
-    if "Message" in Details.keys():
-        return Details
     if int(Details["Detail"]["ProductStatus"])!=1:
         return Details
     append_html='''
