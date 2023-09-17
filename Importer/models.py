@@ -46,7 +46,7 @@ class Importer(models.Model):
     category = models.OneToOneField("Category",max_length=255,null=False,unique=True,on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    last_live = models.DateTimeField(default=timezone.now)
+    current_Item = models.CharField(null=True,blank=True)
     status = models.CharField(choices=STATUS_CHOICES,max_length=255,default='Running')
     is_periodic = models.BooleanField(default=False)
     period_length = models.IntegerField(default = 10)
@@ -127,9 +127,9 @@ def Import_Job(importer):
             set_all_item_list(AuthorizationToken,importer.category)
         category_item_list = importer.category.get_ItemList()
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
-            importer.last_live = timezone.now()
-            importer.save()
             ItemNo = category_item_list[importer.Number_of_checked_products]
+            importer.current_Item = ItemNo
+            importer.save()
             if  not Model_Black_List.objects.filter(black_item_no=ItemNo.strip()):
                 details = standardize_Details(get_Details(AuthorizationToken,ItemNo=ItemNo))
                 if "Message" not in details.keys():
