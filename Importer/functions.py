@@ -4,8 +4,12 @@ from jinja2 import Template
 import time
 import re
 import json
+import os
 translator = Translator()
-with open("../Categories/FarsiCatJson.json","r") as f:
+from django.conf import settings
+BASE_DIR=settings.BASE_DIR
+file_path = os.path.join(BASE_DIR, "Categories/FarsiCatJson.json")
+with open(file_path,"r") as f:
     FarsiCatJson = json.loads(f.read())
     
 
