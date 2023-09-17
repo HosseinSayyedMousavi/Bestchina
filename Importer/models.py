@@ -45,8 +45,8 @@ class Importer(models.Model):
 
     category = models.OneToOneField("Category",max_length=255,null=False,unique=True,on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
-    created_at = models.DateTimeField(max_length=255,auto_now_add=True)
-    current_Item = models.CharField(null=True,blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    current_Item = models.CharField(max_length=255,null=True,blank=True)
     status = models.CharField(choices=STATUS_CHOICES,max_length=255,default='Running')
     is_periodic = models.BooleanField(default=False)
     period_length = models.IntegerField(default = 10)
