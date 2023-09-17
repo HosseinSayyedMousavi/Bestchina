@@ -32,9 +32,11 @@ def get_item_list(AuthorizationToken,CategoryCode, lastProductId="", PageSize=10
     }
     response = requests.request("GET", reqUrl, data="",  headers=headersList,timeout=20)
     if "Message" in response.json().keys():
-        AuthorizationToken = get_AuthorizationToken()
-        return get_item_list(AuthorizationToken,CategoryCode, lastProductId, PageSize)
-    
+        if response.json()["Message"] == 'unauthorized':
+            AuthorizationToken = get_AuthorizationToken()
+            return get_item_list(AuthorizationToken,CategoryCode, lastProductId, PageSize)
+        else:
+            raise Exception(f"get_item_list error on category : {CategoryCode}")
     return response.json()
 
 
@@ -86,15 +88,18 @@ def get_Details(AuthorizationToken, ItemNo):
     response = requests.request("GET", reqUrl, data="",  headers=headersList,timeout=20)
     Details = response.json()
     if "Message" in response.json().keys():
-        AuthorizationToken = get_AuthorizationToken()
-        return get_Details(AuthorizationToken, ItemNo)
+        if response.json()["Message"] == 'unauthorized':
+            AuthorizationToken = get_AuthorizationToken()
+            return get_Details(AuthorizationToken, ItemNo)
+
     return Details
 
 
 def standardize_Details(Details):
+    if "Message" in Details.keys():
+        return Details
     if int(Details["Detail"]["ProductStatus"])!=1:
         return Details
-
     append_html='''
     <div>
         <h3 class="titr">سازگار با:</h3>

@@ -131,20 +131,27 @@ def Import_Job(importer):
             ItemNo = category_item_list[importer.Number_of_checked_products]
             if  not Model_Black_List.objects.filter(black_item_no=ItemNo.strip()):
                 details = standardize_Details(get_Details(AuthorizationToken,ItemNo=ItemNo))
-                if int(details["Detail"]["ProductStatus"]) == 1:
-                    for detail in details["ModelList"] :
-                        if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no=detail["ItemNo"].strip()):
-                            Model_Black_List.objects.create(black_item_no=detail["ItemNo"].strip())
+                if "Message" not in details.keys():
 
-                    response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
-                    if response.json()["result"]:
-                        importer.Number_of_products = importer.Number_of_products + 1
+                    if int(details["Detail"]["ProductStatus"]) == 1:
+                        for detail in details["ModelList"] :
+                            if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no=detail["ItemNo"].strip()):
+                                Model_Black_List.objects.create(black_item_no=detail["ItemNo"].strip())
+
+                        response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
+                        if response.json()["result"]:
+                            importer.Number_of_products = importer.Number_of_products + 1
+                            importer.Number_of_checked_products = importer.Number_of_checked_products + 1
+                            importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
+                            importer.start_job=False
+                            importer.save()
+                        else:
+                            raise Exception("Import Endpoint Has Error!")
+                    else:
                         importer.Number_of_checked_products = importer.Number_of_checked_products + 1
                         importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
                         importer.start_job=False
                         importer.save()
-                    else:
-                        raise Exception("Import Endpoint Has Error!")
                 else:
                     importer.Number_of_checked_products = importer.Number_of_checked_products + 1
                     importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
