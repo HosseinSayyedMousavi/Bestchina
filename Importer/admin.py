@@ -30,8 +30,8 @@ admin.site.register(Category,CategoryAdmin)
 class ImporterAdmin(admin.ModelAdmin):
     list_display = ("category","status","is_periodic","Progress_percentage")
     list_display_links = list_display
-    exclude = ["start_job"]
-    readonly_fields = ("category","category_prepared_Items","Progress_percentage","period_number","Number_of_products","Number_of_checked_products","errors","updated_at","created_at","last_live")
+    exclude = ["start_job","last_live"]
+    readonly_fields = ("category","category_prepared_Items","Progress_percentage","period_number","Number_of_products","Number_of_checked_products","errors","updated_at","created_at")
     search_fields = ("category.Name","category.Code")
 admin.site.register(Importer,ImporterAdmin)
 
