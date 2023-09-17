@@ -47,6 +47,7 @@ class Importer(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
     current_Item = models.CharField(max_length=255,null=True,blank=True)
+    operation = models.CharField(max_length=255,null=True,blank=True)
     status = models.CharField(choices=STATUS_CHOICES,max_length=255,default='Running')
     is_periodic = models.BooleanField(default=False)
     period_length = models.IntegerField(default = 10)
@@ -129,16 +130,23 @@ def Import_Job(importer):
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
             ItemNo = category_item_list[importer.Number_of_checked_products]
             importer.current_Item = ItemNo
+            
             importer.save()
             if  not Model_Black_List.objects.filter(black_item_no=ItemNo.strip()):
-                details = standardize_Details(get_Details(AuthorizationToken,ItemNo=ItemNo))
+                importer.operation = "1.Get From API"
+                importer.save()
+                details = get_Details(AuthorizationToken,ItemNo=ItemNo)
+                importer.operation = "2.Standardize"
+                importer.save()
+                details = standardize_Details(details)
                 if "Message" not in details.keys():
 
                     if int(details["Detail"]["ProductStatus"]) == 1:
                         for detail in details["ModelList"] :
                             if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no = detail["ItemNo"].strip()).exists():
                                 Model_Black_List.objects.create(black_item_no = detail["ItemNo"].strip())
-
+                        importer.operation = "3.Import To Website"
+                        importer.save()
                         response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
                         if response.json()["result"]:
                             importer.Number_of_products = importer.Number_of_products + 1
