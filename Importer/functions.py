@@ -5,7 +5,9 @@ import time
 import re
 import json
 translator = Translator()
-
+with open("../Categories/FarsiCatJson.json","r") as f:
+    FarsiCatJson = json.loads(f.read())
+    
 
 def get_AuthorizationToken(email="bestchina.ir@gmail.com", password="poonish27634"):
     reqUrl = f"http://openapi.tvc-mall.com/Authorization/GetAuthorization?email={email}&password={password}"
@@ -156,7 +158,7 @@ def standardize_Details(Details):
 
     '''
 
-
+    Details["Detail"]["CategoryCode"]=get_Cat_Tree(Details["Detail"]["CategoryCode"])
     before_html = '''
     <!DOCTYPE html>
     <html lang="en">
@@ -254,3 +256,11 @@ def set_all_item_list(AuthorizationToken,category):
         category.errors = json.dumps(e.args)
         category.save()
 
+
+def get_Cat_Tree(CategoryCode):
+    CategoryList = []
+    CategoryList.append(CategoryCode)
+    while FarsiCatJson[CategoryCode]["ParentCode"].strip():
+        CategoryCode = FarsiCatJson[CategoryCode]["ParentCode"]
+        CategoryList.append(CategoryCode)
+    return CategoryList

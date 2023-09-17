@@ -182,7 +182,7 @@ def Import_Job(importer):
             except:break
         if importer.is_periodic :
             importer = Importer.objects.get(id=importer.id)
-            importer.operation = "5. Wait For Second Period Time..."
+            importer.operation = "5. Wait For Next Period Time..."
             importer.save()
             time.sleep(importer.period_length*24*60*60)
             importer.period_number = importer.period_number + 1
