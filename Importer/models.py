@@ -130,13 +130,13 @@ def Import_Job(importer):
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
             ItemNo = category_item_list[importer.Number_of_checked_products]
             importer.current_Item = ItemNo
-            
+            importer.operation = "1. Check Product"
             importer.save()
             if  not Model_Black_List.objects.filter(black_item_no=ItemNo.strip()):
-                importer.operation = "1.Get From API"
+                importer.operation = "2. Get From API"
                 importer.save()
                 details = get_Details(AuthorizationToken,ItemNo=ItemNo)
-                importer.operation = "2.Standardize"
+                importer.operation = "3. Standardize"
                 importer.save()
                 details = standardize_Details(details)
                 if "Message" not in details.keys():
@@ -145,7 +145,7 @@ def Import_Job(importer):
                         for detail in details["ModelList"] :
                             if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no = detail["ItemNo"].strip()).exists():
                                 Model_Black_List.objects.create(black_item_no = detail["ItemNo"].strip())
-                        importer.operation = "3.Import To Website"
+                        importer.operation = "4. Import To Website"
                         importer.save()
                         response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
                         if response.json()["result"]:
