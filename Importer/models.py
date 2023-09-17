@@ -136,8 +136,8 @@ def Import_Job(importer):
 
                     if int(details["Detail"]["ProductStatus"]) == 1:
                         for detail in details["ModelList"] :
-                            if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no=detail["ItemNo"].strip()):
-                                Model_Black_List.objects.create(black_item_no=detail["ItemNo"].strip())
+                            if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no = detail["ItemNo"].strip()).exists():
+                                Model_Black_List.objects.create(black_item_no = detail["ItemNo"].strip())
 
                         response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
                         if response.json()["result"]:
