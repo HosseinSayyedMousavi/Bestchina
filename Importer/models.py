@@ -129,14 +129,17 @@ def Import_Job(importer):
         category_item_list = importer.category.get_ItemList()
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
             ItemNo = category_item_list[importer.Number_of_checked_products]
+            importer = Importer.objects.get(id=importer.id)
             importer.current_Item = ItemNo
             importer.operation = "1. Check Product"
             importer.save()
             if  not Model_Black_List.objects.filter(black_item_no=ItemNo.strip()):
+                importer = Importer.objects.get(id=importer.id)
                 importer.operation = "2. Get From API"
                 importer.save()
                 details = get_Details(AuthorizationToken,ItemNo=ItemNo)
                 if "Message" not in details.keys():
+                    importer = Importer.objects.get(id=importer.id)
                     importer.operation = "3. Standardize"
                     importer.save()
                     details = standardize_Details(details)
@@ -144,10 +147,12 @@ def Import_Job(importer):
                         for detail in details["ModelList"] :
                             if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no = detail["ItemNo"].strip()).exists():
                                 Model_Black_List.objects.create(black_item_no = detail["ItemNo"].strip())
+                        importer = Importer.objects.get(id=importer.id)
                         importer.operation = "4. Import To Website"
                         importer.save()
                         response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
                         if response.json()["result"]:
+                            importer = Importer.objects.get(id=importer.id)
                             importer.Number_of_products = importer.Number_of_products + 1
                             importer.Number_of_checked_products = importer.Number_of_checked_products + 1
                             importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
@@ -156,16 +161,19 @@ def Import_Job(importer):
                         else:
                             raise Exception("Import Endpoint Has Error!")
                     else:
+                        importer = Importer.objects.get(id=importer.id)
                         importer.Number_of_checked_products = importer.Number_of_checked_products + 1
                         importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
                         importer.start_job=False
                         importer.save()
                 else:
+                    importer = Importer.objects.get(id=importer.id)
                     importer.Number_of_checked_products = importer.Number_of_checked_products + 1
                     importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
                     importer.start_job=False
                     importer.save()
             else:
+                importer = Importer.objects.get(id=importer.id)
                 importer.Number_of_checked_products = importer.Number_of_checked_products + 1
                 importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
                 importer.start_job=False
@@ -173,6 +181,7 @@ def Import_Job(importer):
             try:importer = Importer.objects.get(id=importer.id)
             except:break
         if importer.is_periodic :
+            importer = Importer.objects.get(id=importer.id)
             importer.operation = "5. Wait For Second Period Time..."
             importer.save()
             time.sleep(importer.period_length*24*60*60)
@@ -180,12 +189,13 @@ def Import_Job(importer):
             importer.start_job=True
             importer.save()
         else:
+            importer = Importer.objects.get(id=importer.id)
             importer.operation = "6. Import Finished Successfully!"
-            importer.save()
             importer.status="Finished"
             importer.start_job=False
             importer.save()
     except Exception as e:
+        importer = Importer.objects.get(id=importer.id)
         importer.status = "Stopped"
         importer.errors = json.dumps(e.args)
         importer.start_job=False
