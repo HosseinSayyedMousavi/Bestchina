@@ -142,8 +142,8 @@ def standardize_Details(Details):
                 {% if  Details["Detail"]["SpecificationList"] is iterable %}
                     {% for specific in Details["Detail"]["SpecificationList"] %}
                         <tr>
-                            <td class="parag">{{ specific["Name"] }}</td>
-                            <td class="parag">{{ specific["Value"] }}</td>
+                            <td class="parag" style="font-size:13px">{{ specific["Name"] }}</td>
+                            <td class="parag" style="font-size:13px">{{ specific["Value"] }}</td>
                         </tr>
                     {% endfor %}
                 {% endif %}
