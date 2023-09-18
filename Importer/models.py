@@ -160,7 +160,7 @@ def Import_Job(importer):
                             importer.start_job=False
                             importer.save()
                         else:
-                            raise Exception("Import Endpoint Has Error!")
+                            raise Exception(response.text)
                     else:
                         importer = Importer.objects.get(id=importer.id)
                         importer.Number_of_checked_products = importer.Number_of_checked_products + 1
