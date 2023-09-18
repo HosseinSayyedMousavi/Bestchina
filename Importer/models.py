@@ -138,12 +138,13 @@ def Import_Job(importer):
                 importer.operation = "2. Get From API"
                 importer.save()
                 details = get_Details(AuthorizationToken,ItemNo=ItemNo)
-                if "Message" not in details.keys():
-                    importer = Importer.objects.get(id=importer.id)
-                    importer.operation = "3. Standardize"
-                    importer.save()
-                    details = standardize_Details(details)
-                    if int(details["Detail"]["ProductStatus"]) == 1:
+                if int(details["Detail"]["ProductStatus"]) == 1:
+                    if "Message" not in details.keys():
+                        importer = Importer.objects.get(id=importer.id)
+                        importer.operation = "3. Standardize"
+                        importer.save()
+                        details = standardize_Details(details)
+                        
                         for detail in details["ModelList"] :
                             if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no = detail["ItemNo"].strip()).exists():
                                 Model_Black_List.objects.create(black_item_no = detail["ItemNo"].strip())
