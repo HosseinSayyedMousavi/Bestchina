@@ -7,9 +7,9 @@ import json
 import os
 translator = Translator()
 from django.conf import settings
-BASE_DIR=settings.BASE_DIR
-file_path = os.path.join(BASE_DIR, "Categories/FarsiCatJson.json")
-with open(file_path,"r") as f:
+# BASE_DIR=settings.BASE_DIR
+# file_path = os.path.join(BASE_DIR, "Categories/FarsiCatJson.json")
+with open("Categories/FarsiCatJson.json","r") as f:
     FarsiCatJson = json.loads(f.read())
     
 
@@ -68,6 +68,17 @@ def google_translate(text, source_language="en", target_language="fa"):
     time.sleep(0.5)
     translated = translator.translate(text, src=source_language, dest=target_language)
     return translated.text
+
+
+def google_translate_large_text(text, max_chunk_size=5000, source_language="en", target_language="fa"):
+    chunks = [text[i:i+max_chunk_size] for i in range(0, len(text), max_chunk_size)]
+    translated_chunks = []
+
+    for chunk in chunks:
+        translated_chunk = google_translate(chunk, source_language, target_language)
+        translated_chunks.append(translated_chunk)
+
+    return ''.join(translated_chunks)
 
 
 def delete_keyword(dictionary, keywords_to_remove):
@@ -212,7 +223,7 @@ def standardize_Details(Details):
             except:pass
     except:pass
     Details["Detail"]["Description"]=re.sub(r"style.*?>",">",Details["Detail"]["Description"])
-    Details["Detail"]["Description"] = google_translate(Details["Detail"]["Description"].replace("h5","h2").replace("system -title","system-title"))
+    Details["Detail"]["Description"] = google_translate_large_text(Details["Detail"]["Description"].replace("h5","h2").replace("system -title","system-title"))
     
     template = Template(before_html + Details["Detail"]["Description"] + append_html)
     rendered_html = template.render(Details=Details)
