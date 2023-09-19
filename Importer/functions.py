@@ -8,12 +8,13 @@ import os
 import openai
 import threading
 from django.conf import settings
-openai.api_key = settings.CHAT_GPT_API_KEY
+
 translator = Translator()
 
-BASE_DIR=settings.BASE_DIR
-file_path = os.path.join(BASE_DIR, "Categories/FarsiCatJson.json")
-with open(file_path,"r") as f:
+# openai.api_key = settings.CHAT_GPT_API_KEY
+# BASE_DIR=settings.BASE_DIR
+# file_path = os.path.join(BASE_DIR, "Categories/FarsiCatJson.json")
+with open("Categories/FarsiCatJson.json","r") as f:
     FarsiCatJson = json.loads(f.read())
 
 def get_AuthorizationToken(email="bestchina.ir@gmail.com", password="poonish27634"):
@@ -74,7 +75,7 @@ def google_translate(text, source_language="en", target_language="fa"):
 
 
 def ChatGPT_translate(Details, source_language="English", target_language="Farsi"):
-    prompt = f"Translate the following text from '{source_language}' to '{target_language}': "+Details["Detail"]["Name"]
+    prompt = f"Translate the following text from '{source_language}' to '{target_language}' and dont say anything else: "+Details["Detail"]["Name"]
 
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",

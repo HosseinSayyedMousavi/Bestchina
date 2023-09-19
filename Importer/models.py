@@ -90,7 +90,6 @@ class Importer(models.Model):
     def check_thread(self,Import_thread):
 
         if not Import_thread.is_alive() and self.status == "Running":
-            print("نخ متوقف شده است. دوباره شروع می‌شود...")
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
             Import_thread.daemon = True
             Import_thread.start()
