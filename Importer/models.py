@@ -94,7 +94,7 @@ class Importer(models.Model):
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
             Import_thread.daemon = True
             Import_thread.start()
-        else:
+        elif not Import_thread.is_alive():
             return
         threading.Timer(5, self.check_thread,args = (Import_thread,)).start()
 
