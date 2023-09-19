@@ -9,6 +9,8 @@ from django.conf import settings
 from django.utils import timezone
 STATUS_CHOICES = [('Stopped', 'Stopped'),('Running', 'Running'),('Finished', 'Finished')]
 IMPORT_ENDPOINT = settings.IMPORT_ENDPOINT
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
 
 class CreateImporter(SingletonModel):
     category = models.OneToOneField("Category",max_length=255,unique=True,null=True,on_delete=models.SET_NULL)
@@ -72,14 +74,29 @@ class Importer(models.Model):
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
             Import_thread.daemon = True
             Import_thread.start()
+            check_thread = threading.Thread(target=self.check_thread,args = (Import_thread,))
+            check_thread.daemon = True
+            check_thread.start()
         elif self.status =="Running" and self.status_changed():
             self.errors = "Everything is Ok!"
             super(Importer, self).save(*args,**kwargs)
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
             Import_thread.daemon = True
             Import_thread.start()
+            check_thread = threading.Thread(target=self.check_thread,args = (Import_thread,))
+            check_thread.daemon = True
+            check_thread.start()
         else:
             super(Importer, self).save(*args,**kwargs)
+
+    def check_thread(self,Import_thread):
+
+        if not Import_thread.is_alive():
+            print("نخ متوقف شده است. دوباره شروع می‌شود...")
+            Import_thread = threading.Thread(target=Import_Job,args=(self,))
+            Import_thread.daemon = True
+            Import_thread.start()
+        threading.Timer(5, self.check_thread,args = (Import_thread,)).start()
 
     def status_changed(self):
         if self.pk:
