@@ -6,7 +6,9 @@ import re
 import json
 import os
 import openai
+import threading
 from django.conf import settings
+from bs4 import BeautifulSoup
 openai.api_key = settings.CHAT_GPT_API_KEY
 translator = Translator()
 
@@ -14,7 +16,6 @@ BASE_DIR=settings.BASE_DIR
 file_path = os.path.join(BASE_DIR, "Categories/FarsiCatJson.json")
 with open(file_path,"r") as f:
     FarsiCatJson = json.loads(f.read())
-    
 
 def get_AuthorizationToken(email="bestchina.ir@gmail.com", password="poonish27634"):
     reqUrl = f"http://openapi.tvc-mall.com/Authorization/GetAuthorization?email={email}&password={password}"
@@ -73,8 +74,8 @@ def google_translate(text, source_language="en", target_language="fa"):
     return translated.text
 
 
-def ChatGPT_translate(text, source_language="English", target_language="Farsi"):
-    prompt = f"Translate the following text from '{source_language}' to '{target_language}': {text}"
+def ChatGPT_translate(Details, source_language="English", target_language="Farsi"):
+    prompt = f"Translate the following text from '{source_language}' to '{target_language}': "+Details["Detail"]["Name"]
 
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -89,19 +90,27 @@ def ChatGPT_translate(text, source_language="English", target_language="Farsi"):
         temperature=0.5,
     )
 
-    translation = response.choices[0].message.content.strip()
-    return translation
+    Details["Detail"]["Name"] = response.choices[0].message.content.strip()
+
+    return Details["Detail"]["Name"]
 
 
-def google_translate_large_text(text, max_chunk_size=5000, source_language="en", target_language="fa"):
-    chunks = [text[i:i+max_chunk_size] for i in range(0, len(text), max_chunk_size)]
-    translated_chunks = []
+def google_translate_large_text(html_content, max_chunk_size=4950, source_language="en", target_language="fa"):
+    phrases = html_content.split("\n")
+    translated_html = ""
+    translated_chunk = ""
+    for phrase in phrases:
+        if len(translated_chunk + "\n"+phrase) < max_chunk_size:
+            translated_chunk += "\n"+phrase
+        else:
+            translated_chunk = google_translate(translated_chunk, source_language=source_language, target_language=target_language)
+            translated_html += translated_chunk
+            translated_chunk = "\n"+phrase
 
-    for chunk in chunks:
-        translated_chunk = google_translate(chunk, source_language, target_language)
-        translated_chunks.append(translated_chunk)
+    translated_chunk = google_translate(translated_chunk, source_language=source_language, target_language=target_language)
+    translated_html += translated_chunk
 
-    return ''.join(translated_chunks)
+    return translated_html.strip()
 
 
 def delete_keyword(dictionary, keywords_to_remove):
@@ -215,7 +224,7 @@ def standardize_Details(Details):
     if "-" in Details["Detail"]["Summary"]:Details["Detail"]["Name"]=re.findall(r'(.*)-', Details["Detail"]["Summary"])[0]
     Details["Detail"]["Description"]=Details["Detail"]["Description"].replace("-"+re.findall(r"-.*h5",Details["Detail"]["Description"])[0].split("-")[-1],"<\h5")
     Details["Detail"]["Image"] = get_Image(AuthorizationToken, Details["Detail"]["ItemNo"])
-    Details["Detail"]["Name"] = ChatGPT_translate(Details["Detail"]["Name"])
+    threading.Thread(target=ChatGPT_translate,args=(Details,)).start()
 
     Details["Detail"]["Summary"] = google_translate(Details["Detail"]["Summary"])
     try:
