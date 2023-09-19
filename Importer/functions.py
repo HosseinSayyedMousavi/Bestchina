@@ -8,7 +8,6 @@ import os
 import openai
 import threading
 from django.conf import settings
-from bs4 import BeautifulSoup
 openai.api_key = settings.CHAT_GPT_API_KEY
 translator = Translator()
 
