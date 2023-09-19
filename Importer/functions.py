@@ -7,7 +7,7 @@ import json
 import os
 import openai
 from django.conf import settings
-openai.api_key = "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"
+openai.api_key = settings.CHAT_GPT_API_KEY
 translator = Translator()
 
 BASE_DIR=settings.BASE_DIR
@@ -80,10 +80,10 @@ def ChatGPT_translate(text, source_language="English", target_language="Farsi"):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
-                "content": "You are a helpful assistant that translates json file."},
+                "content": "You are a helpful assistant that translates text."},
             {"role": "user", "content": prompt}
         ],
-        max_tokens=150,
+        max_tokens=300,
         n=1,
         stop=None,
         temperature=0.5,
@@ -216,6 +216,7 @@ def standardize_Details(Details):
     Details["Detail"]["Description"]=Details["Detail"]["Description"].replace("-"+re.findall(r"-.*h5",Details["Detail"]["Description"])[0].split("-")[-1],"<\h5")
     Details["Detail"]["Image"] = get_Image(AuthorizationToken, Details["Detail"]["ItemNo"])
     Details["Detail"]["Name"] = ChatGPT_translate(Details["Detail"]["Name"])
+
     Details["Detail"]["Summary"] = google_translate(Details["Detail"]["Summary"])
     try:
         AttributeKeys = list(Details["Detail"]["Attributes"].keys())
