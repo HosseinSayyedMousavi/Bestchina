@@ -9,8 +9,6 @@ from django.conf import settings
 from django.utils import timezone
 STATUS_CHOICES = [('Stopped', 'Stopped'),('Running', 'Running'),('Finished', 'Finished')]
 IMPORT_ENDPOINT = settings.IMPORT_ENDPOINT
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
 
 class CreateImporter(SingletonModel):
     category = models.OneToOneField("Category",max_length=255,unique=True,null=True,on_delete=models.SET_NULL)
