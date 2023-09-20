@@ -69,6 +69,7 @@ class Importer(models.Model):
         if self.start_job==True:
             self.errors = "Everything is Ok!"
             super(Importer, self).save(*args,**kwargs)
+            print("started!")
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
             Import_thread.daemon = True
             Import_thread.start()
