@@ -74,7 +74,8 @@ class Importer(models.Model):
             Import_thread.start()
             # self.check_thread()
         elif self.status =="Running" and Importer.objects.get(pk=self.pk).status!=self.status:
-            print("salam!!!")
+            print(Importer.objects.get(pk=self.pk).status)
+            print(self.status)
             self.errors = "Everything is Ok!"
             super(Importer, self).save(*args,**kwargs)
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
