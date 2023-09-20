@@ -74,6 +74,7 @@ class Importer(models.Model):
             Import_thread.start()
             # self.check_thread()
         elif self.status =="Running" and self.status_changed():
+            print("salam!!!")
             self.errors = "Everything is Ok!"
             super(Importer, self).save(*args,**kwargs)
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
@@ -97,8 +98,6 @@ class Importer(models.Model):
     def status_changed(self):
         if self.pk:
             original = Importer.objects.get(pk=self.pk)
-            print(original.status)
-            print(self.status)
             return self.status != original.status
         return False
 
