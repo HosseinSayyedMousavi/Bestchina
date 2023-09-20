@@ -197,23 +197,24 @@ def Import_Job(importer):
                 importer.save()
             try:importer = Importer.objects.get(id=importer.id)
             except:break
-        print(ItemNo)
-        print(importer.Number_of_checked_products)
-        if importer.is_periodic :
-            importer = Importer.objects.get(id=importer.id)
-            importer.operation = "5. Wait For Next Period Time..."
-            importer.start_job=False
-            importer.save()
-            time.sleep(importer.period_length*24*60*60)
-            importer.period_number = importer.period_number + 1
-            importer.start_job=True
-            importer.save()
         else:
-            importer = Importer.objects.get(id=importer.id)
-            importer.operation = "6. Import Finished Successfully!"
-            importer.status="Finished"
-            importer.start_job=False
-            importer.save()
+            if importer.status=="Stopped":return
+
+            if importer.status=="Running" and importer.is_periodic :
+                importer = Importer.objects.get(id=importer.id)
+                importer.operation = "5. Wait For Next Period Time..."
+                importer.start_job=False
+                importer.save()
+                time.sleep(importer.period_length*24*60*60)
+                importer.period_number = importer.period_number + 1
+                importer.start_job=True
+                importer.save()
+            else:
+                importer = Importer.objects.get(id=importer.id)
+                importer.operation = "6. Import Finished Successfully!"
+                importer.status="Finished"
+                importer.start_job=False
+                importer.save()
     except Exception as e:
         importer = Importer.objects.get(id=importer.id)
         importer.status = "Stopped"
