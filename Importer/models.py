@@ -73,7 +73,7 @@ class Importer(models.Model):
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
             Import_thread.daemon = True
             Import_thread.start()
-            self.check_thread()
+            self.check_thread(Import_thread)
         elif self.status =="Running" and self.status_changed() and not "Import_thread" in locals():
             print(Importer.objects.get(pk=self.pk).status)
             print(self.status)
@@ -82,7 +82,7 @@ class Importer(models.Model):
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
             Import_thread.daemon = True
             Import_thread.start()
-            self.check_thread()
+            self.check_thread(Import_thread)
         elif self.status =="Running" and self.status_changed() and "Import_thread" in locals():
             if not Import_thread.is_alive():
                 self.errors = "Everything is Ok!"
@@ -90,7 +90,7 @@ class Importer(models.Model):
                 Import_thread = threading.Thread(target=Import_Job,args=(self,))
                 Import_thread.daemon = True
                 Import_thread.start()
-                self.check_thread()
+                self.check_thread(Import_thread)
         else:
             super(Importer, self).save(*args,**kwargs)
 
@@ -102,7 +102,7 @@ class Importer(models.Model):
             Import_thread.start()
         elif not Import_thread.is_alive():
             return
-        threading.Timer(5, self.check_thread,args = (Import_thread,)).start()
+        threading.Timer(50, self.check_thread,args = (Import_thread,)).start()
 
     def status_changed(self):
         if self.pk:
