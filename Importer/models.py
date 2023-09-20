@@ -138,8 +138,6 @@ def Import_Job(importer):
         category_item_list = importer.category.get_ItemList()
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
             ItemNo = category_item_list[importer.Number_of_checked_products]
-            print(ItemNo)
-            print(importer.Number_of_checked_products)
             importer = Importer.objects.get(id=importer.id)
             importer.current_Item = ItemNo
             importer.operation = "1. Check Product"
@@ -192,6 +190,8 @@ def Import_Job(importer):
                 importer.save()
             try:importer = Importer.objects.get(id=importer.id)
             except:break
+        print(ItemNo)
+        print(importer.Number_of_checked_products)
         if importer.is_periodic :
             importer = Importer.objects.get(id=importer.id)
             importer.operation = "5. Wait For Next Period Time..."
