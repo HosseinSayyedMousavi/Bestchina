@@ -69,14 +69,11 @@ class Importer(models.Model):
         if self.start_job==True:
             self.errors = "Everything is Ok!"
             super(Importer, self).save(*args,**kwargs)
-            print("started!")
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
             Import_thread.daemon = True
             Import_thread.start()
             self.check_thread(Import_thread)
         elif self.status =="Running" and self.status_changed() and not "Import_thread" in locals():
-            print(Importer.objects.get(pk=self.pk).status)
-            print(self.status)
             self.errors = "Everything is Ok!"
             super(Importer, self).save(*args,**kwargs)
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
@@ -174,8 +171,8 @@ def Import_Job(importer):
                         importer.operation = "4. Import To Website"
                         importer.start_job=False
                         importer.save()
-                        # response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
-                        if True:#response.json()["result"]:
+                        response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
+                        if response.json()["result"]:
                             importer = Importer.objects.get(id=importer.id)
                             importer.Number_of_products = importer.Number_of_products + 1
                             importer.Number_of_checked_products = importer.Number_of_checked_products + 1
