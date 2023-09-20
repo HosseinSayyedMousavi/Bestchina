@@ -112,12 +112,8 @@ class Category(models.Model):
     ParentCode = models.CharField(max_length=255,null=False)
     Status = models.CharField(max_length=255,null=False)
     ItemList = models.TextField(default="[]")
-    # Total = models.IntegerField(default=1, blank=True)
     errors = models.TextField(default="Everything is Ok!")
-    # @property
-    # def category_prepared_percent(self):
-    #     return len(self.get_ItemList())/self.Total * 100
-    
+
     def __str__(self):
         return self.Name 
 
@@ -145,6 +141,8 @@ def Import_Job(importer):
         category_item_list = importer.category.get_ItemList()
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
             ItemNo = category_item_list[importer.Number_of_checked_products]
+            print(ItemNo)
+
             importer = Importer.objects.get(id=importer.id)
             importer.current_Item = ItemNo
             importer.operation = "1. Check Product"
@@ -167,8 +165,8 @@ def Import_Job(importer):
                         importer = Importer.objects.get(id=importer.id)
                         importer.operation = "4. Import To Website"
                         importer.save()
-                        response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
-                        if response.json()["result"]:
+                        # response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
+                        if True:#response.json()["result"]:
                             importer = Importer.objects.get(id=importer.id)
                             importer.Number_of_products = importer.Number_of_products + 1
                             importer.Number_of_checked_products = importer.Number_of_checked_products + 1

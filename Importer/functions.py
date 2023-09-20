@@ -5,13 +5,17 @@ import time
 import re
 import json
 import os
-translator = Translator()
+import openai
+import threading
 from django.conf import settings
+
+translator = Translator()
+
+openai.api_key = settings.CHAT_GPT_API_KEY
 BASE_DIR=settings.BASE_DIR
 file_path = os.path.join(BASE_DIR, "Categories/FarsiCatJson.json")
 with open(file_path,"r") as f:
     FarsiCatJson = json.loads(f.read())
-    
 
 def get_AuthorizationToken(email="bestchina.ir@gmail.com", password="poonish27634"):
     reqUrl = f"http://openapi.tvc-mall.com/Authorization/GetAuthorization?email={email}&password={password}"
@@ -68,6 +72,45 @@ def google_translate(text, source_language="en", target_language="fa"):
     time.sleep(0.5)
     translated = translator.translate(text, src=source_language, dest=target_language)
     return translated.text
+
+
+def ChatGPT_translate(Details, source_language="انگلیسی", target_language="فارسی"):
+    prompt = f"متن مقابل رو از {source_language} به {target_language} ترجمه کن و هیچ حرف اضافی نزن و اگر نتونستی خودش رو بدون هیچ تغییری برگردون: "+Details["Detail"]["Name"]
+
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system",
+                "content": "You are a helpful assistant that translates text."},
+            {"role": "user", "content": prompt}
+        ],
+        max_tokens=300,
+        n=1,
+        stop=None,
+        temperature=0.5,
+    )
+
+    Details["Detail"]["Name"] = response.choices[0].message.content.strip()
+
+    return Details["Detail"]["Name"]
+
+
+def google_translate_large_text(html_content, max_chunk_size=4950, source_language="en", target_language="fa"):
+    phrases = html_content.split("\n")
+    translated_html = ""
+    translated_chunk = ""
+    for phrase in phrases:
+        if len(translated_chunk + "\n"+phrase) < max_chunk_size:
+            translated_chunk += "\n"+phrase
+        else:
+            translated_chunk = google_translate(translated_chunk, source_language=source_language, target_language=target_language)
+            translated_html += translated_chunk
+            translated_chunk = "\n"+phrase
+
+    translated_chunk = google_translate(translated_chunk, source_language=source_language, target_language=target_language)
+    translated_html += translated_chunk
+
+    return translated_html.strip()
 
 
 def delete_keyword(dictionary, keywords_to_remove):
@@ -181,7 +224,8 @@ def standardize_Details(Details):
     if "-" in Details["Detail"]["Summary"]:Details["Detail"]["Name"]=re.findall(r'(.*)-', Details["Detail"]["Summary"])[0]
     Details["Detail"]["Description"]=Details["Detail"]["Description"].replace("-"+re.findall(r"-.*h5",Details["Detail"]["Description"])[0].split("-")[-1],"<\h5")
     Details["Detail"]["Image"] = get_Image(AuthorizationToken, Details["Detail"]["ItemNo"])
-    Details["Detail"]["Name"] = google_translate(Details["Detail"]["Name"])
+    threading.Thread(target=ChatGPT_translate,args=(Details,)).start()
+
     Details["Detail"]["Summary"] = google_translate(Details["Detail"]["Summary"])
     try:
         AttributeKeys = list(Details["Detail"]["Attributes"].keys())
@@ -212,7 +256,7 @@ def standardize_Details(Details):
             except:pass
     except:pass
     Details["Detail"]["Description"]=re.sub(r"style.*?>",">",Details["Detail"]["Description"])
-    Details["Detail"]["Description"] = google_translate(Details["Detail"]["Description"].replace("h5","h2").replace("system -title","system-title"))
+    Details["Detail"]["Description"] = google_translate_large_text(Details["Detail"]["Description"].replace("h5","h2").replace("system -title","system-title"))
     
     template = Template(before_html + Details["Detail"]["Description"] + append_html)
     rendered_html = template.render(Details=Details)
