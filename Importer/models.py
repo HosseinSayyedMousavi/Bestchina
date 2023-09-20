@@ -73,7 +73,7 @@ class Importer(models.Model):
             Import_thread.daemon = True
             Import_thread.start()
             # self.check_thread()
-        elif self.status =="Running" and Importer.objects.get(pk=self.pk).status!=self.status:
+        elif self.status =="Running" and Importer.objects.get(pk=self.pk).status!=self.status and not Import_thread.is_alive():
             print(Importer.objects.get(pk=self.pk).status)
             print(self.status)
             self.errors = "Everything is Ok!"
