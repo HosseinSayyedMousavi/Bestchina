@@ -144,16 +144,19 @@ def Import_Job(importer):
             importer = Importer.objects.get(id=importer.id)
             importer.current_Item = ItemNo
             importer.operation = "1. Check Product"
+            importer.start_job=False
             importer.save()
             if  not Model_Black_List.objects.filter(black_item_no=ItemNo.strip()):
                 importer = Importer.objects.get(id=importer.id)
                 importer.operation = "2. Get From API"
+                importer.start_job=False
                 importer.save()
                 details = get_Details(AuthorizationToken,ItemNo=ItemNo)
                 if int(details["Detail"]["ProductStatus"]) == 1:
                     if "Message" not in details.keys():
                         importer = Importer.objects.get(id=importer.id)
                         importer.operation = "3. Standardize"
+                        importer.start_job=False
                         importer.save()
                         details = standardize_Details(details)
                         
@@ -162,6 +165,7 @@ def Import_Job(importer):
                                 Model_Black_List.objects.create(black_item_no = detail["ItemNo"].strip())
                         importer = Importer.objects.get(id=importer.id)
                         importer.operation = "4. Import To Website"
+                        importer.start_job=False
                         importer.save()
                         # response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
                         if True:#response.json()["result"]:
@@ -198,6 +202,7 @@ def Import_Job(importer):
         if importer.is_periodic :
             importer = Importer.objects.get(id=importer.id)
             importer.operation = "5. Wait For Next Period Time..."
+            importer.start_job=False
             importer.save()
             time.sleep(importer.period_length*24*60*60)
             importer.period_number = importer.period_number + 1
