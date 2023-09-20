@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'Bestchina.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'bestchinadb',
+        'USER': 'bestchin',
+        'PASSWORD': 'b%zp-YgJFuEs',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
