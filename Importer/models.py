@@ -72,18 +72,15 @@ class Importer(models.Model):
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
             Import_thread.daemon = True
             Import_thread.start()
-            check_thread = threading.Thread(target=self.check_thread,args = (Import_thread,))
-            check_thread.daemon = True
-            check_thread.start()
+            # self.check_thread()
         elif self.status =="Running" and self.status_changed():
             self.errors = "Everything is Ok!"
             super(Importer, self).save(*args,**kwargs)
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
             Import_thread.daemon = True
             Import_thread.start()
-            check_thread = threading.Thread(target=self.check_thread,args = (Import_thread,))
-            check_thread.daemon = True
-            check_thread.start()
+            # self.check_thread()
+
         else:
             super(Importer, self).save(*args,**kwargs)
 
