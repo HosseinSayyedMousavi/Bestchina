@@ -97,6 +97,8 @@ class Importer(models.Model):
     def status_changed(self):
         if self.pk:
             original = Importer.objects.get(pk=self.pk)
+            print(original.status)
+            print(self.status)
             return self.status != original.status
         return False
 
