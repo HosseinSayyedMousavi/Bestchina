@@ -162,7 +162,7 @@ def Import_Job(importer):
     try:
 
         AuthorizationToken = get_AuthorizationToken()
-        if importer.category_prepared_Items == 0:
+        if 1:
             set_all_item_list(AuthorizationToken,importer.category)
         category_item_list = importer.category.get_ItemList()
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
