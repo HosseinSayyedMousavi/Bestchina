@@ -148,6 +148,7 @@ class Category(models.Model):
     
     def extend_ItemList(self,ItemList):
         Item_List = self.get_ItemList()
+        print(Item_List)
         Item_List.extend(json.dumps(ItemList))
         self.ItemList = Item_List
         self.save()
