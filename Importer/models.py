@@ -67,6 +67,7 @@ class Importer(models.Model):
 
     def save(self, *args,**kwargs):
         if self.start_job==True:
+            print("started!")
             self.errors = "Everything is Ok!"
             self.start_job=False
             super(Importer, self).save(*args,**kwargs)
@@ -75,6 +76,9 @@ class Importer(models.Model):
             Import_thread.start()
             self.check_thread(Import_thread)
         elif self.status =="Running" and self.status_changed() and not "Import_thread" in locals():
+            print(Importer.objects.get(pk=self.pk).status)
+            print(self.status)
+            print("elif1")
             self.errors = "Everything is Ok!"
             self.start_job=False
             super(Importer, self).save(*args,**kwargs)
@@ -83,6 +87,9 @@ class Importer(models.Model):
             Import_thread.start()
             self.check_thread(Import_thread)
         elif self.status =="Running" and self.status_changed() and "Import_thread" in locals():
+            print(Importer.objects.get(pk=self.pk).status)
+            print(self.status)
+            print("elif2")
             if not Import_thread.is_alive():
                 self.errors = "Everything is Ok!"
                 self.start_job=False
