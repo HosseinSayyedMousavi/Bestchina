@@ -254,7 +254,7 @@ def set_all_item_list(AuthorizationToken,category):
     try:
         ProductItemNoList =True
         ItemList=[]
-        lastProductId = ""
+        lastProductId = "660400983A"
         i=0
         while ProductItemNoList:
             NoList = get_item_list(AuthorizationToken=AuthorizationToken,CategoryCode=category.Code,lastProductId=lastProductId)
