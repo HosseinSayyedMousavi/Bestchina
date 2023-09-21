@@ -218,7 +218,7 @@ def standardize_Details(Details,formula):
     if "-" in Details["Detail"]["Summary"]:Details["Detail"]["Name"]=re.findall(r'(.*)-', Details["Detail"]["Summary"])[0]
     Details["Detail"]["Description"]=Details["Detail"]["Description"].replace("-"+re.findall(r"-.*h5",Details["Detail"]["Description"])[0].split("-")[-1],"<\h5")
     Details["Detail"]["Image"] = get_Image(AuthorizationToken, Details["Detail"]["ItemNo"])
-    Details["Detail"]["OriginalPrice"] = change_with_formula(model["OriginalPrice"],formula)
+    Details["Detail"]["OriginalPrice"] = change_with_formula(Details["Detail"]["OriginalPrice"],formula)
     threading.Thread(target=ChatGPT_translate,args=(Details,)).start()
 
     Details["Detail"]["Summary"] = google_translate(Details["Detail"]["Summary"])
