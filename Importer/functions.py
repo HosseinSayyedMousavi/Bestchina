@@ -138,7 +138,7 @@ def get_Details(AuthorizationToken, ItemNo):
     return Details
 
 
-def standardize_Details(Details):
+def standardize_Details(Details,formula):
     if int(Details["Detail"]["ProductStatus"])!=1:
         return Details
     append_html='''
@@ -218,6 +218,7 @@ def standardize_Details(Details):
     if "-" in Details["Detail"]["Summary"]:Details["Detail"]["Name"]=re.findall(r'(.*)-', Details["Detail"]["Summary"])[0]
     Details["Detail"]["Description"]=Details["Detail"]["Description"].replace("-"+re.findall(r"-.*h5",Details["Detail"]["Description"])[0].split("-")[-1],"<\h5")
     Details["Detail"]["Image"] = get_Image(AuthorizationToken, Details["Detail"]["ItemNo"])
+    Details["Detail"]["OriginalPrice"] = change_with_formula(model["OriginalPrice"],formula)
     threading.Thread(target=ChatGPT_translate,args=(Details,)).start()
 
     Details["Detail"]["Summary"] = google_translate(Details["Detail"]["Summary"])
@@ -261,6 +262,7 @@ def standardize_Details(Details):
     for model in Details["ModelList"]:
         if model["ItemNo"]!=Details["Detail"]["ItemNo"]:
             model["Image"] = get_Image(AuthorizationToken, model["ItemNo"])
+            model["OriginalPrice"] = change_with_formula(model["OriginalPrice"],formula)
             try:
                 ModelKeys = list(model["Attributes"].keys())
                 for attr in ModelKeys:
@@ -306,3 +308,9 @@ def get_Cat_Tree(CategoryCode):
         CategoryCode = FarsiCatJson[CategoryCode]["ParentCode"]
         CategoryList.append(CategoryCode)
     return CategoryList
+
+
+def change_with_formula(input_number, formula):
+    number_list = list(formula.keys())
+    larger_numbers = [float(num) for num in number_list if float(num) > input_number]
+    return float(formula[str[min(larger_numbers)]])*input_number

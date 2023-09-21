@@ -26,6 +26,7 @@ class CreateImporter(SingletonModel):
                     raise Exception(f"This Category or it\'s Parent or it's Child is Importing now! Please Delete Importer of {importer.category.Name} Category with CategoryCod : {importer.category.Code} then try again...")
             if not self.category:
                 raise Exception(f"Category not set!")
+            self.check_formula(self.formula)
             if self.pk:
                 Importer.objects.create(
                 category=self.category,
@@ -34,12 +35,21 @@ class CreateImporter(SingletonModel):
                 period_length=self.period_length,
                 formula = self.formula,
                 start_job=True)
+            
         except Exception as e:
             self.errors = json.dumps(e.args)
             super(CreateImporter, self).save(*args,**kwargs)
         else:
             self.errors = "Importer Created Successfully!"
             super(CreateImporter, self).save(*args,**kwargs)
+
+    def check_formula(self,input_dict):
+        for key, value in input_dict.items():
+            try:
+                float(key)
+                float(value)
+            except ValueError:
+                raise ValueError(f"The key '{key}' or value '{value}' is not convertible to float.")
 
 
 class Importer(models.Model):
@@ -170,7 +180,7 @@ def Import_Job(importer):
                         importer.operation = "3. Standardize"
                         importer.start_job=False
                         importer.save()
-                        details = standardize_Details(details)
+                        details = standardize_Details(details,importer.formula)
                         
                         for detail in details["ModelList"] :
                             if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no = detail["ItemNo"].strip()).exists():
