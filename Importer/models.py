@@ -150,7 +150,7 @@ class Category(models.Model):
         Item_List = json.loads(self.ItemList)
         print(Item_List)
         Item_List.extend(ItemList)
-        self.ItemList = Item_List
+        self.ItemList = json.dumps(Item_List)
         self.save()
 
     def number_of_items(self):
