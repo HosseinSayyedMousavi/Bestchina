@@ -10,6 +10,7 @@ from django.utils import timezone
 STATUS_CHOICES = [('Stopped', 'Stopped'),('Running', 'Running'),('Finished', 'Finished')]
 IMPORT_ENDPOINT = settings.IMPORT_ENDPOINT
 
+
 class CreateImporter(SingletonModel):
     category = models.OneToOneField("Category",max_length=255,unique=True,null=True,on_delete=models.SET_NULL)
     updated_at = models.DateTimeField(auto_now_add=True)
@@ -149,7 +150,10 @@ class Category(models.Model):
         self.ItemList = json.dumps(ItemList)
         self.save()
 
-
+    def number_of_items(self):
+        return len(self.get_item_list())
+    
+    
 class Model_Black_List(models.Model):
     black_item_no = models.CharField(max_length=255,null=False,unique=True)
 

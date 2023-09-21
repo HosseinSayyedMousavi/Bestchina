@@ -17,6 +17,7 @@ file_path = os.path.join(BASE_DIR, "Categories/FarsiCatJson.json")
 with open(file_path,"r") as f:
     FarsiCatJson = json.loads(f.read())
 
+
 def get_AuthorizationToken(email="bestchina.ir@gmail.com", password="poonish27634"):
     reqUrl = f"http://openapi.tvc-mall.com/Authorization/GetAuthorization?email={email}&password={password}"
 
