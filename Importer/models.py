@@ -17,7 +17,7 @@ class CreateImporter(SingletonModel):
     is_periodic = models.BooleanField(default=False)
     period_length = models.IntegerField(default = 10)
     errors = models.TextField(default="Everything is Ok!",null=True)
-    formula = models.JSONField(default={})
+    formula = models.JSONField(default=dict)
     def save(self, *args,**kwargs):
         try:
             importers = Importer.objects.all()
@@ -57,7 +57,7 @@ class Importer(models.Model):
     Number_of_checked_products = models.IntegerField(default=0) 
     start_job = models.BooleanField(default=False)
     errors = models.TextField(default = "Everything is Ok!")
-    formula = models.JSONField(default={})
+    formula = models.JSONField(default=dict)
     # @property
     # def category_prepared_percent(self):
     #     return str(len(self.category.get_ItemList())/self.category.Total * 100)
