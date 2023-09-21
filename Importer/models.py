@@ -146,8 +146,8 @@ class Category(models.Model):
     def get_ItemList(self):
         return json.loads(self.ItemList)
     
-    def set_ItemList(self,ItemList):
-        self.ItemList = json.dumps(ItemList)
+    def extend_ItemList(self,ItemList):
+        self.ItemList = self.get_ItemList().extend(json.dumps(ItemList))
         self.save()
 
     def number_of_items(self):
@@ -162,7 +162,7 @@ def Import_Job(importer):
     try:
 
         AuthorizationToken = get_AuthorizationToken()
-        if 1:
+        if importer.category_prepared_Items == 0:
             set_all_item_list(AuthorizationToken,importer.category)
         category_item_list = importer.category.get_ItemList()
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
@@ -248,26 +248,4 @@ def Import_Job(importer):
         importer.errors = json.dumps(e.args)
         importer.start_job=False
         importer.save()
-
-
-def set_all_item_list(AuthorizationToken,category):
-    try:
-        ProductItemNoList =True
-        ItemList=[]
-        lastProductId = "660400983A"
-        i=0
-        while ProductItemNoList:
-            NoList = get_item_list(AuthorizationToken=AuthorizationToken,CategoryCode=category.Code,lastProductId=lastProductId)
-            ProductItemNoList = NoList["ProductItemNoList"]
-            lastProductId = NoList["lastProductId"]
-            # category.Total = NoList["Total"]-2
-            category.save()
-            category = Category.objects.get(id=category.id)
-            for item in ProductItemNoList:
-                i+=1
-                ItemList.append(item["ItemNo"])
-                category.set_ItemList(ItemList)
-    except Exception as e:
-        category.errors = json.dumps(e.args)
-        category.save()
 
