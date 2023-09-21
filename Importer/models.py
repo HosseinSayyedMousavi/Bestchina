@@ -153,7 +153,7 @@ class Category(models.Model):
     def number_of_items(self):
         return len(self.get_item_list())
     
-    
+
 class Model_Black_List(models.Model):
     black_item_no = models.CharField(max_length=255,null=False,unique=True)
 
@@ -249,4 +249,25 @@ def Import_Job(importer):
         importer.start_job=False
         importer.save()
 
+
+def set_all_item_list(AuthorizationToken,category):
+    try:
+        ProductItemNoList =True
+        ItemList=[]
+        lastProductId = ""
+        i=0
+        while ProductItemNoList:
+            NoList = get_item_list(AuthorizationToken=AuthorizationToken,CategoryCode=category.Code,lastProductId=lastProductId)
+            ProductItemNoList = NoList["ProductItemNoList"]
+            lastProductId = NoList["lastProductId"]
+            # category.Total = NoList["Total"]-2
+            category.save()
+            category = Category.objects.get(id=category.id)
+            for item in ProductItemNoList:
+                i+=1
+                ItemList.append(item["ItemNo"])
+                category.set_ItemList(ItemList)
+    except Exception as e:
+        category.errors = json.dumps(e.args)
+        category.save()
 

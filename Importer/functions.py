@@ -281,27 +281,6 @@ def standardize_Details(Details,formula):
     return Details
 
 
-def set_all_item_list(AuthorizationToken,category):
-    try:
-        ProductItemNoList =True
-        ItemList=[]
-        lastProductId = ""
-        i=0
-        while ProductItemNoList:
-            NoList = get_item_list(AuthorizationToken=AuthorizationToken,CategoryCode=category.Code,lastProductId=lastProductId)
-            ProductItemNoList = NoList["ProductItemNoList"]
-            lastProductId = NoList["lastProductId"]
-            # category.Total = NoList["Total"]-2
-            category.save()
-            for item in ProductItemNoList:
-                i+=1
-                ItemList.append(item["ItemNo"])
-                category.set_ItemList(ItemList)
-    except Exception as e:
-        category.errors = json.dumps(e.args)
-        category.save()
-
-
 def get_Cat_Tree(CategoryCode):
     CategoryList = []
     CategoryList.append(CategoryCode)
