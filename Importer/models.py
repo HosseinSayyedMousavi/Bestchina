@@ -155,8 +155,8 @@ class Model_Black_List(models.Model):
 
 
 def Import_Job(importer):
-    # try:
-        print(importer.formula)
+    try:
+
         AuthorizationToken = get_AuthorizationToken()
         if importer.category_prepared_Items == 0:
             set_all_item_list(AuthorizationToken,importer.category)
@@ -180,7 +180,7 @@ def Import_Job(importer):
                         importer.operation = "3. Standardize"
                         importer.start_job=False
                         importer.save()
-                        details = standardize_Details(details,importer.formula)
+                        details = standardize_Details(details,dict(importer.formula))
                         
                         for detail in details["ModelList"] :
                             if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no = detail["ItemNo"].strip()).exists():
@@ -238,11 +238,11 @@ def Import_Job(importer):
                 importer.start_job=False
                 importer.save()
 
-    # except Exception as e:
-    #     importer = Importer.objects.get(id=importer.id)
-    #     importer.status = "Stopped"
-    #     importer.errors = json.dumps(e.args)
-    #     importer.start_job=False
-    #     importer.save()
+    except Exception as e:
+        importer = Importer.objects.get(id=importer.id)
+        importer.status = "Stopped"
+        importer.errors = json.dumps(e.args)
+        importer.start_job=False
+        importer.save()
 
 
