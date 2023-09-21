@@ -180,7 +180,7 @@ def Import_Job(importer):
                         importer.operation = "3. Standardize"
                         importer.start_job=False
                         importer.save()
-                        details = standardize_Details(details,dict(importer.formula))
+                        details = standardize_Details(details,json.loads(importer.formula))
                         
                         for detail in details["ModelList"] :
                             if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no = detail["ItemNo"].strip()).exists():
