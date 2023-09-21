@@ -155,7 +155,7 @@ class Model_Black_List(models.Model):
 
 
 def Import_Job(importer):
-    try:
+    # try:
 
         AuthorizationToken = get_AuthorizationToken()
         if importer.category_prepared_Items == 0:
@@ -238,11 +238,11 @@ def Import_Job(importer):
                 importer.start_job=False
                 importer.save()
 
-    except Exception as e:
-        importer = Importer.objects.get(id=importer.id)
-        importer.status = "Stopped"
-        importer.errors = json.dumps(e.args)
-        importer.start_job=False
-        importer.save()
+    # except Exception as e:
+    #     importer = Importer.objects.get(id=importer.id)
+    #     importer.status = "Stopped"
+    #     importer.errors = json.dumps(e.args)
+    #     importer.start_job=False
+    #     importer.save()
 
 
