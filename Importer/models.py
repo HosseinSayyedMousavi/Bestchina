@@ -17,7 +17,7 @@ class CreateImporter(SingletonModel):
     is_periodic = models.BooleanField(default=False)
     period_length = models.IntegerField(default = 10)
     errors = models.TextField(default="Everything is Ok!",null=True)
-    formula = models.JSONField(default=dict)
+    formula = models.JSONField(null=True , blank = True)
     def save(self, *args,**kwargs):
         try:
             importers = Importer.objects.all()
@@ -26,7 +26,7 @@ class CreateImporter(SingletonModel):
                     raise Exception(f"This Category or it\'s Parent or it's Child is Importing now! Please Delete Importer of {importer.category.Name} Category with CategoryCod : {importer.category.Code} then try again...")
             if not self.category:
                 raise Exception(f"Category not set!")
-            self.check_formula(self.formula)
+            if self.formula : self.check_formula(self.formula)
             if self.pk:
                 Importer.objects.create(
                 category=self.category,
@@ -68,7 +68,7 @@ class Importer(models.Model):
     Number_of_checked_products = models.IntegerField(default=0) 
     start_job = models.BooleanField(default=False)
     errors = models.TextField(default = "Everything is Ok!")
-    formula = models.JSONField(default=dict)
+    formula = models.JSONField(null=True, blank=True)
     # @property
     # def category_prepared_percent(self):
     #     return str(len(self.category.get_ItemList())/self.category.Total * 100)
