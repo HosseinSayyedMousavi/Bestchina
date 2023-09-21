@@ -105,6 +105,9 @@ class Importer(models.Model):
     def check_thread(self,Import_thread):
 
         if not Import_thread.is_alive() and self.status == "Running":
+            print(Importer.objects.get(pk=self.pk).status)
+            print(self.status)
+            print("Check Thread")
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
             Import_thread.daemon = True
             Import_thread.start()
