@@ -26,7 +26,7 @@ class CreateImporter(SingletonModel):
                     raise Exception(f"This Category or it\'s Parent or it's Child is Importing now! Please Delete Importer of {importer.category.Name} Category with CategoryCod : {importer.category.Code} then try again...")
             if not self.category:
                 raise Exception(f"Category not set!")
-            if self.formula : self.check_formula(dict(self.formula))
+            if self.formula : self.check_formula(self.formula)
             if self.pk:
                 Importer.objects.create(
                 category=self.category,
@@ -155,7 +155,7 @@ class Model_Black_List(models.Model):
 
 
 def Import_Job(importer):
-    # try:
+    try:
 
         AuthorizationToken = get_AuthorizationToken()
         if importer.category_prepared_Items == 0:
@@ -180,7 +180,7 @@ def Import_Job(importer):
                         importer.operation = "3. Standardize"
                         importer.start_job=False
                         importer.save()
-                        details = standardize_Details(details,dict(importer.formula))
+                        details = standardize_Details(details,importer.formula)
                         
                         for detail in details["ModelList"] :
                             if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no = detail["ItemNo"].strip()).exists():
@@ -238,11 +238,11 @@ def Import_Job(importer):
                 importer.start_job=False
                 importer.save()
 
-    # except Exception as e:
-    #     importer = Importer.objects.get(id=importer.id)
-    #     importer.status = "Stopped"
-    #     importer.errors = json.dumps(e.args)
-    #     importer.start_job=False
-    #     importer.save()
+    except Exception as e:
+        importer = Importer.objects.get(id=importer.id)
+        importer.status = "Stopped"
+        importer.errors = json.dumps(e.args)
+        importer.start_job=False
+        importer.save()
 
 

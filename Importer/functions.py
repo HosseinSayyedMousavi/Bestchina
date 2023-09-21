@@ -313,4 +313,4 @@ def get_Cat_Tree(CategoryCode):
 def change_with_formula(input_number, formula):
     number_list = list(formula.keys())
     larger_numbers = [float(num) for num in number_list if float(num) > input_number]
-    return float(formula[str[min(larger_numbers)]])*input_number
+    return float(formula[str(min(larger_numbers))])*input_number
