@@ -147,9 +147,9 @@ class Category(models.Model):
         return json.loads(self.ItemList)
     
     def extend_ItemList(self,ItemList):
-        Item_List = self.get_ItemList()
+        Item_List = json.loads(self.ItemList)
         print(Item_List)
-        Item_List.extend(json.dumps(ItemList))
+        Item_List.extend(ItemList)
         self.ItemList = Item_List
         self.save()
 
