@@ -74,23 +74,17 @@ def google_translate(text, source_language="en", target_language="fa"):
     return translated.text
 
 
-def ChatGPT_translate(Details, source_language="انگلیسی", target_language="فارسی"):
-    prompt = f"متن مقابل رو از {source_language} به {target_language} ترجمه کن و هیچ حرف اضافی نزن و اگر نتونستی خودش رو بدون هیچ تغییری برگردون: "+Details["Detail"]["Name"]
+def ChatGPT_translate(Details, source_language="English", target_language="Farsi"):
+    prompt = f"translate this product name to {target_language} (dont't say anything else and if can not translate return it pure without change):"+Details["Detail"]["Name"]
 
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system",
-                "content": "You are a helpful assistant that translates text."},
-            {"role": "user", "content": prompt}
-        ],
-        max_tokens=300,
-        n=1,
-        stop=None,
-        temperature=0.5,
+    response=openai.Completion.create(
+        engine='text-davinci-003',
+        prompt=prompt,
+        max_tokens=350,
+        temperature=0.5
     )
 
-    Details["Detail"]["Name"] = response.choices[0].message.content.strip()
+    Details["Detail"]["Name"] =response["choices"][0]["text"]
 
     return Details["Detail"]["Name"]
 

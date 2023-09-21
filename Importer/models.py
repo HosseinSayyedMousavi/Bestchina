@@ -68,6 +68,7 @@ class Importer(models.Model):
     def save(self, *args,**kwargs):
         if self.start_job==True:
             self.errors = "Everything is Ok!"
+            self.start_job=False
             super(Importer, self).save(*args,**kwargs)
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
             Import_thread.daemon = True
@@ -75,6 +76,7 @@ class Importer(models.Model):
             self.check_thread(Import_thread)
         elif self.status =="Running" and self.status_changed() and not "Import_thread" in locals():
             self.errors = "Everything is Ok!"
+            self.start_job=False
             super(Importer, self).save(*args,**kwargs)
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
             Import_thread.daemon = True
@@ -83,12 +85,14 @@ class Importer(models.Model):
         elif self.status =="Running" and self.status_changed() and "Import_thread" in locals():
             if not Import_thread.is_alive():
                 self.errors = "Everything is Ok!"
+                self.start_job=False
                 super(Importer, self).save(*args,**kwargs)
                 Import_thread = threading.Thread(target=Import_Job,args=(self,))
                 Import_thread.daemon = True
                 Import_thread.start()
                 self.check_thread(Import_thread)
         else:
+            self.start_job=False
             super(Importer, self).save(*args,**kwargs)
 
     def check_thread(self,Import_thread):
@@ -144,6 +148,7 @@ def Import_Job(importer):
             set_all_item_list(AuthorizationToken,importer.category)
         category_item_list = importer.category.get_ItemList()
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
+            print(importer.Number_of_checked_products)
             ItemNo = category_item_list[importer.Number_of_checked_products]
             importer = Importer.objects.get(id=importer.id)
             importer.current_Item = ItemNo
@@ -202,6 +207,7 @@ def Import_Job(importer):
             try:importer = Importer.objects.get(id=importer.id)
             except:break
         else:
+            print(importer.Number_of_checked_products)
             if importer.status=="Stopped":return
 
             if importer.status=="Running" and importer.is_periodic :
@@ -219,6 +225,8 @@ def Import_Job(importer):
                 importer.status="Finished"
                 importer.start_job=False
                 importer.save()
+
+        print(importer.Number_of_checked_products)
     except Exception as e:
         importer = Importer.objects.get(id=importer.id)
         importer.status = "Stopped"
