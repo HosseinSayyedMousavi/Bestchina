@@ -32,6 +32,7 @@ class CreateImporter(SingletonModel):
                 status="Running",
                 is_periodic=self.is_periodic,
                 period_length=self.period_length,
+                formula = self.formula,
                 start_job=True)
         except Exception as e:
             self.errors = json.dumps(e.args)
