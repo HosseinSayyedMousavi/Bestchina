@@ -156,6 +156,7 @@ class Model_Black_List(models.Model):
 
 def Import_Job(importer):
     # try:
+        print(importer.formula)
         AuthorizationToken = get_AuthorizationToken()
         if importer.category_prepared_Items == 0:
             set_all_item_list(AuthorizationToken,importer.category)
