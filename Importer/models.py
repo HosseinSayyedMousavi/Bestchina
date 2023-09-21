@@ -161,7 +161,6 @@ def Import_Job(importer):
             set_all_item_list(AuthorizationToken,importer.category)
         category_item_list = importer.category.get_ItemList()
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
-            print(importer.Number_of_checked_products)
             ItemNo = category_item_list[importer.Number_of_checked_products]
             importer = Importer.objects.get(id=importer.id)
             importer.current_Item = ItemNo
@@ -220,7 +219,6 @@ def Import_Job(importer):
             try:importer = Importer.objects.get(id=importer.id)
             except:break
         else:
-            print(importer.Number_of_checked_products)
             if importer.status=="Stopped":return
 
             if importer.status=="Running" and importer.is_periodic :
@@ -239,7 +237,6 @@ def Import_Job(importer):
                 importer.start_job=False
                 importer.save()
 
-        print(importer.Number_of_checked_products)
     except Exception as e:
         importer = Importer.objects.get(id=importer.id)
         importer.status = "Stopped"
