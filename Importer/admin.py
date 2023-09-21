@@ -23,7 +23,7 @@ class CategoryResource(ModelResource):
 
 class CategoryAdmin(ImportExportModelAdmin):
     list_display = ("Code","Name","FarsiName","ParentCode","Status")
-    readonly_fields= ("Code","Name","FarsiName","ParentCode","Status","errors","number_of_items","ItemList")
+    readonly_fields= ("Code","Name","FarsiName","ParentCode","Status","errors","number_of_items")
     search_fields = ("Name","Code","FarsiName")
 admin.site.register(Category,CategoryAdmin)
 
