@@ -301,7 +301,7 @@ def change_with_formula(input_number, formula):
 
 
 def set_all_item_list(AuthorizationToken,category):
-    try:
+    # try:
         ProductItemNoList =True
         lastProductId = ""
         i=0
@@ -316,6 +316,6 @@ def set_all_item_list(AuthorizationToken,category):
                 i+=1
                 ItemList.append(item["ItemNo"])
             category.extend_ItemList(ItemList)
-    except Exception as e:
-        category.errors = json.dumps(e.args)
-        category.save()
+    # except Exception as e:
+    #     category.errors = json.dumps(e.args)
+    #     category.save()
