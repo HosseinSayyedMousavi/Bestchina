@@ -148,7 +148,6 @@ class Category(models.Model):
     
     def extend_ItemList(self,ItemList):
         Item_List = json.loads(self.ItemList)
-        print(Item_List)
         Item_List.extend(ItemList)
         self.ItemList = json.dumps(Item_List)
         self.save()
@@ -162,7 +161,7 @@ class Model_Black_List(models.Model):
 
 
 def Import_Job(importer):
-    # try:
+    try:
 
         AuthorizationToken = get_AuthorizationToken()
         if importer.category_prepared_Items == 0:
@@ -245,10 +244,10 @@ def Import_Job(importer):
                 importer.start_job=False
                 importer.save()
 
-    # except Exception as e:
-    #     importer = Importer.objects.get(id=importer.id)
-    #     importer.status = "Stopped"
-    #     importer.errors = json.dumps(e.args)
-    #     importer.start_job=False
-    #     importer.save()
+    except Exception as e:
+        importer = Importer.objects.get(id=importer.id)
+        importer.status = "Stopped"
+        importer.errors = json.dumps(e.args)
+        importer.start_job=False
+        importer.save()
 
