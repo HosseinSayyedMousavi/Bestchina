@@ -313,6 +313,8 @@ def set_all_item_list(AuthorizationToken,category):
             # category.Total = NoList["Total"]-2
             category.save()
             for item in ProductItemNoList:
+                print(ItemList)
+                print(item["ItemNo"])
                 i+=1
                 ItemList.append(item["ItemNo"])
             category.extend_ItemList(ItemList)
