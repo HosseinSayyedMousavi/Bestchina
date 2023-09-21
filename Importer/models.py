@@ -152,6 +152,7 @@ class Category(models.Model):
         self.ItemList = json.dumps(Item_List)
         self.save()
 
+    @property
     def number_of_items(self):
         return len(self.get_item_list())
     
