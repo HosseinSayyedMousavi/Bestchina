@@ -176,36 +176,45 @@ def Import_Job(importer):
             importer.start_job=False
             importer.save()
             if  not Model_Black_List.objects.filter(black_item_no=ItemNo.strip()):
-                importer = Importer.objects.get(id=importer.id)
-                importer.operation = "2. Get From API"
-                importer.start_job=False
-                importer.save()
-                details = get_Details(AuthorizationToken,ItemNo=ItemNo)
-                if int(details["Detail"]["ProductStatus"]) == 1:
-                    if "Message" not in details.keys():
-                        importer = Importer.objects.get(id=importer.id)
-                        importer.operation = "3. Standardize"
-                        importer.start_job=False
-                        importer.save()
-                        details = standardize_Details(details,importer.formula)
-                        
-                        for detail in details["ModelList"] :
-                            if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no = detail["ItemNo"].strip()).exists():
-                                Model_Black_List.objects.create(black_item_no = detail["ItemNo"].strip())
-                        importer = Importer.objects.get(id=importer.id)
-                        importer.operation = "4. Import To Website"
-                        importer.start_job=False
-                        importer.save()
-                        response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
-                        if response.json()["result"]:
+                sc=Shipping_Cost(AuthorizationToken,ItemNo=ItemNo)
+                if sc["success"]:
+                    importer = Importer.objects.get(id=importer.id)
+                    importer.operation = "2. Get From API"
+                    importer.start_job=False
+                    importer.save()
+                    details = get_Details(AuthorizationToken,ItemNo=ItemNo)
+                    if int(details["Detail"]["ProductStatus"]) == 1:
+                        if "Message" not in details.keys():
                             importer = Importer.objects.get(id=importer.id)
-                            importer.Number_of_products = importer.Number_of_products + 1
+                            importer.operation = "3. Standardize"
+                            importer.start_job=False
+                            importer.save()
+                            details = standardize_Details(details,importer.formula)
+                            
+                            for detail in details["ModelList"] :
+                                if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no = detail["ItemNo"].strip()).exists():
+                                    Model_Black_List.objects.create(black_item_no = detail["ItemNo"].strip())
+                            importer = Importer.objects.get(id=importer.id)
+                            importer.operation = "4. Import To Website"
+                            importer.start_job=False
+                            importer.save()
+                            details["Shipping_Cost"]=sc
+                            response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
+                            if response.json()["result"]:
+                                importer = Importer.objects.get(id=importer.id)
+                                importer.Number_of_products = importer.Number_of_products + 1
+                                importer.Number_of_checked_products = importer.Number_of_checked_products + 1
+                                importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
+                                importer.start_job=False
+                                importer.save()
+                            else:
+                                raise Exception(response.text)
+                        else:
+                            importer = Importer.objects.get(id=importer.id)
                             importer.Number_of_checked_products = importer.Number_of_checked_products + 1
                             importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
                             importer.start_job=False
                             importer.save()
-                        else:
-                            raise Exception(response.text)
                     else:
                         importer = Importer.objects.get(id=importer.id)
                         importer.Number_of_checked_products = importer.Number_of_checked_products + 1

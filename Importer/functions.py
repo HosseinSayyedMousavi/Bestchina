@@ -220,8 +220,7 @@ def standardize_Details(Details,formula):
     Details["Detail"]["Description"]=Details["Detail"]["Description"].replace("-"+re.findall(r"-.*h5",Details["Detail"]["Description"])[0].split("-")[-1],"<\h5")
     Details["Detail"]["Image"] = get_Image(AuthorizationToken, Details["Detail"]["ItemNo"])
     if formula:Details["Detail"]["OriginalPrice"] = change_with_formula(Details["Detail"]["OriginalPrice"],formula)
-    threading.Thread(target=ChatGPT_translate,args=(Details,)).start()
-
+    Details["Detail"]["Name"] = google_translate(Details["Detail"]["Name"])
     Details["Detail"]["Summary"] = google_translate(Details["Detail"]["Summary"])
     try:
         AttributeKeys = list(Details["Detail"]["Attributes"].keys())
@@ -319,3 +318,30 @@ def set_all_item_list(AuthorizationToken,category):
     except Exception as e:
         category.errors = json.dumps(e.args)
         category.save()
+
+def Shipping_Cost(AuthorizationToken, ItemNo,CountryCode="IR"):
+    import requests
+    import json
+
+    reqUrl = "http://openapi.tvc-mall.com/order/shippingcostenhancement"
+
+    headersList = {
+    "Accept": "*/*",
+    "Authorization": "TVC "+AuthorizationToken,
+    "Content-Type": "application/json" 
+    }
+
+    payload = json.dumps({
+    "skuinfo":ItemNo+"*1",
+    "countrycode":CountryCode
+    })
+
+    response = requests.request("POST", reqUrl, data=payload,  headers=headersList)
+
+
+    if "Message" in response.json().keys():
+        if response.json()["Message"] == 'unauthorized':
+            AuthorizationToken = get_AuthorizationToken()
+            return Shipping_Cost(AuthorizationToken, ItemNo,CountryCode)
+    
+    return response.json()
