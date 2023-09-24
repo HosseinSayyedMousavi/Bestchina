@@ -259,7 +259,7 @@ def create_add_on(shipping):
     add_on = [{"Name":"هزینه ارسال","Description":"","Options":[]}]
     for sh in shipping["Shippings"]:
         sh_Dict = {}
-        sh_Dict["Label"] = "ارسال از چین از ایران -  " + sh["ShippingMethod"].replace("China Post","پست سفارشی").replace("POST NL","پست ویژه")
+        sh_Dict["Label"] = "ارسال از چین به ایران -  " + sh["ShippingMethod"].replace("China Post","پست سفارشی").replace("POST NL","پست ویژه")
         sh_Dict["Price"] = sh["ShippingCost"]
         add_on[0]["Options"].append(sh_Dict)
         add_on[0]["Description"] += "مدت ارسال با  " +  sh["ShippingMethod"].replace("China Post","پست سفارشی").replace("POST NL","پست ویژه")+ " : " +  sh["DeliveryCycle"].replace("business","").replace("days","").strip() + " روز کاری\n" 
