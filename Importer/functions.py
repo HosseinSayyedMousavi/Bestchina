@@ -12,9 +12,9 @@ from django.conf import settings
 translator = Translator()
 
 openai.api_key = settings.CHAT_GPT_API_KEY
-BASE_DIR=settings.BASE_DIR
-file_path = os.path.join(BASE_DIR, "Categories/FarsiCatJson.json")
-with open(file_path,"r") as f:
+# BASE_DIR=settings.BASE_DIR
+# file_path = os.path.join(BASE_DIR, "Categories/FarsiCatJson.json")
+with open("Categories/FarsiCatJson.json","r") as f:
     FarsiCatJson = json.loads(f.read())
 
 
@@ -320,8 +320,6 @@ def set_all_item_list(AuthorizationToken,category):
         category.save()
 
 def Shipping_Cost(AuthorizationToken, ItemNo,CountryCode="IR"):
-    import requests
-    import json
 
     reqUrl = "http://openapi.tvc-mall.com/order/shippingcostenhancement"
 

@@ -177,7 +177,7 @@ def Import_Job(importer):
             importer.save()
             if  not Model_Black_List.objects.filter(black_item_no=ItemNo.strip()):
                 shipping=Shipping_Cost(AuthorizationToken,ItemNo=ItemNo)
-                if shipping["success"]:
+                if shipping["Success"]:
                     if shipping["Shippings"]:
                         importer = Importer.objects.get(id=importer.id)
                         importer.operation = "2. Get From API"
