@@ -260,9 +260,9 @@ def standardize_Details(Details,formula):
     Details = delete_custom_keyword(Details,keywords_to_remove)
     Details["ModelList"] = [model for model in Details["ModelList"] if model["ProductStatus"]==1]
     for model in Details["ModelList"]:
+        if formula : model["OriginalPrice"] = change_with_formula(model["OriginalPrice"],formula)
         if model["ItemNo"]!=Details["Detail"]["ItemNo"]:
             model["Image"] = get_Image(AuthorizationToken, model["ItemNo"])
-            if formula : model["OriginalPrice"] = change_with_formula(model["OriginalPrice"],formula)
             try:
                 ModelKeys = list(model["Attributes"].keys())
                 for attr in ModelKeys:
