@@ -214,7 +214,7 @@ def standardize_Details(Details,formula):
 
 
     AuthorizationToken = get_AuthorizationToken()
-    keywords_to_remove = ["EanCode", "Reminder", "IsSpecialOffer", "Price", "Modified","Added", "StockStatus", "CacheTime", "PriceList","PackageList", "CompatibleList", "SpecificationList","MOQ","LeadTime","PromotionPeriod","PromotionPrice","GrossWeight","VolumeWeight","WithPackage"]
+    keywords_to_remove = ["EanCode", "Reminder", "IsSpecialOffer", "Price", "Modified","Added", "StockStatus", "CacheTime", "PriceList","PackageList", "CompatibleList", "SpecificationList","LeadTime","PromotionPeriod","PromotionPrice","GrossWeight","VolumeWeight","WithPackage"]
     if "-" in Details["Detail"]["Name"]:Details["Detail"]["Name"]=re.findall(r'(.*)-', Details["Detail"]["Name"])[0]
     if "-" in Details["Detail"]["Summary"]:Details["Detail"]["Name"]=re.findall(r'(.*)-', Details["Detail"]["Summary"])[0]
     Details["Detail"]["Description"]=Details["Detail"]["Description"].replace("-"+re.findall(r"-.*h5",Details["Detail"]["Description"])[0].split("-")[-1],"<\h5")
@@ -318,6 +318,7 @@ def set_all_item_list(AuthorizationToken,category):
     except Exception as e:
         category.errors = json.dumps(e.args)
         category.save()
+
 
 def Shipping_Cost(AuthorizationToken, ItemNo,CountryCode="IR"):
 
