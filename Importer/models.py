@@ -170,7 +170,7 @@ def Import_Job(importer):
         if importer.category_prepared_Items == 0:
             set_all_item_list(AuthorizationToken,importer.category)
         category_item_list = importer.category.get_ItemList()
-        Progress_bar = tqdm(len(category_item_list))
+        Progress_bar = tqdm(total = len(category_item_list))
         Progress_bar.n = importer.Number_of_checked_products
         importer.Progress_bar = str(Progress_bar)
         importer.start_job=False
