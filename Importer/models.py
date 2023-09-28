@@ -156,7 +156,8 @@ class Category(models.Model):
 
     @property
     def number_of_items(self):
-        return len(self.get_item_list())
+        Item_List = json.loads(self.ItemList)
+        return len(Item_List)
     
 
 class Model_Black_List(models.Model):
