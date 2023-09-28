@@ -66,7 +66,7 @@ class Importer(models.Model):
     period_length = models.IntegerField(default = 10)
     period_number = models.IntegerField(default = 1)
     Progress_percentage = models.FloatField(default = 0)
-    Progress_bar = models.CharField(max_length=255,null=True,blank=True)
+    Progress_bar = models.TextField(null=True,blank=True)
     Number_of_products = models.IntegerField(default=0) 
     Number_of_checked_products = models.IntegerField(default=0) 
     start_job = models.BooleanField(default=False)
@@ -171,6 +171,10 @@ def Import_Job(importer):
             set_all_item_list(AuthorizationToken,importer.category)
         category_item_list = importer.category.get_ItemList()
         Progress_bar = tqdm(len(category_item_list))
+        Progress_bar.n = importer.Number_of_checked_products
+        importer.Progress_bar = str(Progress_bar)
+        importer.start_job=False
+        importer.save()
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
             ItemNo = category_item_list[importer.Number_of_checked_products]
             importer = Importer.objects.get(id=importer.id)
