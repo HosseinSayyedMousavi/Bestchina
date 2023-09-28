@@ -7,6 +7,7 @@ import json
 import threading
 from django.conf import settings
 from django.utils import timezone
+from tqdm import tqdm
 STATUS_CHOICES = [('Stopped', 'Stopped'),('Running', 'Running'),('Finished', 'Finished')]
 IMPORT_ENDPOINT = settings.IMPORT_ENDPOINT
 
@@ -65,6 +66,7 @@ class Importer(models.Model):
     period_length = models.IntegerField(default = 10)
     period_number = models.IntegerField(default = 1)
     Progress_percentage = models.FloatField(default = 0)
+    Progress_bar = models.CharField(max_length=255,null=True,blank=True)
     Number_of_products = models.IntegerField(default=0) 
     Number_of_checked_products = models.IntegerField(default=0) 
     start_job = models.BooleanField(default=False)
@@ -168,6 +170,7 @@ def Import_Job(importer):
         if importer.category_prepared_Items == 0:
             set_all_item_list(AuthorizationToken,importer.category)
         category_item_list = importer.category.get_ItemList()
+        Progress_bar = tqdm(len(category_item_list))
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
             ItemNo = category_item_list[importer.Number_of_checked_products]
             importer = Importer.objects.get(id=importer.id)
@@ -204,21 +207,23 @@ def Import_Job(importer):
                                     importer = Importer.objects.get(id=importer.id)
                                     importer.Number_of_products = importer.Number_of_products + 1
                                     importer.Number_of_checked_products = importer.Number_of_checked_products + 1
+                                    Progress_bar.n = importer.Number_of_checked_products
+                                    importer.Progress_bar = str(Progress_bar)
                                     importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
                                     importer.start_job=False
                                     importer.save()
                                 else:
                                     raise Exception(response.text)
                             else:
-                                simple_else(importer,category_item_list)
+                                simple_else(importer,category_item_list,Progress_bar)
                         else:
-                                simple_else(importer,category_item_list)
+                                simple_else(importer,category_item_list,Progress_bar)
                     else:
-                                simple_else(importer,category_item_list)
+                                simple_else(importer,category_item_list,Progress_bar)
                 else:
-                                simple_else(importer,category_item_list)
+                                simple_else(importer,category_item_list,Progress_bar)
             else:
-                                simple_else(importer,category_item_list)
+                                simple_else(importer,category_item_list,Progress_bar)
             try:importer = Importer.objects.get(id=importer.id)
             except:break
         else:
@@ -248,9 +253,11 @@ def Import_Job(importer):
         importer.save()
 
 
-def simple_else(importer,category_item_list):
+def simple_else(importer,category_item_list,Progress_bar):
     importer = Importer.objects.get(id=importer.id)
     importer.Number_of_checked_products = importer.Number_of_checked_products + 1
+    Progress_bar.n = importer.Number_of_checked_products
+    importer.Progress_bar = str(Progress_bar)
     importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
     importer.start_job=False
     importer.save()
@@ -267,6 +274,3 @@ def create_add_on(shipping):
 
     return add_on
 
-
-
-     

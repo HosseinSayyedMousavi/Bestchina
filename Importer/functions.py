@@ -12,9 +12,9 @@ from django.conf import settings
 translator = Translator()
 
 openai.api_key = settings.CHAT_GPT_API_KEY
-# BASE_DIR=settings.BASE_DIR
-# file_path = os.path.join(BASE_DIR, "Categories/FarsiCatJson.json")
-with open("Categories/FarsiCatJson.json","r") as f:
+BASE_DIR=settings.BASE_DIR
+file_path = os.path.join(BASE_DIR, "Categories/FarsiCatJson.json")
+with open(file_path,"r") as f:
     FarsiCatJson = json.loads(f.read())
 
 
