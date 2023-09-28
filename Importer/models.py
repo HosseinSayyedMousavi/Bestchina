@@ -183,7 +183,7 @@ def Import_Job(importer):
             importer.start_job=False
             importer.save()
             if  not Model_Black_List.objects.filter(black_item_no=ItemNo.strip()):
-                shipping=Shipping_Cost(AuthorizationToken,ItemNo=ItemNo)
+                shipping=Shipping_Cost(AuthorizationToken,MOQ=1,ItemNo=ItemNo)
                 if shipping["Success"]:
                     if shipping["Shippings"]:
                         importer = Importer.objects.get(id=importer.id)
@@ -205,6 +205,7 @@ def Import_Job(importer):
                                 importer.operation = "4. Import To Website"
                                 importer.start_job=False
                                 importer.save()
+                                shipping=Shipping_Cost(AuthorizationToken,MOQ=details["Detail"]["MOQ"],ItemNo=ItemNo)
                                 details["AddonList"]=create_add_on(shipping)
                                 response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
                                 if response.json()["result"]:

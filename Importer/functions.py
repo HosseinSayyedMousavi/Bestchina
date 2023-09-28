@@ -320,7 +320,7 @@ def set_all_item_list(AuthorizationToken,category):
         category.save()
 
 
-def Shipping_Cost(AuthorizationToken, ItemNo,CountryCode="IR"):
+def Shipping_Cost(AuthorizationToken, ItemNo,MOQ,CountryCode="IR"):
 
     reqUrl = "http://openapi.tvc-mall.com/order/shippingcostenhancement"
 
@@ -331,7 +331,7 @@ def Shipping_Cost(AuthorizationToken, ItemNo,CountryCode="IR"):
     }
 
     payload = json.dumps({
-    "skuinfo":ItemNo+"*1",
+    "skuinfo":ItemNo+"*"+str(MOQ),
     "countrycode":CountryCode
     })
 
@@ -341,6 +341,6 @@ def Shipping_Cost(AuthorizationToken, ItemNo,CountryCode="IR"):
     if "Message" in response.json().keys():
         if response.json()["Message"] == 'unauthorized':
             AuthorizationToken = get_AuthorizationToken()
-            return Shipping_Cost(AuthorizationToken, ItemNo,CountryCode)
+            return Shipping_Cost(AuthorizationToken, ItemNo,MOQ,CountryCode)
     
     return response.json()
