@@ -79,22 +79,21 @@ WSGI_APPLICATION = 'Bestchina.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'bestchinadb',
-#         'USER': 'bestchin',
-#         'PASSWORD': 'b%zp-YgJFuEs',
+#         'NAME': 'accbestchina_db',
+#         'USER': 'accbestchina_user',
+#         'PASSWORD': 'R5sMknTvFQBS',
 #         'HOST': 'localhost',
 #         'PORT': '5432',
 #     }
 # }
 DATABASES = {
 	'default': {
-		'ENGINE': 'mysql.connector.django',
+		'ENGINE': 'django.db.backends.mysql',
 		'NAME': 'accbestchina_db',
 		'USER': 'accbestchina_user',
 		'PASSWORD': 'R5sMknTvFQBS',
-        'OPTIONS': {
-          'autocommit': True,
-        }
+        'HOST': 'localhost',
+        'PORT': '3306',
 	}
 }
 
