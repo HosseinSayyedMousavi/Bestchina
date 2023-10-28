@@ -92,7 +92,6 @@ DATABASES = {
 		'NAME': 'accbestchina_db',
 		'USER': 'accbestchina_user',
 		'PASSWORD': 'R5sMknTvFQBS',
-		'HOST':'localhost',
         'OPTIONS': {
           'autocommit': True,
         }
