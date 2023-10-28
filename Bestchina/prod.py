@@ -136,3 +136,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 IMPORT_ENDPOINT = "https://bestchina.ir/acc/wp-json/wpapi/v1/create-update-product"
 CATEGORY_ENDPOINT = "https://bestchina.ir/acc/wp-json/wpapi/v1/create-update-category"
 CHAT_GPT_API_KEY = "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"
+EXISTENCE_CHECK_ENDPOINT = "https://bestchina.ir/acc/wp-json/wpapi/v1/show-existence"
