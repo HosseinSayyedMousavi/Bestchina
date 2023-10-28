@@ -88,12 +88,14 @@ WSGI_APPLICATION = 'Bestchina.wsgi.application'
 # }
 DATABASES = {
 	'default': {
-		'ENGINE': 'django.db.backends.mysql',
+		'ENGINE': 'mysql.connector.django',
 		'NAME': 'accbestchina_db',
 		'USER': 'accbestchina_user',
 		'PASSWORD': 'R5sMknTvFQBS',
 		'HOST':'localhost',
-		'PORT':'3306',
+        'OPTIONS': {
+          'autocommit': True,
+        }
 	}
 }
 
