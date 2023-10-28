@@ -53,6 +53,8 @@ class CreateImporter(SingletonModel):
             except ValueError:
                 raise ValueError(f"The key '{key}' or value '{value}' is not convertible to float.")
 
+try:CreateImporter.objects.get_or_create()
+except:pass
 
 class Importer(models.Model):
 
@@ -136,7 +138,7 @@ class Category(models.Model):
     ParentCode = models.CharField(max_length=255,null=True)
     ParentName = models.CharField(max_length=255,null=True)
     Status = models.CharField(max_length=255,null=False)
-    ItemList = models.TextField(default="['']")
+    ItemList = models.TextField(default='[""]')
     errors = models.TextField(default="Everything is Ok!")
 
     def __str__(self):
