@@ -316,9 +316,10 @@ def update_itemlist(AuthorizationToken,category):
             ItemList=[]
             NoList = get_item_list(AuthorizationToken=AuthorizationToken,CategoryCode=category.Code,lastProductId=lastProductId)
             ProductItemNoList = NoList["ProductItemNoList"]
-            lastProductId = NoList["lastProductId"]
-            category.lastProductId = lastProductId
-            category.save()
+            if ProductItemNoList:
+                lastProductId = NoList["lastProductId"]
+                category.lastProductId = lastProductId
+                category.save()
             for item in ProductItemNoList:
                 ItemList.append(item["ItemNo"])
             category=Category.objects.get(id=category.id)
