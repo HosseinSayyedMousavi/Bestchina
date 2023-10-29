@@ -187,52 +187,50 @@ def Import_Job(importer):
             importer.save()
             if  not Model_Black_List.objects.filter(black_item_no=ItemNo.strip()):
                 shipping=Shipping_Cost(AuthorizationToken,MOQ=1,ItemNo=ItemNo)
-                if shipping["Success"]:
-                    if shipping["Shippings"]:
-                        importer = Importer.objects.get(id=importer.id)
-                        importer.operation = "2. Get From API"
-                        importer.start_job=False
-                        importer.save()
-                        details = get_Details(AuthorizationToken,ItemNo=ItemNo)
-                        existence = check_existence(ItemNo)
-                        if (not existence and int(details["Detail"]["ProductStatus"]) == 1) or existence:
-                            if "Message" not in details.keys():
+                existence = check_existence(ItemNo)
+                if (not existence and shipping["Shippings"]) or existence:
+                    importer = Importer.objects.get(id=importer.id)
+                    importer.operation = "2. Get From API"
+                    importer.start_job=False
+                    importer.save()
+                    details = get_Details(AuthorizationToken,ItemNo=ItemNo)
+                    if not shipping["Shippings"] : details["Detail"]["ProductStatus"] = 0
+                    if (not existence and int(details["Detail"]["ProductStatus"]) == 1) or existence:
+                        if "Message" not in details.keys():
+                            importer = Importer.objects.get(id=importer.id)
+                            importer.operation = "3. Standardize"
+                            importer.start_job=False
+                            importer.save()
+                            
+                            
+                            if existence : details = standardize_update_Details(details,importer.formula)
+                            else : details = standardize_Details(details,importer.formula)
+
+                            for detail in details["ModelList"] :
+                                if detail["ItemNo"] != ItemNo :
+                                    Model_Black_List.objects.get_or_create(black_item_no = detail["ItemNo"].strip())
+                            importer = Importer.objects.get(id=importer.id)
+                            importer.operation = "4. Import To Website"
+                            importer.start_job=False
+                            importer.save()
+                            shipping=Shipping_Cost(AuthorizationToken,MOQ=details["Detail"]["MOQ"],ItemNo=ItemNo)
+                            details["AddonList"] = create_add_on(shipping)
+                            response = requests.post(IMPORT_ENDPOINT , data=json.dumps(details) , headers = {'Content-Type': 'application/json'} , timeout=180)
+                            if response.json()["result"]:
                                 importer = Importer.objects.get(id=importer.id)
-                                importer.operation = "3. Standardize"
+                                importer.Number_of_products = importer.Number_of_products + 1
+                                importer.Number_of_checked_products = importer.Number_of_checked_products + 1
+                                Progress_bar.n = importer.Number_of_checked_products
+                                importer.Progress_bar = str(Progress_bar)
+                                importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
                                 importer.start_job=False
                                 importer.save()
-                                
-
-                                if existence : details = standardize_update_Details(details,importer.formula)
-                                else : details = standardize_Details(details,importer.formula)
-
-                                for detail in details["ModelList"] :
-                                    if detail["ItemNo"] != ItemNo and not Model_Black_List.objects.filter(black_item_no = detail["ItemNo"].strip()).exists():
-                                        Model_Black_List.objects.create(black_item_no = detail["ItemNo"].strip())
-                                importer = Importer.objects.get(id=importer.id)
-                                importer.operation = "4. Import To Website"
-                                importer.start_job=False
-                                importer.save()
-                                shipping=Shipping_Cost(AuthorizationToken,MOQ=details["Detail"]["MOQ"],ItemNo=ItemNo)
-                                details["AddonList"]=create_add_on(shipping)
-                                response = requests.post(IMPORT_ENDPOINT,data=json.dumps(details),headers = {'Content-Type': 'application/json'},timeout=180)
-                                if response.json()["result"]:
-                                    importer = Importer.objects.get(id=importer.id)
-                                    importer.Number_of_products = importer.Number_of_products + 1
-                                    importer.Number_of_checked_products = importer.Number_of_checked_products + 1
-                                    Progress_bar.n = importer.Number_of_checked_products
-                                    importer.Progress_bar = str(Progress_bar)
-                                    importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
-                                    importer.start_job=False
-                                    importer.save()
-                                else:
-                                    raise Exception(response.text)
                             else:
-                                simple_else(importer,category_item_list,Progress_bar)
+                                raise Exception(response.text)
                         else:
-                                simple_else(importer,category_item_list,Progress_bar)
+                            simple_else(importer,category_item_list,Progress_bar)
                     else:
-                                simple_else(importer,category_item_list,Progress_bar)
+                            simple_else(importer,category_item_list,Progress_bar)
                 else:
                                 simple_else(importer,category_item_list,Progress_bar)
             else:
@@ -268,7 +266,7 @@ def Import_Job(importer):
 
 def simple_else(importer,category_item_list,Progress_bar):
     importer = Importer.objects.get(id=importer.id)
-    importer.Number_of_checked_products = importer.Number_of_checked_products + 1
+    importer.Number_of_checked_products += 1
     Progress_bar.n = importer.Number_of_checked_products
     importer.Progress_bar = str(Progress_bar)
     importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
