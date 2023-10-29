@@ -173,6 +173,7 @@ def Import_Job(importer):
 
         AuthorizationToken = get_AuthorizationToken()
         update_itemlist(AuthorizationToken,importer.category)
+        importer = Importer.objects.get(id=importer.id)
         category_item_list = importer.category.get_ItemList()
         Progress_bar = tqdm(total = len(category_item_list))
         Progress_bar.n = importer.Number_of_checked_products
@@ -209,6 +210,7 @@ def Import_Job(importer):
                             else : details = standardize_Details(details,importer.formula)
 
                             for detail in details["ModelList"] :
+                                print(detail)
                                 if detail["ItemNo"] != ItemNo :
                                     Model_Black_List.objects.get_or_create(black_item_no = detail["ItemNo"].strip())
                             importer = Importer.objects.get(id=importer.id)

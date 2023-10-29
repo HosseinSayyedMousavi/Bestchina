@@ -147,6 +147,7 @@ def standardize_update_Details(Details,formula):
     for model in Details["ModelList"]:
         if formula : model["OriginalPrice"] = change_with_formula(model["OriginalPrice"],formula)
         update_model = {}
+        update_model["ItemNo"] = model["ItemNo"]
         update_model["OriginalPrice"] = model["OriginalPrice"]
         update_model["MOQ"] = model["MOQ"]
         update_model["ProductStatus"] = model["ProductStatus"]
