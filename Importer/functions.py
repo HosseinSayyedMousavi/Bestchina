@@ -150,7 +150,7 @@ def standardize_update_Details(Details,formula):
         update_model["OriginalPrice"] = model["OriginalPrice"]
         update_model["MOQ"] = model["MOQ"]
         update_model["ProductStatus"] = model["ProductStatus"]
-        update_Detail.append(update_model)
+        update_Detail["ModelList"].append(update_model)
     return update_Detail
 
 
