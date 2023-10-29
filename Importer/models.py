@@ -138,8 +138,9 @@ class Category(models.Model):
     ParentCode = models.CharField(max_length=255,null=True)
     ParentName = models.CharField(max_length=255,null=True)
     Status = models.CharField(max_length=255,null=False)
-    ItemList = models.TextField(default='[""]')
+    ItemList = models.TextField(default='[]')
     errors = models.TextField(default="Everything is Ok!")
+    lastProductId = models.CharField(max_length=255,null=True)
 
     def __str__(self):
         return self.Name 
@@ -180,6 +181,7 @@ def Import_Job(importer):
         importer.save()
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
             ItemNo = category_item_list[importer.Number_of_checked_products]
+            print(ItemNo)
             importer = Importer.objects.get(id=importer.id)
             importer.current_Item = ItemNo
             importer.operation = "1. Check Product"
@@ -308,18 +310,18 @@ def get_Cat_Tree(CategoryCode):
 def update_itemlist(AuthorizationToken,category):
     try:
         ProductItemNoList =True
-        lastProductId = category.get_ItemList()[-1]
+        lastProductId = category.lastProductId
         category=Category.objects.get(id=category.id)
         while ProductItemNoList:
             ItemList=[]
             NoList = get_item_list(AuthorizationToken=AuthorizationToken,CategoryCode=category.Code,lastProductId=lastProductId)
-            if lastProductId=="":
-                category.ItemList="[]"
             ProductItemNoList = NoList["ProductItemNoList"]
             lastProductId = NoList["lastProductId"]
+            category.lastProductId = lastProductId
             category.save()
             for item in ProductItemNoList:
                 ItemList.append(item["ItemNo"])
+            category=Category.objects.get(id=category.id)
             category.extend_ItemList(ItemList)
     except Exception as e:
         category.errors = json.dumps(e.args)
