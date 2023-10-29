@@ -169,7 +169,7 @@ class Model_Black_List(models.Model):
 
 
 def Import_Job(importer):
-    try:
+    # try:
 
         AuthorizationToken = get_AuthorizationToken()
         update_itemlist(AuthorizationToken,importer.category)
@@ -258,12 +258,12 @@ def Import_Job(importer):
                 importer.start_job=False
                 importer.save()
 
-    except Exception as e:
-        importer = Importer.objects.get(id=importer.id)
-        importer.status = "Stopped"
-        importer.errors = json.dumps(e.args)
-        importer.start_job=False
-        importer.save()
+    # except Exception as e:
+    #     importer = Importer.objects.get(id=importer.id)
+    #     importer.status = "Stopped"
+    #     importer.errors = json.dumps(e.args)
+    #     importer.start_job=False
+    #     importer.save()
 
 
 def simple_else(importer,category_item_list,Progress_bar):
@@ -315,10 +315,12 @@ def update_itemlist(AuthorizationToken,category):
         while ProductItemNoList:
             ItemList=[]
             NoList = get_item_list(AuthorizationToken=AuthorizationToken,CategoryCode=category.Code,lastProductId=lastProductId)
+            category.errors = "Everything is Ok!"
             ProductItemNoList = NoList["ProductItemNoList"]
             if ProductItemNoList:
                 lastProductId = NoList["lastProductId"]
                 category.lastProductId = lastProductId
+                
                 category.save()
             for item in ProductItemNoList:
                 ItemList.append(item["ItemNo"])
