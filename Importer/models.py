@@ -169,7 +169,7 @@ class Model_Black_List(models.Model):
 
 
 def Import_Job(importer):
-    try:
+    # try:
 
         AuthorizationToken = get_AuthorizationToken()
         update_itemlist(AuthorizationToken,importer.category)
@@ -177,7 +177,7 @@ def Import_Job(importer):
         category_item_list = importer.category.get_ItemList()
         Progress_bar = tqdm(total = len(category_item_list))
         Progress_bar.n = importer.Number_of_checked_products
-        importer.Progress_bar = str(Progress_bar)
+        importer.Progress_bar = Progress_bar.__str__()
         importer.start_job=False
         importer.save()
         while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
@@ -225,7 +225,7 @@ def Import_Job(importer):
                                 importer.Number_of_products = importer.Number_of_products + 1
                                 importer.Number_of_checked_products = category_item_list.index(importer.current_Item) + 1
                                 Progress_bar.n = importer.Number_of_checked_products
-                                importer.Progress_bar = str(Progress_bar)
+                                importer.Progress_bar = Progress_bar.__str__()
                                 importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
                                 importer.start_job=False
                                 importer.save()
@@ -262,19 +262,19 @@ def Import_Job(importer):
                 importer.start_job=False
                 importer.save()
 
-    except Exception as e:
-        importer = Importer.objects.get(id=importer.id)
-        importer.status = "Stopped"
-        importer.errors = json.dumps(e.args)
-        importer.start_job=False
-        importer.save()
+    # except Exception as e:
+    #     importer = Importer.objects.get(id=importer.id)
+    #     importer.status = "Stopped"
+    #     importer.errors = json.dumps(e.args)
+    #     importer.start_job=False
+    #     importer.save()
 
 
 def simple_else(importer,category_item_list,Progress_bar):
     importer = Importer.objects.get(id=importer.id)
     importer.Number_of_checked_products = category_item_list.index(importer.current_Item) + 1
     Progress_bar.n = importer.Number_of_checked_products
-    importer.Progress_bar = str(Progress_bar)
+    importer.Progress_bar = Progress_bar.__str__()
     importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
     importer.start_job=False
     importer.save()
