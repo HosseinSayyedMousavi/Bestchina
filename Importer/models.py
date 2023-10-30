@@ -211,7 +211,7 @@ def Import_Job(importer):
                             else : details = standardize_Details(details,importer.formula)
 
                             for detail in details["ModelList"] :
-                                print(detail)
+                                # print(detail)
                                 if detail["ItemNo"] != ItemNo :
                                     Model_Black_List.objects.get_or_create(black_item_no = detail["ItemNo"].strip())
                             importer = Importer.objects.get(id=importer.id)
