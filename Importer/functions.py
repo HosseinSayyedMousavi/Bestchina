@@ -208,7 +208,7 @@ def get_Parent(AuthorizationToken,CategoryCode):
 
 
 def check_existence(ItemNo):
-    payload = json.dumps({"ItemNo":"660408945A"})
+    payload = json.dumps({"ItemNo":ItemNo})
     header = {"Content-Type": "application/json"}
     response = requests.request("POST", EXISTENCE_CHECK_ENDPOINT ,data = payload ,headers=header,timeout=20)
     return response.json()["response"]

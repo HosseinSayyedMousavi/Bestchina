@@ -250,9 +250,11 @@ def Import_Job(importer):
                 importer.start_job=False
                 importer.save()
                 time.sleep(importer.period_length*24*60*60)
-                importer.period_number = importer.period_number + 1
-                importer.start_job=True
-                importer.save()
+                importer = Importer.objects.get(id=importer.id)
+                if importer.status=="Running":
+                    importer.period_number = importer.period_number + 1
+                    importer.start_job=True
+                    importer.save()
             else:
                 importer = Importer.objects.get(id=importer.id)
                 importer.operation = "6. Import Finished Successfully!"

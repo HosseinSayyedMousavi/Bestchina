@@ -8,3 +8,4 @@ django-solo==2.0.0
 # mysqlclient==2.2.0#for mysql database
 psycopg2-binary==2.9.7 #for postgres database
 tqdm==4.66.1
+ipython
