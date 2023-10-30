@@ -223,7 +223,7 @@ def Import_Job(importer):
                             if response.json()["result"]:
                                 importer = Importer.objects.get(id=importer.id)
                                 importer.Number_of_products = importer.Number_of_products + 1
-                                importer.Number_of_checked_products = importer.Number_of_checked_products + 1
+                                importer.Number_of_checked_products = category_item_list.index(importer.current_Item) + 1
                                 Progress_bar.n = importer.Number_of_checked_products
                                 importer.Progress_bar = str(Progress_bar)
                                 importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
@@ -272,7 +272,7 @@ def Import_Job(importer):
 
 def simple_else(importer,category_item_list,Progress_bar):
     importer = Importer.objects.get(id=importer.id)
-    importer.Number_of_checked_products += 1
+    importer.Number_of_checked_products = category_item_list.index(importer.current_Item) + 1
     Progress_bar.n = importer.Number_of_checked_products
     importer.Progress_bar = str(Progress_bar)
     importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
