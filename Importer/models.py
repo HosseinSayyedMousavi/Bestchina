@@ -220,7 +220,7 @@ def Import_Job(importer):
                             importer.save()
                             shipping=Shipping_Cost(AuthorizationToken,MOQ = details["Detail"]["MOQ"],ItemNo=ItemNo)
                             details["AddonList"] = create_add_on(shipping)
-                            response = requests.post(IMPORT_ENDPOINT , data=json.dumps(details, ensure_ascii=False) , headers = {'Content-Type': 'application/json'} , timeout=180)
+                            response = requests.post(IMPORT_ENDPOINT , data=json.dumps(details) , headers = {'Content-Type': 'application/json'} , timeout=180)
                             if response.json()["result"]:
                                 importer = Importer.objects.get(id=importer.id)
                                 importer.Number_of_products = importer.Number_of_products + 1
@@ -266,7 +266,7 @@ def Import_Job(importer):
     except Exception as e:
         importer = Importer.objects.get(id=importer.id)
         importer.status = "Stopped"
-        importer.errors = json.dumps(e.args)+"ErrorLine"+ str(e.__traceback__.tb_lineno)
+        importer.errors = json.dumps(e.args)+"            ErrorLine:  "+ str(e.__traceback__.tb_lineno)
         importer.start_job=False
         importer.save()
 
