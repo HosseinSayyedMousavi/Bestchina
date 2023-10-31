@@ -424,7 +424,8 @@ def standardize_Details(Details,formula):
     keywords_to_remove = ["EanCode", "Reminder", "IsSpecialOffer", "Price", "Modified","Added", "StockStatus", "CacheTime", "PriceList","PackageList", "CompatibleList", "SpecificationList","LeadTime","PromotionPeriod","PromotionPrice","GrossWeight","VolumeWeight","WithPackage"]
     if "-" in Details["Detail"]["Name"]:Details["Detail"]["Name"]=re.findall(r'(.*)-', Details["Detail"]["Name"])[0]
     if "-" in Details["Detail"]["Summary"]:Details["Detail"]["Name"]=re.findall(r'(.*)-', Details["Detail"]["Summary"])[0]
-    Details["Detail"]["Description"]=Details["Detail"]["Description"].replace(re.findall(r"-[\s\w]*</h5>",Details["Detail"]["Description"])[0],"</h5>")
+    try:Details["Detail"]["Description"]=Details["Detail"]["Description"].replace(re.findall(r"-[\s\w]*</h5>",Details["Detail"]["Description"])[0],"</h5>")
+    except:pass
     Details["Detail"]["Image"] = get_Image(AuthorizationToken, Details["Detail"]["ItemNo"])
     if formula:Details["Detail"]["OriginalPrice"] = change_with_formula(Details["Detail"]["OriginalPrice"],formula)
     Details["Detail"]["Name"] = google_translate(Details["Detail"]["Name"])
