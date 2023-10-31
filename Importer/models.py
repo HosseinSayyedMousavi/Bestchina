@@ -11,7 +11,7 @@ from tqdm import tqdm
 
 STATUS_CHOICES = [('Stopped', 'Stopped'),('Running', 'Running'),('Finished', 'Finished')]
 IMPORT_ENDPOINT = settings.IMPORT_ENDPOINT
-
+CATEGORY_ENDPOINT = settings.CATEGORY_ENDPOINT
 
 class CreateImporter(SingletonModel):
     category = models.OneToOneField("Category",max_length=255,unique=True,null=True,on_delete=models.SET_NULL)
@@ -298,15 +298,25 @@ def get_Cat_Tree(CategoryCode):
     CategoryList.append(CategoryCode)
     if not Category.objects.filter(Code=CategoryCode):
         AuthorizationToken = get_AuthorizationToken()
+        cat_send ={}
         category = get_Parent(AuthorizationToken,CategoryCode)["CateoryList"][0]
         category["FarsiName"] = google_translate[category["Name"]]
+        cat_send["Name"] = category["FarsiName"]
+        cat_send["Code"] = category["Code"]
+        cat_send["ParentCode"] = category["ParentCode"]
         Category.objects.create(**category)
+        requests.post(CATEGORY_ENDPOINT , data=json.dumps([cat_send]) , headers = {'Content-Type': 'application/json'} , timeout=180)
     while Category.objects.get(Code=CategoryCode).ParentCode.strip():
         ParentCode = Category.objects.get(Code=CategoryCode).ParentCode.strip()
         if not Category.objects.filter(Code=ParentCode):
             category = get_Parent(AuthorizationToken,ParentCode)["CateoryList"][0]
+            cat_send ={}
             category["FarsiName"] = google_translate[category["Name"]]
+            cat_send["Name"] = category["FarsiName"]
+            cat_send["Code"] = category["Code"]
+            cat_send["ParentCode"] = category["ParentCode"]
             Category.objects.create(**category)
+            requests.post(CATEGORY_ENDPOINT , data=json.dumps([cat_send]) , headers = {'Content-Type': 'application/json'} , timeout=180)
         CategoryCode = ParentCode
         CategoryList.append(CategoryCode)
     return CategoryList
@@ -414,7 +424,7 @@ def standardize_Details(Details,formula):
     keywords_to_remove = ["EanCode", "Reminder", "IsSpecialOffer", "Price", "Modified","Added", "StockStatus", "CacheTime", "PriceList","PackageList", "CompatibleList", "SpecificationList","LeadTime","PromotionPeriod","PromotionPrice","GrossWeight","VolumeWeight","WithPackage"]
     if "-" in Details["Detail"]["Name"]:Details["Detail"]["Name"]=re.findall(r'(.*)-', Details["Detail"]["Name"])[0]
     if "-" in Details["Detail"]["Summary"]:Details["Detail"]["Name"]=re.findall(r'(.*)-', Details["Detail"]["Summary"])[0]
-    Details["Detail"]["Description"]=Details["Detail"]["Description"].replace("-"+re.findall(r"-.*h5",Details["Detail"]["Description"])[0].split("-")[-1],"<\h5")
+    Details["Detail"]["Description"]=Details["Detail"]["Description"].replace(re.findall(r"-[\s\w]*</h5>",Details["Detail"]["Description"])[0],"</h5>")
     Details["Detail"]["Image"] = get_Image(AuthorizationToken, Details["Detail"]["ItemNo"])
     if formula:Details["Detail"]["OriginalPrice"] = change_with_formula(Details["Detail"]["OriginalPrice"],formula)
     Details["Detail"]["Name"] = google_translate(Details["Detail"]["Name"])
@@ -449,7 +459,7 @@ def standardize_Details(Details,formula):
     except:pass
     Details["Detail"]["Description"]=re.sub(r"style.*?>",">",Details["Detail"]["Description"])
     Details["Detail"]["Description"] = google_translate_large_text(Details["Detail"]["Description"].replace("h5","h2").replace("system -title","system-title"))
-    
+    print(Details["Detail"]["Description"])
     template = Template(before_html + Details["Detail"]["Description"] + append_html)
     rendered_html = template.render(Details=Details)
     Details["Detail"]["Description"] = rendered_html

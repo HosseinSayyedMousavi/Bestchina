@@ -138,11 +138,12 @@ def get_Details(AuthorizationToken, ItemNo):
 
 def standardize_update_Details(Details,formula):
     update_Detail = {}
-    update_Detail["Detail"]={"OriginalPrice":"","MOQ":"","ProductStatus":""}
+    update_Detail["Detail"]={"OriginalPrice":"","MOQ":"","ProductStatus":"","ItemNo":""}
     if formula:Details["Detail"]["OriginalPrice"] = change_with_formula(Details["Detail"]["OriginalPrice"],formula)
     update_Detail["Detail"]["OriginalPrice"] = Details["Detail"]["OriginalPrice"]
     update_Detail["Detail"]["MOQ"] = Details["Detail"]["MOQ"]
     update_Detail["Detail"]["ProductStatus"] = Details["Detail"]["ProductStatus"]
+    update_Detail["Detail"]["ItemNo"] = Details["Detail"]["ItemNo"]
     update_Detail["ModelList"]=[]
     for model in Details["ModelList"]:
         if formula : model["OriginalPrice"] = change_with_formula(model["OriginalPrice"],formula)
