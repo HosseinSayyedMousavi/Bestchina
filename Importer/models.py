@@ -460,7 +460,6 @@ def standardize_Details(Details,formula):
     except:pass
     Details["Detail"]["Description"]=re.sub(r"style.*?>",">",Details["Detail"]["Description"])
     Details["Detail"]["Description"] = google_translate_large_text(Details["Detail"]["Description"].replace("h5","h2").replace("system -title","system-title"))
-    print(Details["Detail"]["Description"])
     template = Template(before_html + Details["Detail"]["Description"] + append_html)
     rendered_html = template.render(Details=Details)
     Details["Detail"]["Description"] = rendered_html
