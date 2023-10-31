@@ -8,7 +8,7 @@ import threading
 from django.conf import settings
 from django.utils import timezone
 from tqdm import tqdm
-
+import traceback
 STATUS_CHOICES = [('Stopped', 'Stopped'),('Running', 'Running'),('Finished', 'Finished')]
 IMPORT_ENDPOINT = settings.IMPORT_ENDPOINT
 CATEGORY_ENDPOINT = settings.CATEGORY_ENDPOINT
@@ -211,7 +211,6 @@ def Import_Job(importer):
                             else : details = standardize_Details(details,importer.formula)
 
                             for detail in details["ModelList"] :
-                                # print(detail)
                                 if detail["ItemNo"] != ItemNo :
                                     Model_Black_List.objects.get_or_create(black_item_no = detail["ItemNo"].strip())
                             importer = Importer.objects.get(id=importer.id)
@@ -266,7 +265,11 @@ def Import_Job(importer):
     except Exception as e:
         importer = Importer.objects.get(id=importer.id)
         importer.status = "Stopped"
-        importer.errors = json.dumps(e.args)+"            ErrorLine:  "+ str(e.__traceback__.tb_lineno)
+        traceback.print_exc()
+        tb = traceback.extract_tb(e.__traceback__)
+        error_line = tb[-1].lineno
+        print("Error occurred at line:", error_line)
+        importer.errors = json.dumps(e.args)+"            ErrorLine:  "+ str(e.__traceback__.tb_lineno)+ "-"+str(error_line)
         importer.start_job=False
         importer.save()
 
