@@ -9,6 +9,8 @@ from django.conf import settings
 from django.utils import timezone
 from tqdm import tqdm
 import traceback
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 STATUS_CHOICES = [('Stopped', 'Stopped'),('Running', 'Running'),('Finished', 'Finished')]
 IMPORT_ENDPOINT = settings.IMPORT_ENDPOINT
 CATEGORY_ENDPOINT = settings.CATEGORY_ENDPOINT
@@ -139,10 +141,9 @@ class Category(models.Model):
     ParentCode = models.CharField(max_length=255,null=True)
     ParentName = models.CharField(max_length=255,null=True)
     Status = models.CharField(max_length=255,null=False)
-    ItemList = models.TextField(default='[]')
     errors = models.TextField(default="Everything is Ok!")
     lastProductId = models.CharField(max_length=255,null=True)
-
+    number_of_items = models.IntegerField(default=0)
     def __str__(self):
         return self.Name 
 
@@ -150,23 +151,22 @@ class Category(models.Model):
         verbose_name="Category"
         verbose_name_plural="Categories"
     
-    def get_ItemList(self):
-        return json.loads(self.ItemList)
-    
-    def extend_ItemList(self,ItemList):
-        Item_List = json.loads(self.ItemList)
-        Item_List.extend(ItemList)
-        self.ItemList = json.dumps(Item_List)
-        self.save()
 
-    @property
-    def number_of_items(self):
-        Item_List = json.loads(self.ItemList)
-        return len(Item_List)
-    
+
 
 class Model_Black_List(models.Model):
     black_item_no = models.CharField(max_length=255,null=False,unique=True)
+
+
+class Product(models.Model):
+    ItemNo = models.CharField(max_length=255)
+    category = models.ForeignKey(Category)
+    product_num = models.IntegerField(null=True,blank=True)
+    def save(self, *args,**kwargs):
+        self.product_num = self.category.number_of_items
+        self.category.number_of_items +=1
+        self.category.save()
+        super(Product, self).save(*args,**kwargs)
 
 
 def Import_Job(importer):
@@ -175,14 +175,13 @@ def Import_Job(importer):
         AuthorizationToken = get_AuthorizationToken()
         update_itemlist(AuthorizationToken,importer.category)
         importer = Importer.objects.get(id=importer.id)
-        category_item_list = importer.category.get_ItemList()
-        Progress_bar = tqdm(total = len(category_item_list))
+        Progress_bar = tqdm(total = importer.category.number_of_items)
         Progress_bar.n = importer.Number_of_checked_products
         importer.Progress_bar = Progress_bar.__str__()
         importer.start_job=False
         importer.save()
-        while importer.Number_of_checked_products < len(category_item_list) and importer.status=="Running":
-            ItemNo = category_item_list[importer.Number_of_checked_products]
+        while importer.Number_of_checked_products < importer.category.number_of_items and importer.status=="Running":
+            ItemNo = Product.objects.get(product_num=importer.Number_of_checked_products)
             print(ItemNo)
             importer = Importer.objects.get(id=importer.id)
             importer.current_Item = ItemNo
@@ -223,22 +222,22 @@ def Import_Job(importer):
                             if response.json()["result"]:
                                 importer = Importer.objects.get(id=importer.id)
                                 importer.Number_of_products = importer.Number_of_products + 1
-                                importer.Number_of_checked_products = category_item_list.index(importer.current_Item) + 1
+                                importer.Number_of_checked_products = Product.objects.get(category=importer.category,ItemNo=importer.current_Item).product_num + 1
                                 Progress_bar.n = importer.Number_of_checked_products
                                 importer.Progress_bar = Progress_bar.__str__()
-                                importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
+                                importer.Progress_percentage = importer.Number_of_checked_products / importer.category.number_of_items * 100
                                 importer.start_job=False
                                 importer.save()
                             else:
                                 raise Exception(response.text)
                         else:
-                            simple_else(importer,category_item_list,Progress_bar)
+                            simple_else(importer,Progress_bar)
                     else:
-                            simple_else(importer,category_item_list,Progress_bar)
+                            simple_else(importer,Progress_bar)
                 else:
-                                simple_else(importer,category_item_list,Progress_bar)
+                                simple_else(importer,Progress_bar)
             else:
-                                simple_else(importer,category_item_list,Progress_bar)
+                                simple_else(importer,Progress_bar)
             try:importer = Importer.objects.get(id=importer.id)
             except:break
         else:
@@ -272,14 +271,14 @@ def Import_Job(importer):
         importer.errors = json.dumps(e.args)+"            ErrorLine:  "+ str(e.__traceback__.tb_lineno)+ "-"+str(error_line)
         importer.start_job=False
         importer.save()
+    
 
-
-def simple_else(importer,category_item_list,Progress_bar):
+def simple_else(importer,Progress_bar):
     importer = Importer.objects.get(id=importer.id)
-    importer.Number_of_checked_products = category_item_list.index(importer.current_Item) + 1
+    importer.Number_of_checked_products = Product.objects.get(category=importer.category,ItemNo=importer.current_Item).product_num + 1
     Progress_bar.n = importer.Number_of_checked_products
     importer.Progress_bar = Progress_bar.__str__()
-    importer.Progress_percentage = importer.Number_of_checked_products / len(category_item_list) * 100
+    importer.Progress_percentage = importer.Number_of_checked_products / importer.category.number_of_items * 100
     importer.start_job=False
     importer.save()
 
@@ -331,19 +330,17 @@ def update_itemlist(AuthorizationToken,category):
         lastProductId = category.lastProductId
         category=Category.objects.get(id=category.id)
         while ProductItemNoList:
-            ItemList=[]
             NoList = get_item_list(AuthorizationToken=AuthorizationToken,CategoryCode=category.Code,lastProductId=lastProductId)
             category.errors = "Everything is Ok!"
             ProductItemNoList = NoList["ProductItemNoList"]
             if ProductItemNoList:
                 lastProductId = NoList["lastProductId"]
                 category.lastProductId = lastProductId
-                
                 category.save()
-            for item in ProductItemNoList:
-                ItemList.append(item["ItemNo"])
             category=Category.objects.get(id=category.id)
-            category.extend_ItemList(ItemList)
+            for item in ProductItemNoList:
+                Product.objects.create(ItemNo=item["ItemNo"],category=category)
+                category=Category.objects.get(id=category.id)
     except Exception as e:
         category.errors = json.dumps(e.args)
         category.save()
