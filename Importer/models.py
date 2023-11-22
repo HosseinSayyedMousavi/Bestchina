@@ -143,7 +143,8 @@ class Category(models.Model):
     Status = models.CharField(max_length=255,null=False)
     errors = models.TextField(default="Everything is Ok!")
     lastProductId = models.CharField(max_length=255,null=True)
-    number_of_items = models.IntegerField(default=0)
+    # number_of_items = models.IntegerField(default=0)
+    ItemList = models.TextField(default='[]')
     def __str__(self):
         return self.Name 
 
@@ -162,6 +163,8 @@ class Product(models.Model):
     ItemNo = models.CharField(max_length=255)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     product_num = models.IntegerField(null=True,blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     def save(self, *args,**kwargs):
         self.product_num = self.category.number_of_items
         self.category.number_of_items +=1
