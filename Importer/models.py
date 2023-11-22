@@ -168,7 +168,8 @@ class Product(models.Model):
         self.category.number_of_items +=1
         self.category.save()
         super(Product, self).save(*args,**kwargs)
-
+    class Meta:
+        unique_together = ["ItemNo", "category"]
 
 def Import_Job(importer):
     try:
