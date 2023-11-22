@@ -159,17 +159,17 @@ class Model_Black_List(models.Model):
     black_item_no = models.CharField(max_length=255,null=False,unique=True)
 
 
-class Product(models.Model):
-    ItemNo = models.CharField(max_length=255)
-    category = models.ForeignKey(Category,on_delete=models.CASCADE)
-    product_num = models.IntegerField(null=True,blank=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    def save(self, *args,**kwargs):
-        self.product_num = self.category.number_of_items
-        self.category.number_of_items +=1
-        self.category.save()
-        super(Product, self).save(*args,**kwargs)
+# class Product(models.Model):
+#     ItemNo = models.CharField(max_length=255)
+#     category = models.ForeignKey(Category,on_delete=models.CASCADE)
+#     product_num = models.IntegerField(null=True,blank=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     def save(self, *args,**kwargs):
+#         self.product_num = self.category.number_of_items
+#         self.category.number_of_items +=1
+#         self.category.save()
+#         super(Product, self).save(*args,**kwargs)
 
 
 def Import_Job(importer):
