@@ -40,6 +40,6 @@ class CreateImporterAdmin(SingletonModelAdmin):
     exclude = ["status"]
 admin.site.register(CreateImporter,CreateImporterAdmin)
 
-class ProductAdmin(SingletonModelAdmin):
+class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ("ItemNo","category","product_num","updated_at","created_at")
 admin.site.register(Product,ProductAdmin)
