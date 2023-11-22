@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from import_export.resources import ModelResource
-from .models import Category , Importer , CreateImporter , Product
+from .models import Category , Importer , CreateImporter #, Product
 from solo.admin import SingletonModelAdmin
 # Register your models here.
 class CategoryResource(ModelResource):
