@@ -160,7 +160,7 @@ class Model_Black_List(models.Model):
 
 class Product(models.Model):
     ItemNo = models.CharField(max_length=255)
-    category = models.ForeignKey(Category)
+    category = models.ForeignKey(Category,on_delete=models.CASCADE)
     product_num = models.IntegerField(null=True,blank=True)
     def save(self, *args,**kwargs):
         self.product_num = self.category.number_of_items
