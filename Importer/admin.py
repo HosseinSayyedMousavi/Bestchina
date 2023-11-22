@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from import_export.resources import ModelResource
-from .models import Category , Importer , CreateImporter #, Product
+from .models import Category , Importer , CreateImporter , Product
 from solo.admin import SingletonModelAdmin
 # Register your models here.
 class CategoryResource(ModelResource):
@@ -23,7 +23,7 @@ class CategoryResource(ModelResource):
 
 class CategoryAdmin(ImportExportModelAdmin):
     list_display = ("Code","Name","FarsiName","ParentCode","Status")
-    readonly_fields= ("Code","Name","FarsiName","ParentCode","ParentName","Status","errors","lastProductId")
+    readonly_fields= ("Code","Name","FarsiName","ParentCode","ParentName","Status","errors","number_of_items","lastProductId")
     search_fields = ("Name","Code","FarsiName")
 admin.site.register(Category,CategoryAdmin)
 
@@ -40,6 +40,6 @@ class CreateImporterAdmin(SingletonModelAdmin):
     exclude = ["status"]
 admin.site.register(CreateImporter,CreateImporterAdmin)
 
-# class ProductAdmin(SingletonModelAdmin):
-#     readonly_fields = ("ItemNo","category","product_num","updated_at","created_at")
-# admin.site.register(Product,ProductAdmin)
+class ProductAdmin(SingletonModelAdmin):
+    readonly_fields = ("ItemNo","category","product_num","updated_at","created_at")
+admin.site.register(Product,ProductAdmin)
