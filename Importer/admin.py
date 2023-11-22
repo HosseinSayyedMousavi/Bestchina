@@ -42,4 +42,9 @@ admin.site.register(CreateImporter,CreateImporterAdmin)
 
 class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ("ItemNo","category","product_num","updated_at","created_at")
+    list_display = ("ItemNo","category","product_num")
+    list_filter = ("category",)
+    def has_add_permission(self, request):
+        return False
+
 admin.site.register(Product,ProductAdmin)
