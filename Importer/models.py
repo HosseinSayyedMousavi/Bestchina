@@ -183,7 +183,7 @@ def Import_Job(importer):
         importer.start_job=False
         importer.save()
         while importer.Number_of_checked_products < importer.category.number_of_items and importer.status=="Running":
-            ItemNo = Product.objects.get(product_num=importer.Number_of_checked_products)
+            ItemNo = Product.objects.get(category = importer.category ,product_num=importer.Number_of_checked_products).ItemNo
             print(ItemNo)
             importer = Importer.objects.get(id=importer.id)
             importer.current_Item = ItemNo
