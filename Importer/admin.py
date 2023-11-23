@@ -44,6 +44,7 @@ class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ("ItemNo","category","product_num")
     list_display = ("ItemNo","category","product_num")
     list_filter = ("category",)
+    search_fields = ("ItemNo",)
     def has_add_permission(self, request):
         return False
 
