@@ -216,20 +216,22 @@ def Import_Job(importer):
                                 importer.start_job=False
                                 importer.save()
                                 shipping=Shipping_Cost(AuthorizationToken,MOQ = details["Detail"]["MOQ"],ItemNo=ItemNo)
-                                details["AddonList"] = create_add_on(shipping)
-                                if details["Detail"]["Image"]:
-                                    response = requests.post(IMPORT_ENDPOINT , data=json.dumps(details) , headers = {'Content-Type': 'application/json'} , timeout=180)
-                                    if response.json()["result"]:
-                                        importer = Importer.objects.get(id=importer.id)
-                                        importer.Number_of_products = importer.Number_of_products + 1
-                                        importer.Number_of_checked_products = Product.objects.get(category=importer.category,ItemNo=importer.current_Item).product_num + 1
-                                        Progress_bar.n = importer.Number_of_checked_products
-                                        importer.Progress_bar = Progress_bar.__str__()
-                                        importer.Progress_percentage = importer.Number_of_checked_products / importer.category.number_of_items * 100
-                                        importer.start_job=False
-                                        importer.save()
-                                    else:
-                                        raise Exception(response.text)
+                                if "Shippings" in shipping.keys():
+                                    details["AddonList"] = create_add_on(shipping)
+                                    if details["Detail"]["Image"]:
+                                        response = requests.post(IMPORT_ENDPOINT , data=json.dumps(details) , headers = {'Content-Type': 'application/json'} , timeout=180)
+                                        if response.json()["result"]:
+                                            importer = Importer.objects.get(id=importer.id)
+                                            importer.Number_of_products = importer.Number_of_products + 1
+                                            importer.Number_of_checked_products = Product.objects.get(category=importer.category,ItemNo=importer.current_Item).product_num + 1
+                                            Progress_bar.n = importer.Number_of_checked_products
+                                            importer.Progress_bar = Progress_bar.__str__()
+                                            importer.Progress_percentage = importer.Number_of_checked_products / importer.category.number_of_items * 100
+                                            importer.start_job=False
+                                            importer.save()
+                                        else:
+                                            raise Exception(response.text)
+                                    else: jump(importer,Progress_bar)
                                 else: jump(importer,Progress_bar)
                             else: jump(importer,Progress_bar)
                         else: jump(importer,Progress_bar)
