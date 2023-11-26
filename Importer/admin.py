@@ -31,8 +31,10 @@ class ImporterAdmin(admin.ModelAdmin):
     list_display = ("category","status","is_periodic","Progress_percentage","Progress_bar")
     list_display_links = list_display
     exclude = ["start_job"]
-    readonly_fields = ("is_periodic","period_length","category","category_number_of_items","Progress_percentage","Progress_bar","period_number","Number_of_products","Number_of_checked_products","errors","updated_at","created_at","current_Item","operation","formula")
+    readonly_fields = ("is_periodic","period_length","number_of_items","Progress_percentage","Progress_bar","period_number","Number_of_products","Number_of_checked_products","errors","updated_at","created_at","current_Item","operation","formula")
     search_fields = ("category.Name","category.Code")
+    def number_of_items(self, obj):
+        return obj.category.number_of_items
 admin.site.register(Importer,ImporterAdmin)
 
 class CreateImporterAdmin(SingletonModelAdmin):
