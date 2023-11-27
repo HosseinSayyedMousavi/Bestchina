@@ -9,8 +9,7 @@ import openai
 import threading
 from django.conf import settings
 
-translator = Translator()
-
+translator_waiter = False
 openai.api_key = settings.CHAT_GPT_API_KEY
 EXISTENCE_CHECK_ENDPOINT = settings.EXISTENCE_CHECK_ENDPOINT
 
@@ -67,8 +66,14 @@ def get_Image(AuthorizationToken, ItemNo, Size="700x700"):
 
 
 def google_translate(text, source_language="en", target_language="fa"):
-    time.sleep(0.5)
+    translator = Translator()
+    translator.raise_Exception = True
+    while translator_waiter:
+        time.sleep(0.5)
+    translator_waiter = True
     translated = translator.translate(text, src=source_language, dest=target_language)
+    time.sleep(0.5)
+    translator_waiter = False
     return translated.text
 
 
