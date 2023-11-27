@@ -188,7 +188,7 @@ def Import_Job(importer):
             importer.save()
             if  not Model_Black_List.objects.filter(black_item_no=ItemNo.strip()):
                 shipping=Shipping_Cost(AuthorizationToken,MOQ=1,ItemNo=ItemNo)
-                if "Shippings" in shipping.keys():
+                if True:#"Shippings" in shipping.keys():
                     existence = check_existence(ItemNo)
                     if (not existence and shipping["Shippings"]) or existence:
                         importer = Importer.objects.get(id=importer.id)
@@ -215,8 +215,8 @@ def Import_Job(importer):
                                 importer.operation = "4. Import To Website"
                                 importer.start_job=False
                                 importer.save()
-                                if int(details["Detail"]["MOQ"]) !=1:
-                                    shipping=Shipping_Cost(AuthorizationToken,MOQ = details["Detail"]["MOQ"],ItemNo=ItemNo)
+                                # if int(details["Detail"]["MOQ"]) !=1:
+                                shipping=Shipping_Cost(AuthorizationToken,MOQ = details["Detail"]["MOQ"],ItemNo=ItemNo)
                                 if True:#"Shippings" in shipping.keys():
                                     details["AddonList"] = create_add_on(shipping)
                                     if details["Detail"]["Image"]:
@@ -237,7 +237,7 @@ def Import_Job(importer):
                             else: jump(importer,Progress_bar)
                         else: jump(importer,Progress_bar)
                     else: jump(importer,Progress_bar)
-                else: jump(importer,Progress_bar)
+                # else: jump(importer,Progress_bar)
             else: jump(importer,Progress_bar)
             try:importer = Importer.objects.get(id=importer.id)
             except:break
