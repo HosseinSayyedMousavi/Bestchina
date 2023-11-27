@@ -215,7 +215,8 @@ def Import_Job(importer):
                                 importer.operation = "4. Import To Website"
                                 importer.start_job=False
                                 importer.save()
-                                shipping=Shipping_Cost(AuthorizationToken,MOQ = details["Detail"]["MOQ"],ItemNo=ItemNo)
+                                if int(details["Detail"]["MOQ"]) !=1:
+                                    shipping=Shipping_Cost(AuthorizationToken,MOQ = details["Detail"]["MOQ"],ItemNo=ItemNo)
                                 if "Shippings" in shipping.keys():
                                     details["AddonList"] = create_add_on(shipping)
                                     if details["Detail"]["Image"]:
