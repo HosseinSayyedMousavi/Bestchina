@@ -217,7 +217,7 @@ def Import_Job(importer):
                                 importer.save()
                                 if int(details["Detail"]["MOQ"]) !=1:
                                     shipping=Shipping_Cost(AuthorizationToken,MOQ = details["Detail"]["MOQ"],ItemNo=ItemNo)
-                                if "Shippings" in shipping.keys():
+                                if True:#"Shippings" in shipping.keys():
                                     details["AddonList"] = create_add_on(shipping)
                                     if details["Detail"]["Image"]:
                                         response = requests.post(IMPORT_ENDPOINT , data=json.dumps(details) , headers = {'Content-Type': 'application/json'} , timeout=180)
@@ -233,7 +233,7 @@ def Import_Job(importer):
                                         else:
                                             raise Exception(response.text)
                                     else: jump(importer,Progress_bar)
-                                else: jump(importer,Progress_bar)
+                                # else: jump(importer,Progress_bar)
                             else: jump(importer,Progress_bar)
                         else: jump(importer,Progress_bar)
                     else: jump(importer,Progress_bar)
@@ -269,7 +269,10 @@ def Import_Job(importer):
         tb = traceback.extract_tb(e.__traceback__)
         error_line = tb[-1].lineno
         print("Error occurred at line:", error_line)
-        importer.errors = json.dumps(e.args)+"            ErrorLine:  "+ str(e.__traceback__.tb_lineno)+ "-"+str(error_line)
+        if "Shippings" in str(e.args):
+            importer.errors = json.dumps(shipping)
+        else:
+            importer.errors = json.dumps(e.args)+"            ErrorLine:  "+ str(e.__traceback__.tb_lineno)+ "-"+str(error_line)
         importer.start_job=False
         importer.save()
     
