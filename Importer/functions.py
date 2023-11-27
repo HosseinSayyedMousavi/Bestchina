@@ -69,12 +69,12 @@ def google_translate(text, source_language="en", target_language="fa"):
     global translator_waiter
     translator = Translator()
     translator.raise_Exception = True
-    # while translator_waiter:
-        # time.sleep(0.5)
-    # translator_waiter = True
+    while translator_waiter:
+        time.sleep(0.5)
+    translator_waiter = True
     translated = translator.translate(text, src=source_language, dest=target_language)
     time.sleep(0.5)
-    # translator_waiter = False
+    translator_waiter = False
     return translated.text
 
 
