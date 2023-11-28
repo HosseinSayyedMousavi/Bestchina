@@ -72,12 +72,12 @@ def google_translate(text, source_language="en", target_language="fa"):
     while translator_waiter:
         time.sleep(0.5)
     translator_waiter = True
-    try:translated = translator.translate(text, src=source_language, dest=target_language)
-    except:pass
+    try:translated = translator.translate(text, src=source_language, dest=target_language).text
+    except:translated=""
     time.sleep(0.5)
     translator_waiter = False
 
-    return translated.text
+    return translated
 
 
 def ChatGPT_translate(Details, source_language="English", target_language="Farsi"):
