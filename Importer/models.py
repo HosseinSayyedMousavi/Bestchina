@@ -128,6 +128,8 @@ class Importer(models.Model):
             return self.status != original.status
         return False
 
+try:Importer.objects.all().update(status="Stopped")
+except:pass
 
 class Category(models.Model):
 
@@ -148,8 +150,6 @@ class Category(models.Model):
         verbose_name_plural="Categories"
     
 
-
-
 class Model_Black_List(models.Model):
     black_item_no = models.CharField(max_length=255,null=False,unique=True)
 
@@ -167,6 +167,7 @@ class Product(models.Model):
     class Meta:
         unique_together = ["ItemNo", "category"]
 
+
 def Import_Job(importer):
     try:
 
@@ -180,7 +181,7 @@ def Import_Job(importer):
         importer.save()
         while importer.Number_of_checked_products < importer.category.number_of_items and importer.status=="Running":
             ItemNo = Product.objects.get(category = importer.category ,product_num=importer.Number_of_checked_products).ItemNo
-            print(ItemNo)
+            # print(ItemNo)
             importer = Importer.objects.get(id=importer.id)
             importer.current_Item = ItemNo
             importer.operation = "1. Check Product"
@@ -190,6 +191,7 @@ def Import_Job(importer):
                 shipping=Shipping_Cost(AuthorizationToken,MOQ=1,ItemNo=ItemNo)
                 if True:#"Shippings" in shipping.keys():
                     existence = check_existence(ItemNo)
+                    # print(ItemNo)
                     if (not existence and shipping["Shippings"]) or existence:
                         importer = Importer.objects.get(id=importer.id)
                         importer.operation = "2. Get From API"
@@ -204,7 +206,7 @@ def Import_Job(importer):
                                 importer.start_job=False
                                 importer.save()
                                 
-                                
+                                # print("existence ="+str(existence))
                                 if existence : details = standardize_update_Details(details,importer.formula)
                                 else : details = standardize_Details(details,importer.formula)
 
@@ -268,7 +270,7 @@ def Import_Job(importer):
         traceback.print_exc()
         tb = traceback.extract_tb(e.__traceback__)
         error_line = tb[-1].lineno
-        print("Error occurred at line:", error_line)
+        # print("Error occurred at line:", error_line)
         if "Shippings" in str(e.args):
             importer.errors = json.dumps(shipping)
         else:
@@ -447,10 +449,11 @@ def standardize_Details(Details,formula):
     
     try:
         for specific in Details["Detail"]["SpecificationList"]:
-            try:specific["Name"] = google_translate(specific["Name"])
+            try:
+                specific["Name"] = google_translate(specific["Name"])
             except:pass
             try:specific["Value"] = google_translate(specific["Value"])
-            except:pass
+            except :pass
     except:pass
     try:
         for package in Details["Detail"]["PackageList"]:
@@ -490,3 +493,8 @@ def standardize_Details(Details,formula):
             except:pass
     return Details
 
+
+def print_current_line():
+    stack_trace = traceback.extract_stack(limit=2)
+    filename, line_number, _, _ = stack_trace[0]
+    print(f"Working in file '{filename}' at line {line_number}")
