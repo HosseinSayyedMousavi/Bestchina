@@ -67,13 +67,14 @@ def get_Image(AuthorizationToken, ItemNo, Size="700x700"):
 
 
 def google_translate(text, source_language="en", target_language="fa"):
+    translated=""
     global translator_waiter
 
     while translator_waiter:
         time.sleep(0.5)
     translator_waiter = True
     try:translated = translator.translate(text, src=source_language, dest=target_language).text
-    except:translated=""
+    except:pass
     time.sleep(0.5)
     translator_waiter = False
 
