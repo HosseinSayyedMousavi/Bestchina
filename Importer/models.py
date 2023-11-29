@@ -128,7 +128,7 @@ class Importer(models.Model):
             return self.status != original.status
         return False
 
-try:Importer.objects.all().update(status="Stopped")
+try:Importer.objects.filter(status="Running").update(status="Stopped")
 except:pass
 
 class Category(models.Model):
