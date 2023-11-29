@@ -194,10 +194,10 @@ def Shipping_Cost(AuthorizationToken, ItemNo,MOQ,CountryCode="IR"):
 
 
     if "Message" in response.json().keys():
-        if response.json()["Message"] == 'unauthorized':
-            AuthorizationToken = get_AuthorizationToken()
-            return Shipping_Cost(AuthorizationToken, ItemNo,MOQ,CountryCode)
-    
+        AuthorizationToken = get_AuthorizationToken()
+        time.sleep(1)
+        return Shipping_Cost(AuthorizationToken, ItemNo,MOQ,CountryCode)
+    time.sleep(1)
     return response.json()
 
 

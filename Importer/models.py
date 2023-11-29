@@ -167,8 +167,11 @@ class Product(models.Model):
     class Meta:
         unique_together = ["ItemNo", "category"]
 
-
+shopping_wait = False
+try_again = True
 def Import_Job(importer):
+    global shopping_wait
+    global try_again 
     try:
 
         AuthorizationToken = get_AuthorizationToken()
@@ -179,6 +182,7 @@ def Import_Job(importer):
         importer.Progress_bar = Progress_bar.__str__()
         importer.start_job=False
         importer.save()
+        
         while importer.Number_of_checked_products < importer.category.number_of_items and importer.status=="Running":
             ItemNo = Product.objects.get(category = importer.category ,product_num=importer.Number_of_checked_products).ItemNo
             # print(ItemNo)
@@ -188,7 +192,11 @@ def Import_Job(importer):
             importer.start_job=False
             importer.save()
             if  not Model_Black_List.objects.filter(black_item_no=ItemNo.strip()):
+                while shopping_wait:
+                    time.sleep(1)
+                shopping_wait = True
                 shipping=Shipping_Cost(AuthorizationToken,MOQ=1,ItemNo=ItemNo)
+                shopping_wait = False
                 if True:#"Shippings" in shipping.keys():
                     existence = check_existence(ItemNo)
                     # print(ItemNo)
@@ -265,6 +273,9 @@ def Import_Job(importer):
                 importer.save()
 
     except Exception as e:
+        if try_again:
+            Import_Job(importer)
+        try_again = False
         importer = Importer.objects.get(id=importer.id)
         importer.status = "Stopped"
         traceback.print_exc()
@@ -280,8 +291,10 @@ def Import_Job(importer):
     
 
 def jump(importer,Progress_bar):
+    global try_again
     importer = Importer.objects.get(id=importer.id)
     importer.Number_of_checked_products = Product.objects.get(category=importer.category,ItemNo=importer.current_Item).product_num + 1
+    try_again = True
     Progress_bar.n = importer.Number_of_checked_products
     importer.Progress_bar = Progress_bar.__str__()
     importer.Progress_percentage = importer.Number_of_checked_products / importer.category.number_of_items * 100
