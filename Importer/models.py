@@ -238,8 +238,7 @@ def Import_Job(importer):
                                     importer.Progress_percentage = importer.Number_of_checked_products / importer.category.number_of_items * 100
                                     importer.start_job=False
                                     importer.save()
-                                else:
-                                    raise Exception(response.text)
+                                else: raise Exception(response.text)
                             else: jump(importer,Progress_bar)
                         else: jump(importer,Progress_bar)
                     else: jump(importer,Progress_bar)
@@ -270,8 +269,9 @@ def Import_Job(importer):
 
     except Exception as e:
         if try_again:
+            try_again = False
             Import_Job(importer)
-        try_again = False
+        
         importer = Importer.objects.get(id=importer.id)
         importer.status = "Stopped"
         traceback.print_exc()

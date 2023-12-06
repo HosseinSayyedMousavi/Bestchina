@@ -53,4 +53,3 @@ class ProductAdmin(admin.ModelAdmin):
         return False
 
 admin.site.register(Product,ProductAdmin)
-
