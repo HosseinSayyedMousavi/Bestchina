@@ -141,6 +141,8 @@ def get_Details(AuthorizationToken, ItemNo):
         if response.json()["Message"] == 'unauthorized':
             AuthorizationToken = get_AuthorizationToken()
             return get_Details(AuthorizationToken, ItemNo)
+        elif response.json()["Message"] == "The itemNo doesn't exist.":
+            return Details
 
     return Details
 

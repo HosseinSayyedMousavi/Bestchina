@@ -205,9 +205,10 @@ def Import_Job(importer):
                     importer.start_job=False
                     importer.save()
                     details = get_Details(AuthorizationToken,ItemNo=ItemNo)
-                    if not shipping["Shippings"] : details["Detail"]["ProductStatus"] = 0
-                    if (not existence and int(details["Detail"]["ProductStatus"]) == 1) or existence:
-                        if "Message" not in details.keys():
+                    if "Message" not in details.keys():
+                        if not shipping["Shippings"] : details["Detail"]["ProductStatus"] = 0
+                        if (not existence and int(details["Detail"]["ProductStatus"]) == 1) or existence:
+                            
                             importer = Importer.objects.get(id=importer.id)
                             importer.operation = "3. Standardize"
                             importer.start_job=False
