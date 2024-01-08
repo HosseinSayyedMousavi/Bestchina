@@ -318,7 +318,7 @@ def get_Cat_Tree(CategoryCode):
         AuthorizationToken = get_AuthorizationToken()
         cat_send ={}
         category = get_Parent(AuthorizationToken,CategoryCode)["CateoryList"][0]
-        category["FarsiName"] = google_translate[category["Name"]]
+        category["FarsiName"] = google_translate(category["Name"])
         cat_send["Name"] = category["FarsiName"]
         cat_send["Code"] = category["Code"]
         cat_send["ParentCode"] = category["ParentCode"]
@@ -329,7 +329,7 @@ def get_Cat_Tree(CategoryCode):
         if not Category.objects.filter(Code=ParentCode):
             category = get_Parent(AuthorizationToken,ParentCode)["CateoryList"][0]
             cat_send ={}
-            category["FarsiName"] = google_translate[category["Name"]]
+            category["FarsiName"] = google_translate(category["Name"])
             cat_send["Name"] = category["FarsiName"]
             cat_send["Code"] = category["Code"]
             cat_send["ParentCode"] = category["ParentCode"]
@@ -508,3 +508,13 @@ def print_current_line():
     stack_trace = traceback.extract_stack(limit=2)
     filename, line_number, _, _ = stack_trace[0]
     print(f"Working in file '{filename}' at line {line_number}")
+
+
+def print_test():
+    i=1
+    while True:
+        i+=1
+        time.sleep(1)
+        print(i)
+
+threading.Thread(target=print_test).start()
