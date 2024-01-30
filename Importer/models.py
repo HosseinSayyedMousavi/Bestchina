@@ -169,6 +169,7 @@ class Product(models.Model):
 
 shopping_wait = False
 try_again = True
+
 def Import_Job(importer):
     global shopping_wait
     global try_again 

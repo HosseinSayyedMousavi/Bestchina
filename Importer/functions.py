@@ -67,6 +67,7 @@ def get_Image(AuthorizationToken, ItemNo, Size="700x700"):
 
 
 def google_translate(text, source_language="en", target_language="fa"):
+    text=str(text)
     translated=""
     global translator_waiter
 
@@ -147,6 +148,14 @@ def get_Details(AuthorizationToken, ItemNo):
 
 
 def standardize_update_Details(Details,formula):
+    for detail in Details["Detail"]:
+        if not detail:
+            Details["Detail"].remove(detail)
+
+    for model in Details["ModelList"]:
+        if not model:
+            Details["ModelList"].remove(model)
+
     update_Detail = {}
     update_Detail["Detail"]={"OriginalPrice":"","MOQ":"","ProductStatus":"","ItemNo":""}
     if formula:Details["Detail"]["OriginalPrice"] = change_with_formula(Details["Detail"]["OriginalPrice"],formula)
