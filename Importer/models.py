@@ -219,7 +219,7 @@ def Import_Job(importer):
                             else : details = standardize_Details(details,importer.formula)
 
                             for detail in details["ModelList"] :
-                                if detail["ItemNo"] != ItemNo :
+                                if detail and detail["ItemNo"] != ItemNo :
                                     Model_Black_List.objects.get_or_create(black_item_no = detail["ItemNo"].strip())
                             importer = Importer.objects.get(id=importer.id)
                             importer.operation = "4. Import To Website"
@@ -482,7 +482,7 @@ def standardize_Details(Details,formula):
     Details["Detail"]["Description"] = rendered_html
 
     Details = delete_custom_keyword(Details,keywords_to_remove)
-    Details["ModelList"] = [model for model in Details["ModelList"] if model["ProductStatus"]==1]
+    Details["ModelList"] = [model for model in Details["ModelList"] if model and model["ProductStatus"]==1]
     for model in Details["ModelList"]:
         if formula : model["OriginalPrice"] = change_with_formula(model["OriginalPrice"],formula)
         if model["ItemNo"]!=Details["Detail"]["ItemNo"]:
