@@ -363,8 +363,17 @@ def update_itemlist(AuthorizationToken,category):
 
 
 def standardize_Details(Details,formula):
-    if int(Details["Detail"]["ProductStatus"])!=1:
+    if Details["Detail"]["ProductStatus"] and int(Details["Detail"]["ProductStatus"])!=1:
         return Details
+    
+    for detail in Details["Detail"]:
+        if not detail:
+            Details["Detail"].remove(detail)
+
+    for model in Details["ModelList"]:
+        if not model:
+            Details["ModelList"].remove(model)
+
     append_html='''
     <div>
         <h3 class="titr">سازگار با:</h3>
@@ -459,8 +468,7 @@ def standardize_Details(Details,formula):
     
     try:
         for specific in Details["Detail"]["SpecificationList"]:
-            try:
-                specific["Name"] = google_translate(specific["Name"])
+            try:specific["Name"] = google_translate(specific["Name"])
             except:pass
             try:specific["Value"] = google_translate(specific["Value"])
             except :pass
@@ -482,7 +490,7 @@ def standardize_Details(Details,formula):
     Details["Detail"]["Description"] = rendered_html
 
     Details = delete_custom_keyword(Details,keywords_to_remove)
-    Details["ModelList"] = [model for model in Details["ModelList"] if model and model["ProductStatus"]==1]
+    Details["ModelList"] = [model for model in Details["ModelList"] if model["ProductStatus"]==1]
     for model in Details["ModelList"]:
         if formula : model["OriginalPrice"] = change_with_formula(model["OriginalPrice"],formula)
         if model["ItemNo"]!=Details["Detail"]["ItemNo"]:

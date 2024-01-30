@@ -125,7 +125,6 @@ def delete_keyword(dictionary, keywords_to_remove):
 
 def delete_custom_keyword(Details, keywords_to_remove):
     Details["Detail"] = delete_keyword(Details["Detail"], keywords_to_remove)
-    # Details["ModelList"] = [ model for model in Details["ModelList"] if model["ItemNo"]!=Details["Detail"]["ItemNo"]]
     for model in Details["ModelList"]:
         model = delete_keyword(model, keywords_to_remove)
         model = delete_keyword(model, ["Description","Summary","Name","CategoryCode"])
