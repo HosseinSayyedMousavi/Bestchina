@@ -143,15 +143,15 @@ def get_Details(AuthorizationToken, ItemNo):
             return get_Details(AuthorizationToken, ItemNo)
         elif response.json()["Message"] == "The itemNo doesn't exist.":
             return Details
+        
+    for model in Details["ModelList"]:
+        if not model:
+            Details["ModelList"].remove(model)
 
     return Details
 
 
 def standardize_update_Details(Details,formula):
-
-    for model in Details["ModelList"]:
-        if not model:
-            Details["ModelList"].remove(model)
 
     update_Detail = {}
     update_Detail["Detail"]={"OriginalPrice":"","MOQ":"","ProductStatus":"","ItemNo":""}
