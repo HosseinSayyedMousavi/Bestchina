@@ -21,7 +21,7 @@ class CreateImporter(SingletonModel):
     created_at = models.DateTimeField(auto_now=True)
     is_periodic = models.BooleanField(default=False)
     period_length = models.IntegerField(default = 10)
-    errors = models.TextField(default="Everything is Ok!",null=True)
+    errors = models.TextField(default="-",null=True)
     formula = models.JSONField(null=True , blank = True)
     def save(self, *args,**kwargs):
         try:
@@ -75,15 +75,12 @@ class Importer(models.Model):
     Number_of_products = models.IntegerField(default=0) 
     Number_of_checked_products = models.IntegerField(default=0) 
     start_job = models.BooleanField(default=False)
-    errors = models.TextField(default = "Everything is Ok!")
+    errors = models.TextField(default = "-")
     formula = models.JSONField(null=True, blank=True)
-    # @property
-    # def category_prepared_percent(self):
-    #     return str(len(self.category.get_ItemList())/self.category.Total * 100)
 
     def save(self, *args,**kwargs):
         if self.start_job==True:
-            self.errors = "Everything is Ok!"
+            self.errors = "-"
             self.start_job=False
             super(Importer, self).save(*args,**kwargs)
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
@@ -91,7 +88,7 @@ class Importer(models.Model):
             Import_thread.start()
             self.check_thread(Import_thread)
         elif self.status =="Running" and self.status_changed() and not "Import_thread" in locals():
-            self.errors = "Everything is Ok!"
+            self.errors = "-"
             self.start_job=False
             super(Importer, self).save(*args,**kwargs)
             Import_thread = threading.Thread(target=Import_Job,args=(self,))
@@ -100,7 +97,7 @@ class Importer(models.Model):
             self.check_thread(Import_thread)
         elif self.status =="Running" and self.status_changed() and "Import_thread" in locals():
             if not Import_thread.is_alive():
-                self.errors = "Everything is Ok!"
+                self.errors = "-"
                 self.start_job=False
                 super(Importer, self).save(*args,**kwargs)
                 Import_thread = threading.Thread(target=Import_Job,args=(self,))
@@ -139,7 +136,7 @@ class Category(models.Model):
     ParentCode = models.CharField(max_length=255,null=True)
     ParentName = models.CharField(max_length=255,null=True)
     Status = models.CharField(max_length=255,null=False)
-    errors = models.TextField(default="Everything is Ok!")
+    errors = models.TextField(default="-")
     lastProductId = models.CharField(max_length=255,null=True)
     number_of_items = models.IntegerField(default=0)
     def __str__(self):
@@ -348,7 +345,7 @@ def update_itemlist(AuthorizationToken,category):
         category=Category.objects.get(id=category.id)
         while ProductItemNoList:
             NoList = get_item_list(AuthorizationToken=AuthorizationToken,CategoryCode=category.Code,lastProductId=lastProductId)
-            category.errors = "Everything is Ok!"
+            category.errors = "-"
             ProductItemNoList = NoList["ProductItemNoList"]
             if ProductItemNoList:
                 lastProductId = NoList["lastProductId"]
