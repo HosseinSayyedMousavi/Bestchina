@@ -118,7 +118,7 @@ def google_translate_large_text(html_content, max_chunk_size=4950, source_langua
 def delete_keyword(dictionary, keywords_to_remove):
 
     for keyword in keywords_to_remove:
-        if keyword in dictionary:
+        if keyword in dictionary.keys():
             dictionary.pop(keyword)
 
     return dictionary
@@ -148,9 +148,6 @@ def get_Details(AuthorizationToken, ItemNo):
 
 
 def standardize_update_Details(Details,formula):
-    for detail in Details["Detail"]:
-        if not detail:
-            Details["Detail"].remove(detail)
 
     for model in Details["ModelList"]:
         if not model:

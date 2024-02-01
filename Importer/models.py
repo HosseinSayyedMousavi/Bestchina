@@ -366,10 +366,6 @@ def update_itemlist(AuthorizationToken,category):
 def standardize_Details(Details,formula):
     if Details["Detail"]["ProductStatus"] and int(Details["Detail"]["ProductStatus"])!=1:
         return Details
-    
-    for detail in Details["Detail"]:
-        if not detail:
-            Details["Detail"].remove(detail)
 
     for model in Details["ModelList"]:
         if not model:
